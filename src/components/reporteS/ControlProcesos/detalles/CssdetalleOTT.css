@@ -1,0 +1,46 @@
+.responsive-modal {
+    width: 50%;
+    max-width: 90%;
+    height: 90%;
+    max-height: 90%;
+  }
+  
+  .modal-content-container {
+    display: flex;
+    justify-content: center; /* Alineación horizontal */
+    align-items: center; /* Alineación vertical */
+    height: 100%; /* Ajustar altura */
+  }
+  @media (min-width: 375px) {
+    .responsive-modal {
+      width: 90%; /* Ajustar el ancho del modal en pantallas pequeñas */
+      max-width: 90%;
+      height: 90%;
+      max-height: 90%;
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 550px) {
+    .responsive-modal {
+      width: 90%; /* Ajustar el ancho del modal en pantallas pequeñas */
+      max-width: 90%;
+      height: 90%;
+      max-height: 90%;
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 820px) {
+    .responsive-modal {
+      width: 95%; /* Ajustar el ancho del modal en pantallas pequeñas */
+      max-width: 90%;
+      height: 90%;
+      max-height: 90%;
+      font-size: 25px;
+    }
+  }
+  .list-group-item{
+    font-size: small;
+  }
+  

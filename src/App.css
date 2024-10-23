@@ -1,0 +1,50 @@
+/* Estilos para el modo oscuro */
+body.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+body.dark-mode .ant-layout {
+  background-color: #1f1f1f;
+  color: white;
+}
+
+body.dark-mode .ant-btn {
+  background-color: #333;
+  color: white;
+}
+
+/* Estilos para tablas */
+body.dark-mode .ant-table {
+  background-color: #1f1f1f;
+  color: white;
+}
+
+body.dark-mode .ant-table-thead > tr > th {
+  background-color: #2a2a2a;
+  color: white;
+}
+
+body.dark-mode .ant-table-tbody > tr > td {
+  background-color: #1f1f1f;
+  color: white;
+}
+
+/* Estilos para formularios */
+body.dark-mode .ant-form {
+  background-color: #1f1f1f;
+  color: white;
+}
+
+/* Estilos para entradas y campos */
+body.dark-mode .ant-input {
+  background-color: #333;
+  color: white;
+}
+
+body.dark-mode .ant-select-selector {
+  background-color: #333;
+  color: white;
+}
+
+/* Continúa con otros estilos necesarios */

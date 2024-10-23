@@ -1,0 +1,26 @@
+.form-group{
+    padding: 5px;
+    font-size: small;
+    min-width: 300px;
+    flex: 1px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+.form-group:hover{
+    background-color:white ;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+/* .form-check{
+   
+    
+     justify-content: center;
+     text-align: center;
+} */
+.form-check-label{
+    float: right;
+    align-items: center;
+    font: 1em sans-serif;
+  
+    
+}

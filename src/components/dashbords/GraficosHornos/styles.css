@@ -1,0 +1,37 @@
+.filtros-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filtro-item {
+  margin: 5px;
+}
+
+.small-label {
+  font-size: 10px;
+  margin-bottom: 2px;
+}
+
+.small-select {
+  height: 24px;
+  font-size: 10px;
+  padding: 2px 4px;
+  width: 100px;
+}
+
+/* styles.css */
+/* styles.css */
+.title {
+    font-size: 28px; /* Tamaño de fuente ajustado */
+    font-weight: 600; /* Peso de la fuente semi-negrita */
+    color: #333; /* Color gris oscuro */
+    text-align: center; /* Centrar el texto */
+    margin-bottom: 20px; /* Espacio debajo del título */
+    text-transform: uppercase; /* Convertir a mayúsculas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+    border-bottom: 2px solid #3498db; /* Línea decorativa debajo del texto */
+    display: inline-block; /* Para ajustar el borde al texto */
+    padding-bottom: 10px; /* Espaciado para la línea decorativa */
+  }
+  

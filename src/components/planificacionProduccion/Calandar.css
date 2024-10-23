@@ -1,0 +1,13 @@
+/* styles.css */
+.calendar-cell {
+    background: #f0f0f0; /* Color de fondo */
+    border: 1px solid #d9d9d9; /* Bordes */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 5px;
+    transition: background 0.3s; /* Transición para el efecto de hover */
+  }
+  
+  .calendar-cell:hover {
+    background: #e6f7ff; /* Color al pasar el ratón */
+  }
+  

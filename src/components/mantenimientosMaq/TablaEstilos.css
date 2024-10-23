@@ -1,0 +1,15 @@
+.table th,
+.table td {
+  font-size: 12px; 
+}
+.table td:hover {
+    font-weight: bold;
+  }
+
+.table th {
+  padding: 5px; 
+}
+
+.table td {
+  padding: 8px;
+}

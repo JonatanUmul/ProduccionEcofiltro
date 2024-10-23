@@ -1,0 +1,41 @@
+.table th,
+.table td {
+  font-size: 12px; 
+}
+.table td:hover {
+    font-weight: bold;
+  }
+
+.table th {
+  padding: 5px; 
+}
+
+.table td {
+  padding: 8px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.pagination li {
+  display: inline;
+  margin: 0 5px;
+}
+
+.pagination li a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.pagination li.active a {
+  font-weight: bold;
+  color: #000;
+}
+
+.pagination li.disabled a {
+  color: #ccc;
+}

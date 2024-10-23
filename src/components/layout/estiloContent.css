@@ -1,0 +1,6 @@
+@media screen and (max-width: 768px) {
+    .content-container {
+      max-width: 100%; /* Cambia el ancho máximo para pantallas más pequeñas */
+    }
+  }
+  

@@ -1,0 +1,9 @@
+/* Estilo para el encabezado de la tabla */
+.table thead th {
+    background-color: #f8f9fa; /* Color de fondo gris agradable */
+    font-size: 14px; /* Tamaño de fuente un poco más pequeño */
+    font-weight: normal; /* Estilo de fuente normal */
+    color: #495057; /* Color de texto */
+    text-align: center;
+  }
+  

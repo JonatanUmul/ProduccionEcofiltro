@@ -1,0 +1,15 @@
+.large-table {
+  font-size: 18px; /* Tamaño de la fuente aumentado */
+}
+
+.large-table .ant-table-thead > tr > th {
+  font-size: 20px; /* Aumenta el tamaño del texto en el encabezado */
+}
+
+.large-table .ant-table-tbody > tr > td {
+  font-size: 18px; /* Aumenta el tamaño del texto en el cuerpo */
+}
+
+.large-table .ant-tag {
+  font-size: 16px; /* Aumenta el tamaño del texto en las etiquetas */
+}

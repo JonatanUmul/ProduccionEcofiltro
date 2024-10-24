@@ -3,7 +3,10 @@ import { Layout, Menu, theme } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
+const URL = process.env.REACT_APP_CLIMA_API_KEY;
+
 const { Header } = Layout;
+
 
 const HeaderMenu = () => {
   const {
@@ -27,7 +30,7 @@ const HeaderMenu = () => {
         'http://api.weatherstack.com/current',
         {
           params: {
-            access_key: '1b90a7e4fd5c87f6bf24889d7a608151', // Tu clave de API
+            access_key: `${URL}`, // Tu clave de API
             query: '14.5365925,-90.77110859999999', // Coordenadas o nombre de ciudad
           },
         }

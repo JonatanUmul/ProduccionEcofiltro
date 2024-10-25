@@ -124,7 +124,7 @@ console.log('datos cernido 2', datos)
               <tr>
           <td colSpan="4"><strong>Total:</strong></td>
           <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cantidad_inicial), 0)}</strong></td>
-<td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cernido_fino).toFixed(2), 0)}</strong></td>
+<td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cernido_fino), 0)}</strong></td>
 <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cernido_grueso), 0)}</strong></td>
 <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.merma), 0)}</strong></td>
 

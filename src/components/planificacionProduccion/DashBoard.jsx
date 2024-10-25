@@ -39,7 +39,7 @@ const App = () => {
       </div>
 
       <div ref={sectionRef} style={{ height: '100vh', overflow: 'hidden' }}>
-        <Carousel ref={carouselRef} autoplay>
+        <Carousel ref={carouselRef} autoplay autoplaySpeed={300000}>
           <div style={{ height: '100vh', overflow: 'hidden' }}>
             <TablasBoard>1</TablasBoard>
           </div>

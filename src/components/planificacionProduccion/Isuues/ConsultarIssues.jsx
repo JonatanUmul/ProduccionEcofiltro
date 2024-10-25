@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Button } from 'antd';
-import { DatePicker } from 'antd';
+import { Card, Button, DatePicker } from 'antd';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import AsignarIssue from './AsignarIssue';
@@ -14,7 +13,7 @@ const App = () => {
   const URL = process.env.REACT_APP_URL;
   const [planMesData, setPlanMesData] = useState([]);
   const [planCumplido, setPlanCumplido] = useState([]);
-  const [hoy, setHoy] = useState(dayjs().format('YYYY-MM-DD'));
+  const [hoy, setHoy] = useState(dayjs().subtract(1, 'day').format('YYYY-MM-DD'));
   const [fechaInicial, setFechaInicial] = useState(dayjs().startOf('month').format('YYYY-MM-DD'));
   const [fechaFin, setFechaFin] = useState(dayjs().endOf('month').format('YYYY-MM-DD'));
   const [diferenciasAPi, setDiferencias] = useState([]);
@@ -38,11 +37,10 @@ const App = () => {
 
   const handleDateChange = (date) => {
     if (date) {
-      setHoy(date.format('YYYY-MM-DD'));
-      const firstDayOfMonth = date.startOf('month').format('YYYY-MM-DD');
-      const lastDayOfMonth = date.endOf('month').format('YYYY-MM-DD');
-      setFechaInicial(firstDayOfMonth);
-      setFechaFin(lastDayOfMonth);
+      const selectedDate = date.subtract(1, 'day');
+      setHoy(selectedDate.format('YYYY-MM-DD'));
+      setFechaInicial(selectedDate.startOf('month').format('YYYY-MM-DD'));
+      setFechaFin(selectedDate.endOf('month').format('YYYY-MM-DD'));
     }
   };
 
@@ -56,6 +54,7 @@ const App = () => {
         <DatePicker
           onChange={handleDateChange}
           style={{ marginBottom: '20px', width: '100%' }}
+          defaultValue={dayjs().subtract(1, 'day')}
           getPopupContainer={trigger => trigger.parentNode}
         />
         <div className="row">

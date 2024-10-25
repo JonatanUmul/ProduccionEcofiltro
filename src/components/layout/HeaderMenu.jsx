@@ -4,7 +4,7 @@ import { LogoutOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 const URL = process.env.REACT_APP_CLIMA_API_KEY;
-
+console.log('Api clima',URL)
 const { Header } = Layout;
 
 
@@ -83,7 +83,7 @@ const HeaderMenu = () => {
             <p style={{ margin: '0 10px', fontSize: '16px', color: '#fff' }}><strong>Temperatura:</strong> {responseData.current.temperature}°C</p>
             <p style={{ margin: '0 10px', fontSize: '16px', color: '#fff' }}><strong>Humedad:</strong> {responseData.current.humidity}%</p>
             <p style={{ margin: '0 10px', fontSize: '16px', color: '#fff' }}><strong>Viento:</strong> {responseData.current.wind_speed} km/h, dirección {responseData.current.wind_dir}</p>
-            {/* <p style={{ margin: '0 10px', fontSize: '16px', color: '#fff' }}><strong>Presión:</strong> {responseData.current.pressure} mbar</p> */}
+            <p style={{ margin: '0 10px', fontSize: '16px', color: '#fff' }}><strong>Presión:</strong> {responseData.current.pressure} mbar</p>
             <p style={{ margin: '0 10px', fontSize: '16px', color: '#fff' }}><strong>Precipitación:</strong> {responseData.current.precip} mm</p>
             <p style={{ margin: '0 10px' }}>
               <img src={responseData.current.weather_icons[0]} alt="icono del clima" style={{ width: '40px', height: '40px' }} />

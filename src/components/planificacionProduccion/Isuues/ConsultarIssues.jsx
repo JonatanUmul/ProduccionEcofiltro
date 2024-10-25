@@ -51,13 +51,13 @@ const App = () => {
   return (
     <>
       <div className="col">
-        <DatePicker
+        {/* <DatePicker
           onChange={handleDateChange}
           style={{ marginBottom: '20px', width: '100%' }}
           defaultValue={dayjs().subtract(1, 'day')}
           getPopupContainer={trigger => trigger.parentNode}
-        />
-        <div className="row">
+        /> */}
+        <div className="row p-3">
           {diferenciasAPi.map((Issue, index) => (
             <div className="col-md-4 col-sm-6 col-xl-2 mb-4" key={index}>
               <div style={{ position: 'relative', width: '100%' }}>

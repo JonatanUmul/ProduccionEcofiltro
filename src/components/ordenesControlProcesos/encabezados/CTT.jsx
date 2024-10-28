@@ -4,15 +4,16 @@ import axios from "axios";
 // import './user.css'
 const URL = process.env.REACT_APP_URL;
 const CTT = () => {
-  const { handleSubmit, register } = useForm();
-  const [mtp, setMtp] = useState([]);
 
-  const [datos, setDatos] = useState({
-    id_enc: "",
-    id_creador: "",
-    codigoInicio: "",
-    codigoFinal:""
-  });
+  const { handleSubmit, register } = useForm();
+  // const [mtp, setMtp] = useState([]);
+
+  // const [datos, setDatos] = useState({
+  //   id_enc: "",
+  //   id_creador: "",
+  //   codigoInicio: "",
+  //   codigoFinal:""
+  // });
   
 
   const [id_creador, setid_creador] = useState('');
@@ -20,36 +21,41 @@ const CTT = () => {
     setid_creador(localStorage.getItem('id_creador'))
   })
   
-  useEffect(() => {
-    Promise.all([
-      axios.get(`${URL}/MateriaPrima`),
-    ])
-      .then(([estadosResponse, rolesResponse]) => {
-        setMtp(estadosResponse.data);
-        console.log("Datos de Estadosroutes:", estadosResponse.data);
-      })
-      .catch((error) => {
-        console.log("Error al obtener los datos:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   Promise.all([
+  //     axios.get(`${URL}/MateriaPrima`),
+  //   ])
+  //     .then(([estadosResponse, rolesResponse]) => {
+  //       setMtp(estadosResponse.data);
+  //       console.log("Datos de Estadosroutes:", estadosResponse.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log("Error al obtener los datos:", error);
+  //     });
+  // }, []);
 
 
   const onSubmit = async (formData) => {
     // formData.preventDefault();
     try {
       // Actualizar el estado 'datos' con los valores del formulario
-      setDatos({
-      // codigoInicio: formData.codigoInicio.replace(/\s+/g, ''),
-      //   codigoFinal:formData.codigoFinal.replace(/\s+/g, ''),
-        codigoInicio: formData.codigoInicio,
-        codigoFinal:formData.codigoFinal,
-        cantidad:formData.cantidad
-    });
+    //   setDatos({
+    //   // codigoInicio: formData.codigoInicio.replace(/\s+/g, ''),
+    //   //   codigoFinal:formData.codigoFinal.replace(/\s+/g, ''),
+    //     codigoInicio: formData.codigoInicio,
+    //     codigoFinal:formData.codigoFinal,
+    //     cantidad:formData.cantidad
+    // });
    
     
       // Realizar la solicitud POST al servidor con los datos del formulario
       const response = await axios.post(
-        `${URL}/CTT`,{id_creador},formData
+        `${URL}/CTT`,{
+          id_creador:id_creador,
+          codigoInicio: formData.codigoInicio,
+          codigoFinal:formData.codigoFinal,
+          cantidad:formData.cantidad
+        }
       );
       window.location.href = "/Home/TablaCP";
       console.log("Respuesta del servidor:", response.data);

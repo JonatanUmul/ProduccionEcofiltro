@@ -1,12 +1,11 @@
 import React, { useRef } from 'react';
 import TablasBoard from './TablasBoard';
 import Issues from './Isuues/ConsultarIssues';
-import { Carousel } from 'antd';
+import { Carousel } from 'react-bootstrap';
 import './App.css';
 
 const App = () => {
-  const sectionRef = useRef(null); // Referencia para el contenedor general
-  const carouselRef = useRef(null); // Referencia del carrusel
+  const sectionRef = useRef(null);
 
   const handleFullscreen = () => {
     if (sectionRef.current.requestFullscreen) {
@@ -17,12 +16,11 @@ const App = () => {
       sectionRef.current.msRequestFullscreen();
     }
 
-    // Forzar redimensionado después de entrar en pantalla completa
+    // Ajustamos la altura después de activar pantalla completa
     setTimeout(() => {
-      if (carouselRef.current) {
-        carouselRef.current.goTo(0); // Resetea el carrusel al primer slide (opcional)
+      if (sectionRef.current) {
+        sectionRef.current.style.height = `${window.innerHeight}px`;
       }
-      window.dispatchEvent(new Event('resize')); // Forzar el evento de redimensionado
     }, 500);
   };
 
@@ -38,14 +36,23 @@ const App = () => {
         </button>
       </div>
 
-      <div ref={sectionRef} style={{ height: '100vh', overflow: 'hidden' }}>
-        <Carousel ref={carouselRef} autoplay autoplaySpeed={300000}>
-          <div style={{ height: '100vh', overflow: 'hidden' }}>
-            <TablasBoard>1</TablasBoard>
-          </div>
-          <div style={{ height: '100vh', overflow: 'hidden' }}>
-            <Issues>2</Issues>
-          </div>
+      <div ref={sectionRef} style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
+        <Carousel
+          interval={3000}
+          prevIcon={<span className="carousel-control-prev-icon" aria-hidden="true" />}
+          nextIcon={<span className="carousel-control-next-icon" aria-hidden="true" />}
+          indicators={false}
+        >
+          <Carousel.Item>
+            <div style={{  height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <TablasBoard>1</TablasBoard>
+            </div>
+          </Carousel.Item>
+          <Carousel.Item>
+            <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <Issues>2</Issues>
+            </div>
+          </Carousel.Item>
         </Carousel>
       </div>
     </>

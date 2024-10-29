@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Card, Button, DatePicker } from 'antd';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import AsignarIssue from './AsignarIssue';
-import GraficoIssue from './GraficoIssue';
+import AsignarIssue from './AsignarIssue.jsx';
+import GraficoIssue from './GraficoIssue.jsx';
 import ConsultarIsuues from './ConsultarIsuues.jsx';
 import './Css.css';
 
@@ -33,6 +33,11 @@ const App = () => {
     };
 
     fetchData();
+    const intervalId = setInterval(fetchData, 10000); // 5 minutos
+
+    // Limpiar el intervalo al desmontar el componente
+    return () => clearInterval(intervalId);
+
   }, [URL, hoy, fechaInicial, fechaFin]);
 
   const handleDateChange = (date) => {
@@ -51,17 +56,17 @@ const App = () => {
   return (
     <>
       <div className="col">
-        {/* <DatePicker
+        <DatePicker
           onChange={handleDateChange}
-          style={{ marginBottom: '20px', width: '100%' }}
+          style={{ marginBottom: '20px', width: '10%' }}
           defaultValue={dayjs().subtract(1, 'day')}
           getPopupContainer={trigger => trigger.parentNode}
-        /> */}
+        />
         <div className="row p-3">
           {diferenciasAPi.map((Issue, index) => (
             <div className="col-md-4 col-sm-6 col-xl-2 mb-4" key={index}>
               <div style={{ position: 'relative', width: '100%' }}>
-                <ConsultarIsuues Issue={Issue} />
+                {/* <ConsultarIsuues Issue={Issue} /> */}
                 <Card
                   hoverable
                   className={Issue.id_planDiario > 0 ? null : 'card pulse'}
@@ -81,17 +86,15 @@ const App = () => {
                 >
                   <Meta
                     title={Issue.procesosBuscar}
-                    style={{ marginBottom: '5px' }}
+                    style={{ marginBottom: '8px' }}
                     description={
                       <>
-                        <div>Encargado: {Issue.Nombre}</div>
-                        <div>Planificado: {Issue.cantidad_planificada}</div>
-                        <div>Producido: {Issue.producido}</div>
-                        <div style={{ color: 'red' }}>Diferencia: {Issue.residuo}</div>
+                        <div style={{color:'black', fontSize:'15px'}}><strong>Issues: </strong>{Issue.issue!=null ? Issue.issue: 'Sin Issues'}</div>
+                       
                       </>
                     }
                   />
-                  <AsignarIssue Issuees={Issue} />
+                 
                 </Card>
               </div>
             </div>

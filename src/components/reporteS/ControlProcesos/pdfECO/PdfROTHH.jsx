@@ -236,7 +236,7 @@ const MyDocument = ({ datos }) => {
                 <Text style={styles.tableCell}>{fila.mermasCrudas}</Text>
                 <Text style={styles.tableCell}>{fila.librasAserrin}/{fila.librasAserrin2}</Text>
                 <Text style={styles.tableCell}>{fila.aprobados}</Text>
-                <Text style={styles.tableCell}>{fila.porcentaje}</Text>
+                <Text style={styles.tableCell}>{Number(fila.porcentaje)}</Text>
                 {fila.FirmaEncargado ? (
                   <Image style={styles.tablefirma} source={fila.FirmaEncargado} />
                 ) : (

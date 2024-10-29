@@ -11,6 +11,6 @@
   }
   
   .pulse {
-    animation: pulse 7s infinite; /* 1s duración, repetido infinitamente */
+    animation: pulse 4s infinite; /* 1s duración, repetido infinitamente */
   }
   

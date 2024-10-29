@@ -43,10 +43,19 @@ const [isDarkMode, setIsDarkMode] = useState(true)
       
 
 
-
+      const handleDateChange = (date) => {
+        if (date) {
+          setHoy(date.format('YYYY-MM-DD'));
+          const firstDayOfMonth = date.startOf('month').format('YYYY-MM-DD');
+          const lastDayOfMonth = date.endOf('month').format('YYYY-MM-DD');
+          setFechaInicial(firstDayOfMonth);
+          setFechaFin(lastDayOfMonth);
+        }
+      };
 
   useEffect(() => {
     const fetchData = async () => {
+    
       try {
         const [planCumplidoResponse, planMesResponse] = await Promise.all([
           axios.get(`${URL}/PlanCumplido/${hoy}`),
@@ -54,29 +63,21 @@ const [isDarkMode, setIsDarkMode] = useState(true)
         ]);
         setPlanCumplido(planCumplidoResponse.data.rows);
         setPlanMesData(planMesResponse.data.rows);
+       
       } catch (error) {
       }
     };
 
     fetchData();
-
+  
     // Actualizar datos cada 5 minutos
-    const intervalId = setInterval(fetchData, 5 * 60 * 1000); // 5 minutos
+    const intervalId = setInterval(fetchData, 300000); // 5 minutos
 
     // Limpiar el intervalo al desmontar el componente
     return () => clearInterval(intervalId);
+
   }, [URL, hoy, fechaInicial, fechaFin]);
 
-  // Manejar el cambio de fecha
-  const handleDateChange = (date) => {
-    if (date) {
-      setHoy(date.format('YYYY-MM-DD'));
-      const firstDayOfMonth = date.startOf('month').format('YYYY-MM-DD');
-      const lastDayOfMonth = date.endOf('month').format('YYYY-MM-DD');
-      setFechaInicial(firstDayOfMonth);
-      setFechaFin(lastDayOfMonth);
-    }
-  };
 
   // Manejar el cambio de modo oscuro
   const handleDarkModeToggle = () => {
@@ -94,6 +95,7 @@ const [isDarkMode, setIsDarkMode] = useState(true)
     backgroundColor: isDarkMode ? '#1f1f1f' : '#f0f2f5',
     color: isDarkMode ? '#ffffff' : '#000000',
     height: '100vh',
+
     overflow: 'hidden',
   };
 

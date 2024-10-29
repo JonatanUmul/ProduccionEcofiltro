@@ -34,7 +34,7 @@ const App = () => {
 
     const intervalId = setInterval(() => {
       fetchData(); // Actualización cada 5 minutos
-    }, 5000);
+    }, 500000);
 
     return () => clearInterval(intervalId); // Limpieza del intervalo al desmontar
   }, [hoy, fechaInicial, fechaFin]); // Dependencias críticas para actualizar el intervalo correctamente

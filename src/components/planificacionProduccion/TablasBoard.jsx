@@ -71,7 +71,7 @@ const [isDarkMode, setIsDarkMode] = useState(true)
     fetchData();
   
     // Actualizar datos cada 5 minutos
-    const intervalId = setInterval(fetchData, 300000); // 5 minutos
+    const intervalId = setInterval(fetchData, 720000); // 5 minutos
 
     // Limpiar el intervalo al desmontar el componente
     return () => clearInterval(intervalId);

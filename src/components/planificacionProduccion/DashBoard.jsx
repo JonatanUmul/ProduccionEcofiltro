@@ -10,7 +10,7 @@ const App = () => {
     <>
       <div  style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
         <Carousel
-          interval={3000}
+          interval={300000}
           prevIcon={<span className="carousel-control-prev-icon" aria-hidden="true" />}
           nextIcon={<span className="carousel-control-next-icon" aria-hidden="true" />}
           indicators={false}

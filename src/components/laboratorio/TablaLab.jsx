@@ -133,14 +133,14 @@ console.log('Datos de lab',estOT)
                
                 <td>
                 {(ability && (ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
- 
                   <CrearOT
+                    existenciaAserrin={OTDats.datosAserrin}
                     encabezado="otdmp"
                     EncName={OTDats.EncName}
                     fecha_creacion={OTDats.fecha_creacion}
                     id={OTDats.id}
                   />
-                ) : <Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                ) : <Button    type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
                 OT
               </Button>}
               
@@ -149,6 +149,7 @@ console.log('Datos de lab',estOT)
                 {(ability && (ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
 
                   <CrearOT
+                    existenciaAserrin={OTDats.datosBarro}
                     encabezado="otdmpb"
                     EncName={OTDats.EncName}
                     fecha_creacion={OTDats.fecha_creacion}

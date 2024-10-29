@@ -5,7 +5,7 @@ import LogoEco from '../../utilidades/LogoEco'
 import OTDMP from '../detallado/DOTDMP'
 import OTDMPB from '../detallado/DOTDMPB'
 
-const CrearOT = ({ encabezado, id, fecha_creacion, EncName }) => {
+const CrearOT = ({ encabezado, id, fecha_creacion, EncName,existenciaAserrin, existenciaBarro }) => {
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
   const [nombreRol, setNombrerol]=useState('')
 console.log('propr recibios', encabezado, id)
@@ -28,7 +28,7 @@ console.log('propr recibios', encabezado, id)
   const renderSelectedForm = () => {
     switch (encabezado) {
       case 'otdmp':
-        return <OTDMP id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
+        return <OTDMP id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}  />
 
         case 'otdmpb':
           return <OTDMPB id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
@@ -49,10 +49,12 @@ console.log('propr recibios', encabezado, id)
 
   return (
     <div>
-   
-        <button type="button" className="btn btn-success bt-sm" style={{ width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center', alignItems:'center' }} onClick={handleClick}>
-        OT
-      </button>
+     
+    <button disabled={existenciaAserrin!=null || existenciaBarro!=null ? true:false}  type="button" className="btn btn-success bt-sm" style={{ width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center', alignItems:'center' }} onClick={handleClick}>
+     {encabezado=='otdmp' ? 'Aserrin':'Barro'}
+   </button>
+    
+        
 
       
       {/* Modal */}

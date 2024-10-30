@@ -32,7 +32,7 @@ import TablaLab from './components/laboratorio/TablaLab.jsx';
 import TablaPorCodigos from './components/laboratorio/TablaPorCodigos.jsx';
 import Board from './components/planificacionProduccion/Board.jsx';
 import AsignarIsuue from './components/planificacionProduccion/Isuues/TablaIsuues.jsx';
-import OrdenesSap from './components/SapOrdenes/TablaOT.jsx'
+import OrdenesSap from './components/SapOrdenes/OrdenesSap.jsx'
 import OpenAI from './components/OpenIa/ChatOpenIa.jsx'
 function App() {
   const [darkMode, setDarkMode] = useState(false);

@@ -18,7 +18,7 @@ import TablaLab from '../laboratorio/TablaLab'
 import TablaPorCodigos from '../laboratorio/TablaPorCodigos'
 import Board from '../planificacionProduccion/Board'
 import AsignarIsuue from '../../components/planificacionProduccion/Isuues/TablaIsuues'
-import OrdenesSap from '../../components/ordenesTrabajo/TablaOT'
+import OrdenesSap from '../SapOrdenes/OrdenesSap'
 import OpenAi from '../OpenIa/ChatOpenIa'
 export const renderContent = (pathname) => {
     switch (pathname) {

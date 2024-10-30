@@ -5,7 +5,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido, isDarkMode }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
-    const myChart = echarts.init(chartRef.current, 'dark');
+    const myChart = echarts.init(chartRef.current,);
 
     // Agrupar los datos por proceso y calcular la eficiencia
     const procesos = {};

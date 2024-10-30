@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 const TreeChart = ({ data, isDarkMode }) => {
   useEffect(() => {
     const chartDom = document.getElementById('main');
-    const myChart = echarts.init(chartDom, 'dark');
+    const myChart = echarts.init(chartDom);
 
     const processData = (data) => {
       const treeData = {  
@@ -56,6 +56,7 @@ const TreeChart = ({ data, isDarkMode }) => {
       tooltip: {
         trigger: 'item',
         triggerOn: 'mousemove',
+        color: isDarkMode ? '#FFFFFF' : '#000000',
       },
       series: [
         {
@@ -73,9 +74,9 @@ const TreeChart = ({ data, isDarkMode }) => {
             position: 'left',
             verticalAlign: 'middle',
             align: 'right',
+            color: isDarkMode ? '#FFFFFF' : '#000000',
             fontSize: 12,
-            
-            // fontWeight: 'bold',
+            fontWeight: 'normal', // Asegura que no se vea en negrita
             overflow: 'break',
             width: 200,
           },
@@ -85,31 +86,29 @@ const TreeChart = ({ data, isDarkMode }) => {
               verticalAlign: 'middle',
               align: 'left',
               fontSize: 12,
-              // fontWeight: 'bold',
+              color: isDarkMode ? '#FFFFFF' : '#000000',
+              fontWeight: 'normal', // Asegura que no se vea en negrita
               overflow: 'break',
               width: 200,
             },
           },
           lineStyle: {
             width: 1, // Grosor de las líneas
-            color: '#ccc',
-            
+            color: isDarkMode ? '#FFFFFF' : '#000000',
             curveness: 0.5, // Hace que las líneas sean curvas, puedes ajustarlo según el largo
           },
           emphasis: {
             focus: 'descendant',
             itemStyle: {
-              color:'#ffffff',
-              borderWidth: 2,
-              borderColor: '#ff6600',
+              color: isDarkMode ? '#FFFFFF' : '#000000',
             },
             label: {
               fontSize: 12,
-              // fontWeight: 'bold',
+              color: isDarkMode ? '#FFFFFF' : '#000000',
+              fontWeight: 'normal', // Asegura que no se vea en negrita
             },
           },
           expandAndCollapse: true,
-          // initialTreeDepth: -1, // Muestra todos los niveles
           animationDuration: 75,
           animationDurationUpdate: 75,
         },

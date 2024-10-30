@@ -13,7 +13,7 @@ console.log('dark:',isDarkMode)
 
   console.log('isDarkMode',isDarkMode)
   useEffect(() => {
-    const myChart = echarts.init(chartRef.current, 'dark' );
+    const myChart = echarts.init(chartRef.current );
 
     // Agrupar los datos por proceso
     const procesos = {};
@@ -43,14 +43,13 @@ console.log('dark:',isDarkMode)
         type: 'bar',
         data: planificado,
         itemStyle: {
-          color:  '#1f77b4', // Color para lo planificado
-
+          color:  '#1f77b4'
         },
         label: {
           show: true,
           position: 'right', // Colocar las etiquetas dentro de las barras
           formatter: '{c}', // Formato de las etiquetas (solo el valor)
-          color:'#ffffff', // Color de las etiquetas
+          color: isDarkMode ? '#FFFFFF' : '#000000', // Color de las etiquetas
           fontSize:'10px'
         },
         
@@ -68,7 +67,7 @@ console.log('dark:',isDarkMode)
           show: true,
           position: 'right', // Colocar las etiquetas dentro de las barras
           formatter: '{c}', // Formato de las etiquetas (solo el valor)
-          color: '#ffffff', // Color de las etiquetas
+          color: isDarkMode ? '#FFFFFF' : '#000000', // Color de las etiquetas
           fontSize:'9px',
 
                     
@@ -93,6 +92,7 @@ console.log('dark:',isDarkMode)
         top: 'top',
         textStyle: {
           fontSize: 14, // Tamaño de letra de la leyenda
+          color: isDarkMode ? '#FFFFFF' : '#000000',
         },
       },
       grid: {
@@ -105,8 +105,21 @@ console.log('dark:',isDarkMode)
         type: 'value',
         boundaryGap: [0, 0.01],
         axisLabel: {
+          color: isDarkMode ? '#FFFFFF' : '#000000',
           fontSize: 12, // Ajustar el tamaño de la fuente
         },
+        axisLine: {
+          lineStyle: {
+            color: isDarkMode ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.5)', // Cambia el color y opacidad de la línea del eje X
+            width: 1, // Grosor de la línea
+          },
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)', // Cambia el color y opacidad de las líneas de separación
+            width: 0.5, // Grosor de las líneas de separación
+          }},
       },
       yAxis: {
         type: 'category',
@@ -114,7 +127,9 @@ console.log('dark:',isDarkMode)
         axisLabel: {
           rotate:0, // Rotar las etiquetas para mejorar la legibilidad
           fontSize: 12, // Ajustar el tamaño de la fuente
+          color: isDarkMode ? '#FFFFFF' : '#000000',
         },
+        
       },
       series: series,
     };

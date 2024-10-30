@@ -4,6 +4,7 @@ import { Modal, ModalFooter, ModalBody, ModalHeader } from 'reactstrap'
 import LogoEco from '../../utilidades/LogoEco'
 import OTDMP from '../detallado/DOTDMP'
 import OTDMPB from '../detallado/DOTDMPB'
+import { Color } from 'antd/es/color-picker'
 
 const CrearOT = ({ encabezado, id, fecha_creacion, EncName,existenciaAserrin, existenciaBarro }) => {
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
@@ -50,7 +51,7 @@ console.log('propr recibios', encabezado, id)
   return (
     <div>
      
-    <button disabled={existenciaAserrin!=null || existenciaBarro!=null ? true:false}  type="button" className="btn btn-success bt-sm" style={{ width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center', alignItems:'center' }} onClick={handleClick}>
+    <button disabled={existenciaAserrin!=null || existenciaBarro!=null ? true :false} type="button" className={existenciaAserrin!=null || existenciaBarro!=null ? 'btn' :"btn btn-success bt-sm"} style={{  width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center', alignItems:'center'  }} onClick={handleClick}>
      {encabezado=='otdmp' ? 'Aserrin':'Barro'}
    </button>
     

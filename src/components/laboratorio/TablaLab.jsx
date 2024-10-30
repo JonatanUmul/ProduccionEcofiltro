@@ -149,7 +149,8 @@ console.log('Datos de lab',estOT)
                 {(ability && (ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
 
                   <CrearOT
-                    existenciaAserrin={OTDats.datosBarro}
+
+                    existenciaBarro={OTDats.datosBarro}
                     encabezado="otdmpb"
                     EncName={OTDats.EncName}
                     fecha_creacion={OTDats.fecha_creacion}

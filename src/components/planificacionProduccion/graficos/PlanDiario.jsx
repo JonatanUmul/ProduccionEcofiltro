@@ -5,7 +5,7 @@ const PorcentajeEficienciaMensual = ({ planCumplido, isDarkMode }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
-    const myChart = echarts.init(chartRef.current, 'dark' );
+    const myChart = echarts.init(chartRef.current, );
 
     // Agrupar los datos por proceso
     const procesos = {};
@@ -32,15 +32,16 @@ const PorcentajeEficienciaMensual = ({ planCumplido, isDarkMode }) => {
         data: planificado,
         type: 'bar',
         name: 'Planificado',
-        
+        color: isDarkMode ? '#FFFFFF' : '#000000',
         itemStyle: {
           color: '#5470C6',
         },
         label: {
           show: true,
+          color: isDarkMode ? '#FFFFFF' : '#000000',
           position: 'top',
           formatter: '{c}',
-          color: '#ffffff',
+
         },
       },
       {
@@ -50,11 +51,12 @@ const PorcentajeEficienciaMensual = ({ planCumplido, isDarkMode }) => {
         itemStyle: {
           color: '#91CC75',
         },
+        
         label: {
           show: true,
           position: 'top',
           formatter: '{c}',
-          color: '#ffffff',
+          color: isDarkMode ? '#FFFFFF' : '#000000',
         },
       },
     ];
@@ -66,14 +68,17 @@ const PorcentajeEficienciaMensual = ({ planCumplido, isDarkMode }) => {
         top: 'top',
         textStyle: {
           fontSize: 12,
+          color: isDarkMode ? '#FFFFFF' : '#000000',
         },
       },
       xAxis: {
         type: 'category',
         data: nombresProcesos,
+
         axisLabel: {
-          rotate: 22,
-          fontSize: 9,
+          rotate: 15,
+          fontSize: 10,
+          color: isDarkMode ? '#FFFFFF' : '#000000',
           
 
         },
@@ -83,14 +88,26 @@ const PorcentajeEficienciaMensual = ({ planCumplido, isDarkMode }) => {
         
         axisLabel: {
           fontSize: 9,
-          
+          color: isDarkMode ? '#FFFFFF' : '#000000',
         },
+        axisLine: {
+          lineStyle: {
+            color: isDarkMode ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.5)', // Cambia el color y opacidad de la línea del eje X
+            width: 1, // Grosor de la línea
+          },
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            color: isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)', // Cambia el color y opacidad de las líneas de separación
+            width: 0.5, // Grosor de las líneas de separación
+          }},
       },
       grid: {
         top: '10%',
-        bottom: '15%',
-        left: '10%',
-        right: '10%',
+        bottom: '20%',
+        left: '5%',
+        right: '1%',
       },
       series: series,
       tooltip: {

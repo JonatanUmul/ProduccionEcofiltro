@@ -40,7 +40,7 @@ console.log(codigo)
     axios.get(url)
       .then((response) => {
         setDatos(response.data);
-        console.log('datos consulta', response.data.data);
+        console.log('datos consulta', response.data);
       })
       .catch((error) => {
         console.error('Error al obtener los datos:', error);
@@ -67,6 +67,7 @@ console.log('datos', datos)
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
   };
+
 
   const offset = currentPage * itemsPerPage;
   const currentPageData = datos.slice(offset, offset + itemsPerPage);
@@ -98,6 +99,10 @@ const handleMouseOver=(index)=>{
 }
 const handleMouseOut=()=>{
   setmouseover(false)
+}
+
+const formulaAB=()=>{
+  
 }
   return (
     <div className="row mb-3">
@@ -174,6 +179,7 @@ const handleMouseOut=()=>{
           <tr>
             <th scope="col">#</th>
             <th scope="col">Producción</th>
+            <th scope="col">Formula</th>
             <th scope="col">Código</th>
             <th scope="col">Tipo de Filtro</th>
             <th scope="col">Proveedor</th>
@@ -191,6 +197,7 @@ const handleMouseOut=()=>{
             <tr key={index}>
               <th scope="row">{index + 1}</th>
               <td>{formatFecha(fila.fecha_produccion) }</td>
+              <td>{fila.formulaTipo}</td>
               <td>{fila.codigos}</td>
               <td>{fila.ufmodelo}</td>
               <td>{fila.aserradero1}/{fila.aserradero2}</td>

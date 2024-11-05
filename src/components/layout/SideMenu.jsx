@@ -50,8 +50,10 @@ const SideMenu = () => {
         </Menu.SubMenu>
         
         <Menu.SubMenu icon={<  ExperimentOutlined />} title='Laboratorio'>
-          <Menu.Item key="14" icon={<ExperimentOutlined />}><Link to="/Home/TablaLab" style={{ textDecoration: 'none'}}>Laboratorio</Link></Menu.Item>
+          <Menu.Item key="14" icon={<ExperimentOutlined />}><Link to="/Home/TablaLab" style={{ textDecoration: 'none'}}>Formulación</Link></Menu.Item>
+          <Menu.Item key="16" icon={<ExperimentOutlined />}><Link to="/Home/TablaIndicesPlasticos" style={{ textDecoration: 'none'}}>Calculo Limites</Link></Menu.Item>
           <Menu.Item key="15" icon={<ExperimentOutlined />}><Link to="/Home/TablaPorCodigos" style={{ textDecoration: 'none'}}>Producción</Link></Menu.Item>
+       
         </Menu.SubMenu>
 
         <Menu.SubMenu key="sub1" icon={<ToolOutlined />} title="Mantenimiento">

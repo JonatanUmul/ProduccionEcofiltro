@@ -4,8 +4,9 @@ import { Modal, ModalFooter, ModalBody, ModalHeader } from 'reactstrap'
 import LogoEco from '../../utilidades/LogoEco'
 import OTDMP from '../detallado/DOTDMP'
 import OTDMPB from '../detallado/DOTDMPB'
+import DCLiquido from '../detallado/DCLiquido'
 import { Color } from 'antd/es/color-picker'
-
+import DCPlastico from '../detallado/DCPlastico'
 const CrearOT = ({ encabezado, id, fecha_creacion, EncName,existenciaAserrin, existenciaBarro }) => {
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
   const [nombreRol, setNombrerol]=useState('')
@@ -33,7 +34,14 @@ console.log('propr recibios', encabezado, id)
 
         case 'otdmpb':
           return <OTDMPB id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
+       
+        case 'CLiqido':
+          return <DCLiquido id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
+
+        case 'CPlastico':
+            return <DCPlastico id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
   
+
       default:
         return <p>Formulario no encontrado</p>;
     }
@@ -48,11 +56,30 @@ console.log('propr recibios', encabezado, id)
     handleOpenModal();
   };
 
+  const NameButton=()=>{
+    switch (encabezado) {
+      case 'otdmp':
+        return 'Aserrín'
+
+        case 'otdmpb':
+          return 'Barro'
+       
+        case 'CLiqido':
+          return 'Liquido'
+
+        case 'CPlastico':
+          return 'Plastico'
+
+      default:
+        return <p>Error</p>;
+    }
+
+  }
   return (
     <div>
      
     <button disabled={existenciaAserrin!=null || existenciaBarro!=null ? true :false} type="button" className={existenciaAserrin!=null || existenciaBarro!=null ? 'btn' :"btn btn-success bt-sm"} style={{  width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center', alignItems:'center'  }} onClick={handleClick}>
-     {encabezado=='otdmp' ? 'Aserrin':'Barro'}
+    {NameButton()}
    </button>
     
         

@@ -20,6 +20,7 @@ import Board from '../planificacionProduccion/Board'
 import AsignarIsuue from '../../components/planificacionProduccion/Isuues/TablaIsuues'
 import OrdenesSap from '../SapOrdenes/OrdenesSap'
 import OpenAi from '../OpenIa/ChatOpenIa'
+import TablaIndicesPlasticos from '../laboratorio/TablaIndicesPlasticos'
 export const renderContent = (pathname) => {
     switch (pathname) {
 
@@ -89,6 +90,9 @@ export const renderContent = (pathname) => {
      
                     case '/Home/OpenAI':
                       return <OpenAi/>
+
+                      case '/Home/TablaIndicesPlasticos':
+                      return <TablaIndicesPlasticos/>
       default:
         return null;
     }

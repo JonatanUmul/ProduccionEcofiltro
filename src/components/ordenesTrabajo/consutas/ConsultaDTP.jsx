@@ -48,8 +48,8 @@ const ConsultaDTP = ({ encabezado, EncName, fecha_creacion, id }) => {
               <td>{formatFecha(fila.fecha_creacion)}</td>
               <td>{fila.id_OTP}</td>
               <td>{fila.nombre_turno}</td>
-              <td>{fila.nombre_tipoCernido}</td>
-              <td>{fila.nombre_Aserradero}</td>
+              <td>{fila.cernidodetalle}{fila.cernidodetalle2!=null ? '/'+fila.cernidodetalle2:''}</td>
+              <td>{fila.aserradero1}{fila.aserradero2!=null ? '/'+fila.aserradero2:''}</td>
               <td>{fila.nombre_ufmodelo}</td>
               <td>{fila.producido}</td>
               <td>{fila.codigoInicio}</td>

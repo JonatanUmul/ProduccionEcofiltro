@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { Modal, ModalFooter, ModalBody, ModalHeader } from 'reactstrap';
-import OTDMP from '../encabezados/OTDMP';
-import OTDMPB from '../encabezados/OTDMPB'
+import CLP from '../encabezados/CLP';
+
 const BotonOT = () => {
   // const ability = useAbility();
   const [modal, setModal] = useState(false);
@@ -35,9 +35,8 @@ const BotonOT = () => {
   const renderSelectedForm = () => {
     switch (selectedOption) {
       case '1':
-        return <OTDMP />;
-        case '2':
-          return <OTDMPB />;
+        return <CLP />;
+       
   
       default:
         return null;
@@ -59,6 +58,7 @@ const BotonOT = () => {
       </Modal>
 
       <button
+      style={{width:'15%'}}
         className="btn btn-secondary dropdown-toggle"
         type="button"
         id="dropdownMenuButton"
@@ -66,16 +66,13 @@ const BotonOT = () => {
         aria-haspopup="true"
         aria-expanded="false"
       >
-        Crear OT
+        Crear control
       </button>
  
       <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '1', 'Orden de Trabajo - Formmula de Aserrin')}>
-          1. Formula Aserrín
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '1', 'Calculo Limite - Liquido/Plastico')}>
+          1.Limite Liquido/Plastico
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '2', 'Orden de Trabajo - Formula de Barro')}>
-        2. Formula Barro
-      </a>
      
       </div>
     </div>

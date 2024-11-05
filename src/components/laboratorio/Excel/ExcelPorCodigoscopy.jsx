@@ -15,6 +15,7 @@ const ExcelROTHP = ({ datos }) => {
       ...datos.map(dato => ({
         fechaProduccion:formatFecha(dato.fecha_produccion),
         codigo:dato.codigos,
+        Tipoformula:dato.formulaTipo,
         TipoFiltro:dato.ufmodelo,
         CombinacionASerrin:dato.Aserraderos,
         TamañoAserrin1:dato.TamañoAserrin1,

@@ -4,7 +4,7 @@ import { formatFecha } from "../utilidades/FormatearFecta.js";
 // import PdfROTCA1 from './pdfECO/PdfROTCA1.jsx'
 import ExcelROTCA1 from './Excel/ExcelPorCodigoscopy.jsx'
 import ExcelROTCA2 from './Excel/ExcelPorCodigos.jsx'
-// import { Divider } from 'antd';
+import { Alert, Flex, Spin } from 'antd';
 import ReactPaginate from 'react-paginate';
 import Detalle from '../reporteS/ControlProcesos/detalles/RedireccionDetalle_ROTT.jsx'
 const URL = process.env.REACT_APP_URL
@@ -20,7 +20,10 @@ const ROTHP = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 20;
 const [mouseover, setmouseover]=useState(false)
- 
+const [modelo, setmodelo]=useState([])
+const [id_modelo, setId_modelo]=useState('')
+const [cargando, setCargando]=useState(false)
+const [estadoSelect, setestadoSelect]=useState(false)
     const codigo=codigos.toUpperCase()
 
 console.log(codigo)
@@ -29,35 +32,48 @@ console.log(codigo)
     setFecha2(formatFecha(new Date()));
     setIdAserradero('');
     setCodigos('')
-
+    setestadoSelect(false)
+    setDatos([])
+    setId_modelo('')
   };
   console.log(fecha_creacion_inicio, fecha_creacion_fin)
   // Solicitud GET desde React
-  useEffect(() => {
-    // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-    const url = `${URL}/TablaPorCodigos/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${codigo || 'null'}/${ 'null'}`;
 
-    axios.get(url)
-      .then((response) => {
-        setDatos(response.data);
-        console.log('datos consulta', response.data);
-      })
-      .catch((error) => {
+
+  useEffect(() => {
+    const cargarDatosIniciales = async () => {
+      setCargando(true);
+      try {
+        const url =` ${URL}/TablaPorCodigos/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${codigo || 'null'}/${ 'null'}/${id_modelo || 'null'}`;
+        await axios.get(url)
+          .then((response) => {
+            setDatos(response.data);
+            console.log('datos consulta', response.data);
+          })
+      } catch (error) {
         console.error('Error al obtener los datos:', error);
-      });
-  }, [fecha_creacion_inicio,fecha_creacion_fin, id_aserradero,codigo]);
-console.log('datos', datos)
+      }finally{
+        setCargando(false);
+      }
+    }
+
+    cargarDatosIniciales()
+   
+   }, [fecha_creacion_inicio,fecha_creacion_fin, id_aserradero,codigo,id_modelo]);
+
+
   // Realizar las solicitudes para obtener datos
   useEffect(() => {
     axios.all([
       axios.get(`${URL}/Aserradero`),
       axios.get(`${URL}/MateriaPrima`),
+      axios.get(`${URL}/ModelosUF`)
    
     ])
-    .then(axios.spread((aserraderoResponse, materiaPrimResponse, ) => {
+    .then(axios.spread((aserraderoResponse, materiaPrimResponse, modeloResponse) => {
       setAserradero(aserraderoResponse.data);
       setMatPrim(materiaPrimResponse.data);
-    
+      setmodelo(modeloResponse.data)
     }))
     .catch((error) => {
       console.error('Error al obtener los datos:', error);
@@ -101,9 +117,25 @@ const handleMouseOut=()=>{
   setmouseover(false)
 }
 
-const formulaAB=()=>{
+const BuscarCodigo=(e)=>{
   
+  setFecha('')
+  setFecha2('')
+  setId_modelo('')
+  setestadoSelect(true)
+  setCodigos(e.target.value)
+
+
 }
+
+
+const contentStyle = {
+  padding: 50,
+  background: 'rgba(0, 0, 0, 0.05)',
+  borderRadius: 4,
+
+};
+const content = <div style={contentStyle} />;
   return (
     <div className="row mb-3">
 {/*    <Divider style={{ color: '#1d39c4'}}>Cernido 1</Divider> */}
@@ -111,17 +143,26 @@ const formulaAB=()=>{
     <div className="row mb-3">
   <div className="col-md-3">
     <label htmlFor="fecha" className="form-label">Fecha 1 </label>
-    <input className="form-control" type="date" value={fecha_creacion_inicio} onChange={(e) => setFecha(e.target.value)} />
+    <input disabled={estadoSelect} className="form-control" type="date" value={fecha_creacion_inicio} onChange={(e) => setFecha(e.target.value)} />
   </div>
   <div className="col-md-3">
     <label htmlFor="fecha" className="form-label">Fecha 2</label>
-    <input className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha2(e.target.value)} />
+    <input disabled={estadoSelect} className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha2(e.target.value)} />
   </div>
   <div className="col-md-3">
   <label htmlFor="codigo" className="form-label">Código</label>
-  <input className="form-control" type="text" value={codigos} onChange={(e) => setCodigos(e.target.value)} />
+  <input className="form-control" type="text" value={codigos} onChange={BuscarCodigo}/>
 </div>
-  <div className="col-md-3">
+<div className="col-md-3">
+    <label htmlFor="aserradero" className="form-label">Modelo UF:</label>
+    <select disabled={estadoSelect} className="form-select" name="id_aserradero" value={id_modelo} onChange={(e) => setId_modelo(e.target.value)}>
+    <option value="" disabled selected>Seleccione...</option>
+      {Array.isArray(modelo.rows) && modelo.rows.map((item) => (
+        <option key={item.id} value={item.id_mod}>{item.nombre_modelo}</option>
+      ))}
+    </select>
+  </div>
+  {/* <div className="col-md-3">
     <label htmlFor="aserradero" className="form-label">Aserradero:</label>
     <select className="form-select" name="id_aserradero" value={id_aserradero} onChange={(e) => setIdAserradero(e.target.value)}>
     <option value="" disabled selected>Seleccione...</option>
@@ -129,12 +170,12 @@ const formulaAB=()=>{
         <option key={item.id} value={item.id}>{item.nombre_aserradero}</option>
       ))}
     </select>
-  </div>
+  </div> */}
 
   <div className="col-md-3 d-flex align-items-end">
-    <button className="btn btn-primary ms-2" onClick={limpiarInputs}>Limpiar</button>
+    <button className="btn btn-primary ms-2" style={{width:'25%', marginTop:'5px'}} onClick={limpiarInputs}>Limpiar</button>
   </div>
-{datos.length>=0?(
+{/* {datos.length>=0?(
   <div class="container text-center mt-3">
   <div class="row">
     <div class="col">
@@ -160,15 +201,19 @@ const formulaAB=()=>{
     </div>
   </div>
 </div>
-):''}
+):''} */}
   
+  {datos.length>0 ? 
   <div className="col-md-3 d-flex align-items-end">
 
- {/*<p>{(porcentageAprobado.toFixed(2))}</p> */}
-  <ExcelROTCA1 datos={datos}/>
-  <ExcelROTCA2 datos={datos}/>
-{/*<PdfROTCA1 datos={datos}/> */}
-  </div>
+  {/*<p>{(porcentageAprobado.toFixed(2))}</p> */}
+ 
+   <ExcelROTCA1 datos={datos}/>
+   <ExcelROTCA2 datos={datos}/>
+ {/*<PdfROTCA1 datos={datos}/> */}
+   </div>
+   :''}
+  
  
 
 
@@ -191,8 +236,13 @@ const formulaAB=()=>{
             <th scope="col">Temperatura</th>
           </tr>
         </thead>
+        
+        {cargando ?<Spin tip="Loading..." size="large">
+        {content}
+      </Spin>:
         <tbody>
-
+      
+        
           {Array.isArray(currentPageData) && currentPageData.map((fila, index) => (
             <tr key={index}>
               <th scope="row">{index + 1}</th>
@@ -200,7 +250,7 @@ const formulaAB=()=>{
               <td>{fila.formulaTipo}</td>
               <td>{fila.codigos}</td>
               <td>{fila.ufmodelo}</td>
-              <td>{fila.aserradero1}/{fila.aserradero2}</td>
+              <td>{fila.aserradero_principal}/{fila.aserradero_secundario}</td>
      
               <td>{fila.librasAserrin}/{fila.librasAserrin2}</td>
               <td>{fila.formulatotal}</td>
@@ -211,11 +261,12 @@ const formulaAB=()=>{
               {mouseover===index ? (<Detalle nombretabla={nombretabla} datos={datos} />):((fila.promedio))}</td>
             </tr>
           ))}
-          <tr>
-</tr>
-        </tbody>
+
+
+        </tbody>}
       </table>
-      <ReactPaginate
+      
+      {cargando  ? '':  <ReactPaginate
       previousLabel={'Anterior'}
       nextLabel={'Siguiente'}
       breakLabel={'...'}
@@ -227,7 +278,7 @@ const formulaAB=()=>{
       containerClassName={'pagination'}
       subContainerClassName={'pages pagination'}
       activeClassName={'active'}
-    />
+    />}
     </div>
   );
 }

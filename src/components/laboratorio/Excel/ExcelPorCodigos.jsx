@@ -17,10 +17,10 @@ const ExcelROTHP = ({ datos }) => {
         codigo:dato.codigos,
         Tipoformula:dato.formulaTipo,
         TipoFiltro:dato.ufmodelo,
-        aserradero1:dato.aserradero1,
-        aserradero2:dato.aserradero2,
-        TamañoAserrin1:dato.TamañoAserrin1,
-        TamañoAserrin2:dato.TamañoAserrin2,
+        aserradero1:dato.aserradero_principal,
+        aserradero2:dato.aserradero_secundario,
+        TamañoAserrin1:dato.tamañoAserrin_principal,
+        TamañoAserrin2:dato.tamañoAserrin_secundario,
         librasAserrin1: dato.librasAserrin,
         librasAserrin2: dato.librasAserrin2,
         FormulaTotalAserrin:dato.formulatotal,
@@ -82,7 +82,7 @@ const ExcelROTHP = ({ datos }) => {
     };
   return (
     <div>
-      <button className="btn" onClick={generarExcel}><i className="bi bi-file-earmark-excel-fill"></i></button>
+      <button className="btn" onClick={generarExcel}><i className="bi bi-file-earmark-excel-fill"></i>XLSX</button>
     </div>
   );
 };

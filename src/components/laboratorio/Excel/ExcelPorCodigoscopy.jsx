@@ -17,10 +17,13 @@ const ExcelROTHP = ({ datos }) => {
         codigo:dato.codigos,
         Tipoformula:dato.formulaTipo,
         TipoFiltro:dato.ufmodelo,
-        CombinacionASerrin:dato.Aserraderos,
-        TamañoAserrin1:dato.TamañoAserrin1,
-        TamañoAserrin2:dato.TamañoAserrin2,
-        CantidadAserrin:dato.formulatotal,
+        aserradero1:dato.aserradero_principal,
+        aserradero2:dato.aserradero_secundario,
+        TamañoAserrin1:dato.tamañoAserrin_principal,
+        TamañoAserrin2:dato.tamañoAserrin_secundario,
+        librasAserrin1: dato.librasAserrin,
+        librasAserrin2: dato.librasAserrin2,
+        FormulaTotalAserrin:dato.formulatotal,
         CantidadBarro:dato.librasBarro,
         ContenidoDeArcilla:dato.carcilla,
         ContenidoDeLimo:dato.climo,
@@ -39,8 +42,7 @@ const ExcelROTHP = ({ datos }) => {
         ImpregnacionRajadoDesportillado:dato.estado,
         ReduccionColor:dato.ReduccionColor,
         TipoPlata:dato.insumo
-
-      
+  
       }))
     ];
 
@@ -79,7 +81,7 @@ const ExcelROTHP = ({ datos }) => {
     };
   return (
     <div>
-      <button className="btn" onClick={generarExcel}><i className="bi bi-file-earmark-excel-fill"></i></button>
+      <button className="btn" onClick={generarExcel}><i className="bi bi-file-earmark-excel-fill"></i>CSV</button>
     </div>
   );
 };

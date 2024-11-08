@@ -7,6 +7,9 @@ import ExcelROTCA2 from './Excel/ExcelPorCodigos.jsx'
 import { Alert, Flex, Spin } from 'antd';
 import ReactPaginate from 'react-paginate';
 import Detalle from '../reporteS/ControlProcesos/detalles/RedireccionDetalle_ROTT.jsx'
+import Lottie from 'lottie-react';
+import loadingAnimation from '../../loading.json'
+// import loadingAnimation from './path/to/loading.json'; // archivo Lottie
 const URL = process.env.REACT_APP_URL
 const nombretabla='ROTHTablaxCodigos'
 const ROTHP = () => {
@@ -130,12 +133,27 @@ const BuscarCodigo=(e)=>{
 
 
 const contentStyle = {
-  padding: 50,
-  background: 'rgba(0, 0, 0, 0.05)',
-  borderRadius: 4,
-
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '100vw', // Ocupa toda la anchura de la pantalla
+  height: '100vh', // Ocupa toda la altura de la pantalla
+  // backgroundColor: 'rgba(0, 0, 0, 0.1)', // Fondo ligero para mejorar la visibilidad
+  position: 'fixed', // Para asegurar que se mantenga fijo mientras se carga
+  top: 0,
+  left: 0,
 };
-const content = <div style={contentStyle} />;
+
+const spinnerStyle = {
+  width: '50vmin', // Hace que el tamaño de la animación se ajuste a la pantalla
+  height: '50vmin',
+};
+
+const content = (
+  <div style={contentStyle}>
+    <Lottie animationData={loadingAnimation} loop={true} style={spinnerStyle} />
+  </div>
+);
   return (
     <div className="row mb-3">
 {/*    <Divider style={{ color: '#1d39c4'}}>Cernido 1</Divider> */}
@@ -219,27 +237,33 @@ const content = <div style={contentStyle} />;
 
 </div>
 
-      <table className="table text-center">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Producción</th>
-            <th scope="col">Formula</th>
-            <th scope="col">Código</th>
-            <th scope="col">Tipo de Filtro</th>
-            <th scope="col">Proveedor</th>
-            <th scope="col">Cantidad de aserrín</th>
-            <th scope="col">Total</th>
-            <th scope="col">Horno</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Tasa</th>
-            <th scope="col">Temperatura</th>
-          </tr>
-        </thead>
+     
         
-        {cargando ?<Spin tip="Loading..." size="large">
-        {content}
-      </Spin>:
+        {cargando ?
+    
+       <div>
+       {content}
+       </div>
+
+   
+      :
+      <table className="table text-center">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Producción</th>
+          <th scope="col">Formula</th>
+          <th scope="col">Código</th>
+          <th scope="col">Tipo de Filtro</th>
+          <th scope="col">Proveedor</th>
+          <th scope="col">Cantidad de aserrín</th>
+          <th scope="col">Total</th>
+          <th scope="col">Horno</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Tasa</th>
+          <th scope="col">Temperatura</th>
+        </tr>
+      </thead>
         <tbody>
       
         
@@ -263,9 +287,9 @@ const content = <div style={contentStyle} />;
           ))}
 
 
-        </tbody>}
+        </tbody>
       </table>
-      
+}
       {cargando  ? '':  <ReactPaginate
       previousLabel={'Anterior'}
       nextLabel={'Siguiente'}

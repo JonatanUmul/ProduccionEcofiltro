@@ -38,10 +38,10 @@ const ExcelROTHP = ({ datos }) => {
         TasaDeFiltracion:dato.tasa,
         EstadoCC:dato.estadouf,
         ReduccionColor:dato.ReduccionColor,
-        fecha_impregnacion:formatFecha(dato.fecha_impregnacion),
+        fecha_impregnacion:formatFecha(dato.fecha_impregnacion) !='1969-12-31'? formatFecha(dato.fecha_impregnacion): '',
         estadoImpregnado:dato.estadoImpregnado,
         TipoPlata1:dato.plata1,
-        TipoPlata1:dato.plata2
+        TipoPlata2:dato.plata2
   
         
       }))

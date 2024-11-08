@@ -31,18 +31,18 @@ const ExcelROTHP = ({ datos }) => {
         HumedadDeBarro:dato.hbarro,
         IndicePlastico:dato.iplastico,
         Mezcladora:dato.Mezcladora,
-        MermaCrudoRajado:dato.estadoCrudo,
+        EstadoCrudo:dato.estadoCrudo,
         Horno:dato.horno,
         FechaHorneado:formatFecha(dato.fechaHorneado),
-        PosicionHorno:dato.posicionHorno,
-        TiempoHorneado:'',
         TemperaturaHorno:dato.promedio,
-        CdCRajadoDesportillado:dato.estadouf,
         TasaDeFiltracion:dato.tasa,
-        ImpregnacionRajadoDesportillado:dato.estado,
+        EstadoCC:dato.estadouf,
         ReduccionColor:dato.ReduccionColor,
-        TipoPlata:dato.insumo
-
+        fecha_impregnacion:formatFecha(dato.fecha_impregnacion),
+        estadoImpregnado:dato.estadoImpregnado,
+        TipoPlata1:dato.plata1,
+        TipoPlata1:dato.plata2
+  
         
       }))
     ];
@@ -54,7 +54,8 @@ const ExcelROTHP = ({ datos }) => {
     XLSX.utils.book_append_sheet(wb, ws, 'Producción');
 
     // Guardar el archivo Excel
-    const fileName = `Producción ${formatFecha(datos[0])}.xlsx`;
+    // const fileName = `Producción ${formatFecha(datos[0])}.xlsx`;
+    const fileName = `Producción.xlsx`;
     XLSX.writeFile(wb, fileName);
   
 

@@ -31,17 +31,17 @@ const ExcelROTHP = ({ datos }) => {
         HumedadDeBarro:dato.hbarro,
         IndicePlastico:dato.iplastico,
         Mezcladora:dato.Mezcladora,
-        MermaCrudoRajado:dato.estadoCrudo,
+        EstadoCrudo:dato.estadoCrudo,
         Horno:dato.horno,
         FechaHorneado:formatFecha(dato.fechaHorneado),
-        PosicionHorno:dato.posicionHorno,
-        TiempoHorneado:'',
         TemperaturaHorno:dato.promedio,
-        CdCRajadoDesportillado:dato.estadouf,
         TasaDeFiltracion:dato.tasa,
-        ImpregnacionRajadoDesportillado:dato.estado,
+        EstadoCC:dato.estadouf,
         ReduccionColor:dato.ReduccionColor,
-        TipoPlata:dato.insumo
+        fecha_impregnacion:formatFecha(dato.fecha_impregnacion),
+        estadoImpregnado:dato.estadoImpregnado,
+        TipoPlata1:dato.plata1,
+        TipoPlata1:dato.plata2
   
       }))
     ];
@@ -74,7 +74,8 @@ const ExcelROTHP = ({ datos }) => {
       const link = document.createElement('a');
       const url = URL.createObjectURL(blob);
       link.setAttribute('href', url);
-      link.setAttribute('download', `Producción ${formatFecha(datos[0].fecha_produccion)}.csv`);
+      link.setAttribute('download', `Producción.csv`);
+      // link.setAttribute('download', `Producción ${formatFecha(datos[0].fecha_produccion)}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

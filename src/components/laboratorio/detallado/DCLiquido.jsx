@@ -71,22 +71,29 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
   };
 
 
-    // const pesoMaterialHumedo=watch('pesoMaterialHumedo')
+    
+  const [golpes, setGolpes]=useState(0);
+  console.log('Numero de Golpes',golpes)
+  useEffect(()=>{
+      const pesoMaterialHumedo= watch('PesoDeRecipienteYMaterialHumedo')
+      console.log('aca',pesoMaterialHumedo)
+      const pesoMaterialSeco=watch('pesoMaterialSeco')
+      const pesoderecipiente=watch('PesoDeRecipiente')
+      setGolpes(watch('NoGolpes'))
+      console.log(golpes)
+      const humeda=(Math.trunc(( pesoMaterialHumedo-pesoMaterialSeco)/(pesoMaterialSeco-pesoderecipiente)*100))
+      setHumedad(humeda)
+  })
 
   const onSubmit = async (formData) => {
-
     try {
-      const response = await axios.post(`${URL}/DOTDMPB` ,
+      const response = await axios.post(`${URL}/Cliquido` ,
       {
-        id_dtp: id.toString(),
-    id_creador:id_creador,
-    lbbarro:formData.lbbarro,
-    carcilla:formData.carcilla,
-    climo:formData.climo,
-    carena:formData.carena,
-    hbarro:formData.hbarro,
-    iplastico:formData.iplastico
-
+        id_clp: id.toString(),
+        id_creador:id_creador,
+        pesoderecipiente:formData.pesoderecipiente,
+        NoGolpes:formData.NoGolpes,
+        PesoDeRecipienteYMaterialHumedo:formData.PesoDeRecipienteYMaterialHumedo
       });
       Swal.fire({
         icon: 'success',
@@ -116,19 +123,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
 
   // }
   // Humedad()
-const [golpes, setGolpes]=useState(0);
-console.log('Numero de Golpes',golpes)
-  useEffect(()=>{
-    const pesoMaterialHumedo= watch('pesoMaterialHumedo')
-    const pesoMaterialSeco=watch('pesoMaterialSeco')
-    const pesoderecipiente=watch('pesoderecipiente')
 
-    setGolpes(watch('noGolpes'))
-    console.log(golpes)
-    const humeda=(Math.trunc(( pesoMaterialHumedo-pesoMaterialSeco)/(pesoMaterialSeco-pesoderecipiente)*100))
-    setHumedad(humeda)
-    
-  })
 
   const [factorLimite, setfactorLimite]=useState(0)
   console.log('Factor Limite aca',factorLimite)

@@ -9,6 +9,7 @@ import PorcentajeEficienciaDiario from './graficos/PorcentajeEficienciaDiario.js
 import ResponsablesArea from './graficos/ResponsablesArea.jsx';
 import LogoEco from '../utilidades/LogoEco';
 import { formatFecha } from "../utilidades/FormatearFecta.js";
+
 const App = () => {
   const URL = process.env.REACT_APP_URL;
   const [planMesData, setPlanMesData] = useState([]);
@@ -19,8 +20,30 @@ const App = () => {
   const [noche, setNoche]=useState();
   const [mostrarFecha, setMostrar]=useState([])
   const [mes, setMes]=useState([])
-  const [formatearMes, setFormatear]=useState()
+  const [FechaSinFormatear]=useState(new Date().getMonth())
+  const [NumeroMes, setNumeroMes]=useState(FechaSinFormatear)
+  console.log('Fecha Aca', NumeroMes  )
 const [isDarkMode, setIsDarkMode] = useState(true)
+const [MesLetras, setMesLetras]=useState('')
+  console.log('Mes seleccionado',MesLetras)
+
+  
+    const MesNum=()=>{
+      // const NumMes = NumeroMes;
+      const meses=['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+      const MesSeleccionado= meses[NumeroMes]
+      console.log('Meses dentro de Useefeccr',MesSeleccionado)
+    setMesLetras(MesSeleccionado)
+  }
+
+  useEffect(()=>{
+    MesNum()
+  },[NumeroMes])
+
+
+
+
+ 
   
     useEffect(()=>{
         const nocheD=()=>{
@@ -44,7 +67,9 @@ const [isDarkMode, setIsDarkMode] = useState(true)
 
 
       const handleDateChange = (date) => {
+        console.log('Fecha fecha',date)
         if (date) {
+          setNumeroMes(date.$M)
           setHoy(date.format('YYYY-MM-DD'));
           const firstDayOfMonth = date.startOf('month').format('YYYY-MM-DD');
           const lastDayOfMonth = date.endOf('month').format('YYYY-MM-DD');
@@ -147,21 +172,21 @@ const [isDarkMode, setIsDarkMode] = useState(true)
         {/* Gráficos en una sola fila */}
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px', flexWrap: 'wrap' }}>
           <div style={cardStyle}>
-            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Planificación Mensual   Octubre</p>
+            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Planificación Mensual {MesLetras}</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PlanMensual isDarkMode={noche} planCumplido={planMesData} />
             </div>
           </div>
 
           <div style={cardStyle}>
-            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de % Eficiencia   Octubre</p>
+            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de % Eficiencia {MesLetras}</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <PorcentajeEficienciaMensual isDarkMode={noche} planCumplido={planMesData} />
             </div>
           </div>
 
           <div style={cardStyle}>
-            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Responsables   Octubre</p>
+            <p style={{ textAlign: 'center', fontFamily: 'Poppins', fontWeight: 'bold', fontSize: '26px' }}>Gráfico de Responsables {MesLetras}</p>
             <div style={{ height: '300px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <ResponsablesArea isDarkMode={noche} data={planMesData} />
             </div>

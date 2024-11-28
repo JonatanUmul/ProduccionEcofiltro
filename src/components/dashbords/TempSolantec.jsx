@@ -42,8 +42,8 @@ const Bar3DChartComponent = () => {
       });
   }, []);
 
-  // Fetch data for all hornos
-  const fetchData = async () => {
+// Fetch data for all hornos
+const fetchData = async () => {
     try {
       setIsLoading(true);
 
@@ -77,8 +77,8 @@ const Bar3DChartComponent = () => {
     return () => clearInterval(intervalId); // Clean up interval on unmount
   }, [fecha_creacion_inicio, fecha_creacion_fin, turn]);
 
-  // Render charts when data updates
-  useEffect(() => {
+// Render charts when data updates
+useEffect(() => {
     hornosIds.forEach((horno, index) => {
       const chartData = datos[horno]?.flatMap((dato, idx) =>
         Object.keys(dato)
@@ -141,7 +141,7 @@ const Bar3DChartComponent = () => {
             type: 'bar3D',
             data: chartData.map((item) => ({ value: item })),
             shading: 'color',
-            label: { show: false },
+            label: { show: true },
             itemStyle: { opacity: 0.8 }
           }
         ]
@@ -152,7 +152,7 @@ const Bar3DChartComponent = () => {
     });
   }, [datos]);
 
-//   if (isLoading) return <div>Cargando datos...</div>;
+  //   if (isLoading) return <div>Cargando datos...</div>;
   if (error) return <div style={{ color: 'red' }}>{error}</div>;
 
   return (

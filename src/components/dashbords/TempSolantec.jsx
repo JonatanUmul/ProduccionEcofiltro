@@ -22,8 +22,11 @@ const Bar3DChartComponent = () => {
   const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
   const [hora, setHora]=useState(new Date())
   const [turno, setTurno] = useState([]);
-  const [turn, setTurn] = useState(hora>=18 && hora<=5 ? 1: 2);
+  const [turn, setTurn] = useState();
   
+  useEffect(()=>{
+    setTurn(hora>=18 && hora<=5 ? 1: 2) 
+  },[hora])
 
   console.log(hora.getHours(), turn)
   
@@ -125,7 +128,7 @@ const Bar3DChartComponent = () => {
           boxWidth: 100,
           boxDepth: 80,
           viewControl: {
-            autoRotate: false,
+            autoRotate: true,
             autoRotateSpeed: 10
           },
           light: {

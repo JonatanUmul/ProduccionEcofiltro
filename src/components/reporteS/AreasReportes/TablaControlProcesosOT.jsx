@@ -4,7 +4,7 @@ import ROTPB from './ROTPB'
 import ROTPS from './ROTPS'
 import ROTT from './encabezados/ROTT'
 import ROTH from './encabezados/ROTH'
-
+import ROTHSOLANTEC from './encabezados/ROTHSOLANTEC'
 
 
 const BotonOT = () => {
@@ -43,7 +43,8 @@ const BotonOT = () => {
           return <ROTT/>
       case '4':
             return <ROTH/>
-
+      case '5':
+              return <ROTHSOLANTEC/>
       default:
         return null;
     }
@@ -75,7 +76,10 @@ const BotonOT = () => {
         3. Temperatura Tunel
       </a>
       <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '4', 'Temperatura Hornos')}>
-        4. Temperatura Hornos
+        4. Temperatura Hornos Manual
+      </a>
+      <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '5', 'Temperatura Solantec')}>
+        5. Temperatura Solantec
       </a>
   
     

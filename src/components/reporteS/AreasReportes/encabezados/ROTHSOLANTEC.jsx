@@ -22,6 +22,7 @@ const [hornos, setTHornos] = useState([]);
 const [currentPage, setCurrentPage] = useState(0);
 const itemsPerPage = 20;
 const maquinaria="Horno"; 
+console.log('datos solantec',datos)
   useEffect(() => {
     axios.all([
       axios.get(`${URL}/ModelosUF`),
@@ -41,7 +42,7 @@ const maquinaria="Horno";
 
   useEffect(() => {
     // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-    const url = `${URL}/DTH/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${'null'}/${turn || 'null'}/${horno||'null'}`;
+    const url = `${URL}/DTH/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${modeloUF || 'null'}/${turn || 'null'}/${horno||'null'}`;
 
     axios.get(url)
       .then((response) => {
@@ -129,10 +130,18 @@ const pageCount = Math.ceil(datos.length / itemsPerPage);
             <th scope="col">Hora</th>
             <th scope="col">Horno</th>
             <th scope="col">Turno</th>
-            <th scope="col">Cabeza DR</th>
-            <th scope="col">Pie DR</th>
-            <th scope="col">Cabeza IZ</th>
-            <th scope="col">Pie IZ</th>
+            <th scope="col">T1</th>
+            <th scope="col">T2</th>
+            <th scope="col">T3</th>
+            <th scope="col">T4</th>
+            <th scope="col">T5</th>
+            <th scope="col">T6</th>
+            <th scope="col">T7</th>
+            <th scope="col">T8</th>
+            <th scope="col">T9</th>
+            <th scope="col">T10</th>
+            <th scope="col">T11</th>
+            <th scope="col">T12</th>
             <th scope="col">Promedio</th>
           
            
@@ -148,14 +157,22 @@ const pageCount = Math.ceil(datos.length / itemsPerPage);
                   id={fila.id}
                 />
               </th> */}
-              <td>{formatFecha(fila.fecha_real)}</td>
+              <td>{formatFecha(fila.fecha_solantec)}</td>
               <td>{fila.hora_creacion}</td>
               <td>{fila.horno}</td>
               <td>{fila.turno}</td>
-              <td>{fila.tempCabezaDR}</td>
-              <td>{fila.tempCabezaIZ}</td>
-              <td>{fila.tempPieDR}</td>
-              <td>{fila.tempPieIZ}</td>
+              <td>{fila.t1}</td>
+              <td>{fila.t2}</td>
+              <td>{fila.t3}</td>
+              <td>{fila.t4}</td>
+              <td>{fila.t5}</td>
+              <td>{fila.t6}</td>
+              <td>{fila.t7}</td>
+              <td>{fila.t8}</td>
+              <td>{fila.t9}</td>
+              <td>{fila.t10}</td>
+              <td>{fila.t11}</td>
+              <td>{fila.t12}</td>
               <td>{fila.promedio}</td>
             </tr>
           ))}

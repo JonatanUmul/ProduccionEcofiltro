@@ -22,10 +22,8 @@ const App = () => {
   const [mes, setMes]=useState([])
   const [FechaSinFormatear]=useState(new Date().getMonth())
   const [NumeroMes, setNumeroMes]=useState(FechaSinFormatear)
-  console.log('Fecha Aca', NumeroMes  )
 const [isDarkMode, setIsDarkMode] = useState(true)
 const [MesLetras, setMesLetras]=useState('')
-  console.log('Mes seleccionado',MesLetras)
 
   
     const MesNum=()=>{
@@ -67,7 +65,7 @@ const [MesLetras, setMesLetras]=useState('')
 
 
       const handleDateChange = (date) => {
-        console.log('Fecha fecha',date)
+      
         if (date) {
           setNumeroMes(date.$M)
           setHoy(date.format('YYYY-MM-DD'));

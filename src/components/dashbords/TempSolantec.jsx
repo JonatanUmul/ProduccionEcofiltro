@@ -23,10 +23,12 @@ const Bar3DChartComponent = () => {
   const [hora, setHora]=useState(new Date())
   const [turno, setTurno] = useState([]);
   const [turn, setTurn] = useState();
-  
+ const minutos=[1,5,10,15,20,25,30,35,40,45,50,55,60]
+const [tiempo, setMin]=useState(40)
+ console.log('Minutos seleccionadoa',tiempo)
   useEffect(()=>{
-    setTurn(hora>=18 && hora<=5 ? 1: 2) 
-  },[hora])
+    setTurn( hora>=18 && hora<=5 ? 2: 1)
+  },hora)
 
   console.log(hora.getHours(), turn)
   
@@ -42,14 +44,14 @@ const Bar3DChartComponent = () => {
       });
   }, []);
 
-// Fetch data for all hornos
-const fetchData = async () => {
+  // Fetch data for all hornos
+  const fetchData = async () => {
     try {
       setIsLoading(true);
 
       const requests = hornosIds.map((horno) =>
         axios.get(
-          `${URL}/DTH/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${'null'}/${turn || 'null'}/${horno}`
+          `${URL}/DTH/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${'null'}/${turn || 'null'}/${horno|| 'null'}/${tiempo|| 'null'}`
         )
       );
 
@@ -75,10 +77,10 @@ const fetchData = async () => {
     fetchData();
     const intervalId = setInterval(fetchData, 5 * 60 * 1000); // Update every 5 minutes
     return () => clearInterval(intervalId); // Clean up interval on unmount
-  }, [fecha_creacion_inicio, fecha_creacion_fin, turn]);
+  }, [fecha_creacion_inicio, fecha_creacion_fin, turn, tiempo]);
 
-// Render charts when data updates
-useEffect(() => {
+  // Render charts when data updates
+  useEffect(() => {
     hornosIds.forEach((horno, index) => {
       const chartData = datos[horno]?.flatMap((dato, idx) =>
         Object.keys(dato)
@@ -152,7 +154,7 @@ useEffect(() => {
     });
   }, [datos]);
 
-  //   if (isLoading) return <div>Cargando datos...</div>;
+//   if (isLoading) return <div>Cargando datos...</div>;
   if (error) return <div style={{ color: 'red' }}>{error}</div>;
 
   return (
@@ -177,20 +179,20 @@ useEffect(() => {
     />
   </div>
   <div className="col-md-4">
-    <label htmlFor="turno" className="form-label">Turno</label>
+    <label htmlFor="minutos" className="form-label">Minutos</label>
     <select
       className="form-select form-select-sm"
-      value={turn}
-      onChange={(e) => setTurn(e.target.value)}
-    >
+      value={tiempo}
+      onChange={(e) => setMin(e.target.value)}>
       <option value="">--</option>
-      {turno.rows?.map((t) => (
-        <option key={t.id} value={t.id}>
-          {t.turno}
+      {minutos.map((t) => (
+        <option value={t}>
+          {t}
         </option>
       ))}
     </select>
   </div>
+
 </div>
 
       <div className="row">

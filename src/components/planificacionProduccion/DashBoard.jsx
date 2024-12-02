@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import TablasBoard from './TablasBoard';
 import Issues from './Isuues/ConsultarIssues';
+// import TempHornosSolantec from '../dashbords/TempSolantec'
 import { Carousel } from 'react-bootstrap';
 import './App.css';
 
@@ -25,6 +26,11 @@ const App = () => {
               <Issues>2</Issues>
             </div>
           </Carousel.Item>
+          {/* <Carousel.Item>
+            <div style={{ height: '100vw', justifyContent: 'center', alignItems: 'center' }}>
+              <TempHornosSolantec>3</TempHornosSolantec>
+            </div>
+          </Carousel.Item> */}
         </Carousel>
       </div>
     </>

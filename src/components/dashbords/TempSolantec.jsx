@@ -20,24 +20,51 @@ const Bar3DChartComponent = () => {
   const [error, setError] = useState(null);
   const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
   const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
-  const [hora, setHora]=useState(new Date())
+  const [hora]=useState(new Date().getHours())
   const [turno, setTurno] = useState([]);
   const [turn, setTurn] = useState();
- const minutos=[1,5,10,15,20,25,30,35,40,45,50,55,60]
-const [tiempo, setMin]=useState(40)
- console.log('Minutos seleccionadoa',tiempo)
-  useEffect(()=>{
-    setTurn( hora>=18 && hora<=5 ? 2: 1)
-  },hora)
+ const minutos=[1,5,10,15,20,25,30,35,40,45,50,55,60];
+const [tiempo, setMin]=useState(40);
+const [label, setLabel]=useState(false);
+ console.log('Turno',turn)
 
-  console.log(hora.getHours(), turn)
+ useEffect(() => {
+  // Función para actualizar el turno según la hora actual
+  const actualizarTurno = () => {
+    const horaActual = new Date().getHours();
+    if (horaActual >= 18 && horaActual <= 23) {
+      setTurn(2); // Turno nocturno
+    } else if (horaActual >= 0 && horaActual <= 6) {
+      setTurn(2); // Turno nocturno
+    } else {
+      setTurn(1); // Turno diurno
+    }
+  };
+
+  // Ejecutar la función inmediatamente al montar el componente
+  actualizarTurno();
+
+  // Configurar un intervalo para actualizar el turno cada minuto
+  const intervalId = setInterval(actualizarTurno, 60 * 1000);
+
+  // Limpiar el intervalo al desmontar el componente
+  return () => clearInterval(intervalId);
+}, []);
+
+
+  const Etiquets=()=>(
+    setLabel(true)
+  )
+
+
+  // console.log(hora.getHours(), turn)
   
   // Fetch turnos on initial mount
   useEffect(() => {
     axios
-      .get(`${URL}/Turnos`)
+      .get(`${URL}/Turnos`) 
       .then((response) => {
-        setTurno(response.data);
+        setTurno(response.data.rows);
       })
       .catch((error) => {
         console.error('Error al obtener los datos:', error);
@@ -46,6 +73,8 @@ const [tiempo, setMin]=useState(40)
 
   // Fetch data for all hornos
   const fetchData = async () => {
+
+
     try {
       setIsLoading(true);
 
@@ -143,7 +172,7 @@ const [tiempo, setMin]=useState(40)
             type: 'bar3D',
             data: chartData.map((item) => ({ value: item })),
             shading: 'color',
-            label: { show: true },
+            label: { show: label },
             itemStyle: { opacity: 0.8 }
           }
         ]
@@ -154,13 +183,16 @@ const [tiempo, setMin]=useState(40)
     });
   }, [datos]);
 
+  
+ 
 //   if (isLoading) return <div>Cargando datos...</div>;
   if (error) return <div style={{ color: 'red' }}>{error}</div>;
 
   return (
     <>
     <div className="row mb-3">
-  <div className="col-md-4">
+  
+  <div className="col-md-3">
     <label htmlFor="fecha1" className="form-label">Fecha Inicio</label>
     <input
       className="form-control form-control-sm"
@@ -169,7 +201,7 @@ const [tiempo, setMin]=useState(40)
       onChange={(e) => setFecha(e.target.value)}
     />
   </div>
-  <div className="col-md-4">
+  <div className="col-md-3">
     <label htmlFor="fecha2" className="form-label">Fecha Fin</label>
     <input
       className="form-control form-control-sm"
@@ -178,7 +210,21 @@ const [tiempo, setMin]=useState(40)
       onChange={(e) => setFecha2(e.target.value)}
     />
   </div>
-  <div className="col-md-4">
+  <div className="col-md-3">
+    <label htmlFor="minutos" className="form-label">Turno</label>
+    <select
+      className="form-select form-select-sm"
+      // value={turn}
+      onChange={(e) => setTurn(e.target.value)}>
+      <option value="">--</option>
+      {Array.isArray(turno)&&turno.map((t) => (
+        <option value={t.id}>
+          {t.turno}
+        </option>
+      ))}
+    </select>
+  </div>
+  <div className="col-md-3">
     <label htmlFor="minutos" className="form-label">Minutos</label>
     <select
       className="form-select form-select-sm"
@@ -192,7 +238,20 @@ const [tiempo, setMin]=useState(40)
       ))}
     </select>
   </div>
-
+  <div style={{display:'flex'}} className="col-md-1">
+  <div className="form-check">
+    <input
+      className="form-check-input"
+      type="checkbox"
+      defaultValue=""
+      id="flexCheckDefault"
+      onClick={Etiquets}
+    />
+    <label className="form-check-label" htmlFor="flexCheckDefault">
+    Etiquetas
+    </label>
+  </div>
+</div>
 </div>
 
       <div className="row">
@@ -203,6 +262,7 @@ const [tiempo, setMin]=useState(40)
           </div>
         ))}
       </div>
+      
     </>
   );
 };

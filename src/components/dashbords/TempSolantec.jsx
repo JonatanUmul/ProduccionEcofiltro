@@ -52,9 +52,9 @@ const [label, setLabel]=useState(false);
 }, []);
 
 
-  const Etiquets=()=>(
-    setLabel(true)
-  )
+const Etiquets = (e) => {
+  setLabel(e.target.checked);
+};
 
 
   // console.log(hora.getHours(), turn)
@@ -120,19 +120,31 @@ const [label, setLabel]=useState(false);
           })
           .filter(Boolean)
       );
-
+  
       if (!chartData || !chartData.length) return;
-
+  
       const maxValue = Math.max(...chartData.map((item) => item[2]));
       const horas = datos[horno]?.map((item) => item.hora_creacion);
-    //   const etiquetas = Object.keys(datos[horno][0] || {}).filter((key) => key.startsWith('t'));
-    const etiquetas = ['t1','t2','t3','t4','t5','t6','t7','t8','t9','t10','t11','t12'];
-
+      const etiquetas = [
+        't1',
+        't2',
+        't3',
+        't4',
+        't5',
+        't6',
+        't7',
+        't8',
+        't9',
+        't10',
+        't11',
+        't12',
+      ];
+  
       const option = {
         tooltip: {
           trigger: 'item',
           formatter: (params) =>
-            `Etiqueta: ${etiquetas[params.data.value[1]]}<br>Hora: ${horas[params.data.value[0]]}<br>Valor: ${params.data.value[2]}`
+            `Etiqueta: ${etiquetas[params.data.value[1]]}<br>Hora: ${horas[params.data.value[0]]}<br>Valor: ${params.data.value[2]}`,
         },
         visualMap: {
           max: maxValue,
@@ -148,9 +160,9 @@ const [label, setLabel]=useState(false);
               '#fdae61',
               '#f46d43',
               '#d73027',
-              '#a50026'
-            ]
-          }
+              '#a50026',
+            ],
+          },
         },
         xAxis3D: { type: 'category', data: horas, name: 'Horas' },
         yAxis3D: { type: 'category', data: etiquetas, name: 'Etiquetas' },
@@ -160,28 +172,29 @@ const [label, setLabel]=useState(false);
           boxDepth: 80,
           viewControl: {
             autoRotate: true,
-            autoRotateSpeed: 10
+            autoRotateSpeed: 10,
           },
           light: {
             main: { intensity: 1.2 },
-            ambient: { intensity: 0.3 }
-          }
+            ambient: { intensity: 0.3 },
+          },
         },
         series: [
           {
             type: 'bar3D',
             data: chartData.map((item) => ({ value: item })),
             shading: 'color',
-            label: { show: label },
-            itemStyle: { opacity: 0.8 }
-          }
-        ]
+            label: { show: label }, // Actualización basada en el estado `label`
+            itemStyle: { opacity: 0.8 },
+          },
+        ],
       };
-
+  
       const chart = echarts.init(chartsRefs[index].current);
       chart.setOption(option);
     });
-  }, [datos]);
+  }, [datos, label]); // Incluido `label` en las dependencias
+  
 
   
  
@@ -192,7 +205,7 @@ const [label, setLabel]=useState(false);
     <>
     <div className="row mb-3">
   
-  <div className="col-md-3">
+  <div className="col-md-2">
     <label htmlFor="fecha1" className="form-label">Fecha Inicio</label>
     <input
       className="form-control form-control-sm"
@@ -201,7 +214,7 @@ const [label, setLabel]=useState(false);
       onChange={(e) => setFecha(e.target.value)}
     />
   </div>
-  <div className="col-md-3">
+  <div className="col-md-2">
     <label htmlFor="fecha2" className="form-label">Fecha Fin</label>
     <input
       className="form-control form-control-sm"
@@ -210,7 +223,7 @@ const [label, setLabel]=useState(false);
       onChange={(e) => setFecha2(e.target.value)}
     />
   </div>
-  <div className="col-md-3">
+  <div className="col-md-2">
     <label htmlFor="minutos" className="form-label">Turno</label>
     <select
       className="form-select form-select-sm"
@@ -224,8 +237,8 @@ const [label, setLabel]=useState(false);
       ))}
     </select>
   </div>
-  <div className="col-md-3">
-    <label htmlFor="minutos" className="form-label">Minutos</label>
+  <div className="col-md-2">
+    <label htmlFor="minutos" className="form-label">Intervalo</label>
     <select
       className="form-select form-select-sm"
       value={tiempo}
@@ -238,20 +251,20 @@ const [label, setLabel]=useState(false);
       ))}
     </select>
   </div>
-  <div style={{display:'flex'}} className="col-md-1">
+  <div style={{ display: 'flex' }} className="col-md-1">
   <div className="form-check">
     <input
       className="form-check-input"
       type="checkbox"
-      defaultValue=""
       id="flexCheckDefault"
-      onClick={Etiquets}
+      onChange={Etiquets} // Cambiado a `onChange`
     />
     <label className="form-check-label" htmlFor="flexCheckDefault">
-    Etiquetas
+      Etiquetas
     </label>
   </div>
 </div>
+
 </div>
 
       <div className="row">

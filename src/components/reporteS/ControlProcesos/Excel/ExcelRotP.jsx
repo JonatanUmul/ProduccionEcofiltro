@@ -1,7 +1,7 @@
 import React from 'react';
 import * as XLSX from 'xlsx'; // Importar todas las exportaciones de xlsx
 
-const ExcelROTHP = ({ datos,fechaSecado}) => {
+const ExcelROTHP = ({ datos}) => {
   const generarExcel = () => {
     // Crear una nueva hoja de cálculo de Excel
     const wb = XLSX.utils.book_new();
@@ -15,10 +15,10 @@ const ExcelROTHP = ({ datos,fechaSecado}) => {
     const ws = XLSX.utils.json_to_sheet(dataWithHeaders);
 
     // Agregar la hoja a la hoja de cálculo de Excel
-    XLSX.utils.book_append_sheet(wb, ws, 'ROTSA');
+    XLSX.utils.book_append_sheet(wb, ws, 'ROTIP');
 
     // Guardar el archivo Excel
-    const fileName = `Reporte Diario Producciòn.xlsx`;
+    const fileName = `Reporte De Impregnación.xlsx`;
     XLSX.writeFile(wb, fileName);
   };
 

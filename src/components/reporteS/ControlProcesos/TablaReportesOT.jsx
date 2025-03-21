@@ -8,6 +8,7 @@ import ROTPV from './ROTPV'
 import ROTFM from './ROTFM'
 import ROTP from './ROTP'
 import ROTHH from './encabezados/ROTHH'
+import ROTIP from './ROTIP'
 import TablaPorCodigos from '../../laboratorio/TablaPorCodigos'
 import ReporteGeneralDiario from '../ReporteGeneralDiario';
 
@@ -58,6 +59,8 @@ const BotonOT = () => {
           return <ROTHH/>
       case '9':
         return <TablaPorCodigos/>
+      case '10':
+          return <ROTIP/>
        
 
       default:
@@ -108,6 +111,11 @@ const BotonOT = () => {
   <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '9', 'Control de Calidad')}>
     9. Control de calidad
   </a>
+  <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '10', 'Impregnación')}>
+    10. Impregnación
+  </a>
+
+
 
     
 

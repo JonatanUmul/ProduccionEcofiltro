@@ -173,9 +173,11 @@ const styles = StyleSheet.create({
 });
 
 const MyDocument = ({ datos}) => {
+
   const UltimaFirma=datos[datos.length-1]
-  const Firma= UltimaFirma?.JefeMateriaPrim || null
-const FirmaJefe=UltimaFirma?.FirmaJefeProdu || null
+  const Firma = UltimaFirma?.firma ? { uri: UltimaFirma.firma } : 'S/F';
+  const FirmaJefe = UltimaFirma?.FirmaJefeProdu ? { uri: UltimaFirma.FirmaJefeProdu } : 'null';
+ 
     const nombreEncargado=UltimaFirma?.NombreCreador || null
 
     const rowsPerPage=15;
@@ -234,7 +236,7 @@ const FirmaJefe=UltimaFirma?.FirmaJefeProdu || null
                 <Text style={styles.tableCell}>{fila.cernido_fino}</Text>
                 <Text style={styles.tableCell}>{fila.cernido_grueso}</Text>
                 <Text style={styles.tableCell}>{fila.merma}</Text>
-                <Image style={styles.tablefirma} src={fila.JefeMateriaPrim}></Image>
+                {Firma && <Image style={styles.tablefirma} src={Firma} />}
             
               </View>
             ))}
@@ -256,7 +258,7 @@ const FirmaJefe=UltimaFirma?.FirmaJefeProdu || null
         {Firma  ?(<Image style={[styles.FirmasIMG]}  src={Firma}></Image>):(<Text style={styles.lineas}> __________________________ </Text>)} 
         <Text></Text>
         {FirmaJefe ?(<Image style={styles.FirmasIMG}  src={FirmaJefe}/>):(<Text style={styles.lineas}> __________________________ </Text>)}
-        
+
          </View>
          <View style={[styles.firmasText,{}]}>
            <Text style={[styles.firmasText,{}]}>Encargado de Secado</Text>

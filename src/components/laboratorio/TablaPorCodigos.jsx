@@ -252,6 +252,7 @@ const content = (
         <tr>
           <th scope="col">#</th>
           <th scope="col">Producción</th>
+          <th scope="col">Control C.</th>
           <th scope="col">Formula</th>
           <th scope="col">Código</th>
           <th scope="col">Tipo de Filtro</th>
@@ -271,6 +272,7 @@ const content = (
             <tr key={index}>
               <th scope="row">{index + 1}</th>
               <td>{formatFecha(fila.fecha_produccion) }</td>
+              <td>{formatFecha(fila.fechaCC)<='2000-12-31' ?'':formatFecha(fila.fechaCC)}</td>
               <td>{fila.formulaTipo}</td>
               <td>{fila.codigos}</td>
               <td>{fila.ufmodelo}</td>

@@ -175,8 +175,8 @@ const styles = StyleSheet.create({
 
 const MyDocument = ({ datos }) => {
   const UltimaFirma=datos[datos.length-1]
-  const Firma= UltimaFirma?.firmaEncargado || null
-const FirmaJefe=UltimaFirma?.firmaJefe || null
+  const Firma = UltimaFirma?.firma ? { uri: UltimaFirma.firma } : 'S/F';
+  const FirmaJefe = UltimaFirma?.firmaJefe ? { uri: UltimaFirma.firmaJefe } : 'S/F';
     const nombreEncargado=UltimaFirma?.NombreCreador || null
 
     const rowsPerPage = 15; // Ajusta esto según sea necesario
@@ -235,7 +235,8 @@ const FirmaJefe=UltimaFirma?.firmaJefe || null
           <Text style={styles.tableCell}>{fila.CantidadInicial}</Text>
           <Text style={styles.tableCell}>{fila.CantidadFinal}</Text>
           <Text style={styles.tableCell}>{fila.merma}</Text>
-          <Image style={styles.tablefirma} src={fila.firmaEncargado}></Image>
+          {Firma && <Image style={styles.tablefirma} src={Firma} />}
+          {/* <Image style={styles.tablefirma} src={fila.firmaEncargado}></Image> */}
          
                   
         </View>

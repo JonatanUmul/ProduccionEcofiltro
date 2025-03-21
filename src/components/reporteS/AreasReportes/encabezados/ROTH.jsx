@@ -4,7 +4,7 @@ import { formatFecha } from "../../../utilidades/FormatearFecta.js";
 import ExcelROTHP from '../Excel/ExcelRTH';
 import Detalle from '../detalles/Detalle_ROTT.jsx';
 import ReactPaginate from 'react-paginate';
-
+import { Divider } from 'antd';
 const URL = process.env.REACT_APP_URL;
 
 const ROTH = () => {
@@ -66,6 +66,8 @@ const pageCount = Math.ceil(datos.length / itemsPerPage);
   return (
     <div className="row mb-3">
       <div className="row mb-3">
+      <Divider style={{ color: '#1d39c4'}}>Temperatura Hornos</Divider>
+
         <div className="col-md-3">
           <label htmlFor="fecha" className="form-label">Fecha 1</label>
           <input className="form-control" type="date" value={fecha_creacion_inicio} onChange={(e) => setFecha(e.target.value)} />

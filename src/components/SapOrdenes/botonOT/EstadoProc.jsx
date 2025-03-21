@@ -38,39 +38,7 @@ const EstadoProc = ({ id, encabezado }) => {
       case 'othp':
         ruta = 'othp';
         break;
-      case 'otsa':
-        ruta = 'otsa';
-        break;
-      case 'otca1':
-        ruta = 'otca1';
-        break;
-      case 'otca2':
-        ruta = 'otca2';
-        break;
-      case 'otpv':
-        ruta = 'otpv';
-        break;
-      case 'otp':
-        ruta = 'otp';
-        break;
-      case 'othh':
-        ruta = 'othh';
-        break;
-      case 'otfm':
-        ruta = 'otfm';
-        break;
-      case 'otip':
-        ruta = 'otip';
-        break;
-      case 'otcc':
-        ruta = 'otcc';
-        break;
-      case 'cthh':
-        ruta = 'dthh';
-        break;
-      default:
-        ruta = '';
-        break;  
+    
     }
     console.log('Ruta establecida antes de actualizar el estado: ', ruta);
     setCambiarRuta(ruta);

@@ -73,7 +73,10 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
     lbaserrin:formData.lbaserrin,
     lbaserrin2:formData.lbaserrin2,
     id_granulometria:formData.id_granulometria,
-    id_granulometria2:formData.id_granulometria2
+    id_granulometria2:formData.id_granulometria2,
+    mayor_2mm:formData.mayor_2mm,
+    entre_2_y_05mm:formData.entre_2_y_05mm,
+    menor_05mm:formData.menor_05mm
       });
       Swal.fire({
         icon: 'success',
@@ -160,7 +163,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
           ))}
         </select>
       </div>
-      
+{/*       
       <div className="col-md-6">
       <label htmlFor="aserradero" className="form-label">
           Granulometria
@@ -175,7 +178,53 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
           </option>
         ))}
       </select>
-    </div>
+    </div> */}
+     <div className="col-md-10">
+  <label className="form-label">
+    Granulometría de aserrín (%)
+  </label>
+
+  <div className="input-group mb-2">
+    <span className="input-group-text">≥2.00 mm</span>
+    <input
+      type="number"
+      step="0.01"
+      min="0"
+      max="100"
+      className="form-control"
+      {...register("mayor_2mm", { required: true })}
+    />
+    <span className="input-group-text">%</span>
+  </div>
+
+  <div className="input-group mb-2">
+    <span className="input-group-text">2.00 mm - 0.50 mm</span>
+    <input
+      type="number"
+      step="0.01"
+      min="0"
+      max="100"
+      className="form-control"
+      {...register("entre_2_y_05mm", { required: true })}
+    />
+    <span className="input-group-text">%</span>
+  </div>
+
+  <div className="input-group">
+    <span className="input-group-text">&lt;0.5 mm</span>
+    <input
+      type="number"
+      step="0.01"
+      min="0"
+      max="100"
+      className="form-control"
+      {...register("menor_05mm", { required: true })}
+    />
+    <span className="input-group-text">%</span>
+  </div>
+</div>
+
+
     <div className="col-md-6">
           <label htmlFor="esquinaSI" className="form-label">
             Cantidad de Aserrín (lb)
@@ -248,7 +297,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
         
         <div className="col-12">
         <div className="col-4">
-        <a type="button" className="btn btn-danger mb-3" onClick={llamar}>Mix</a>
+        <button disabled type="button" className="btn btn-danger mb-3" onClick={llamar}>Mix</button>
         </div>
           <button type="submit" className="btn btn-primary" disabled={loading}>Guardar</button>
         </div>

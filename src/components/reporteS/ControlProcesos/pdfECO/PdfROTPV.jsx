@@ -170,10 +170,10 @@ firmas: {
 });
 
 const MyDocument = ({ datos}) => {
-  console.log('verificar firmas', datos)
+
   const UltimaFirma=datos[datos.length-1]
-  const Firma= UltimaFirma?.FirmaEncargado || null
-const FirmaJefe=UltimaFirma?.FirmaJefe || null
+  const Firma = UltimaFirma?.firma ? { uri: UltimaFirma.firma } : 'S/F';
+  const FirmaJefe = UltimaFirma?.FirmaJefe ? { uri: UltimaFirma.FirmaJefe } : 'S/F';
 
   const rowsPerPage = 15;
   const totalPages= Math.ceil(datos.length / rowsPerPage);
@@ -229,7 +229,7 @@ const FirmaJefe=UltimaFirma?.FirmaJefe || null
           <Text style={styles.tableCell}>{fila.descripcion_matprima}</Text>
           <Text style={styles.tableCell}>{fila.cantidad}</Text>
           <Text style={styles.tableCell}>{fila.humedad}</Text>
-          <Image style={styles.tablefirma} src={fila.FirmaEncargado}></Image>
+          {Firma && <Image style={styles.tablefirma} src={Firma} />}
                   
         </View>
       ))}

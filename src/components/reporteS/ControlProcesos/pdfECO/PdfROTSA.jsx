@@ -151,9 +151,11 @@ const styles = StyleSheet.create({
 });
 
 const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => {
+  
   const UltimaFirma = datos[datos.length - 1];
-  const Firma = UltimaFirma?.firma || null;
-  const FirmaJefe = UltimaFirma?.firmaJefe || null;
+  const Firma = UltimaFirma?.firma ? { uri: UltimaFirma.firma } : 'S/F';
+  const FirmaJefe = UltimaFirma?.firmaJefe ? { uri: UltimaFirma.firmaJefe } : 'S/F';
+  
 
   const rowsPerPage=12;
   const totalPages = Math.ceil(datos.length/rowsPerPage);
@@ -208,7 +210,7 @@ for(let i=0; i<totalPages; i++){
             <Text style={styles.tableCell}>{fila.cantidad_final}</Text>
             <Text style={styles.tableCell}>{fila.merma}</Text>
             <Text style={styles.tableCell}>{fila.patio}</Text>
-            <Image style={styles.tablefirma} src={Firma} />
+            {Firma && <Image style={styles.tablefirma} src={Firma} />}
           </View>
         ))}
       </View>

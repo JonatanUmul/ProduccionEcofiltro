@@ -4,6 +4,7 @@ import { formatFecha } from "../../../utilidades/FormatearFecta.js";
 import PdfROTHP from '../pdfECO/PdfROTHH.jsx';
 import ExcelROTHP from '../Excel/ExcelRothp';
 import Detalle from '../detalles/Detalle_ROTT.jsx';
+import { Divider } from 'antd';
 const URL = process.env.REACT_APP_URL;
 
 const ROTHP = () => {
@@ -29,6 +30,7 @@ const ROTHP = () => {
   return (
     <div className="row mb-3">
       <div className="row mb-3">
+      <Divider style={{ color: '#1d39c4'}}>Temperatura Tunel</Divider>
         <div className="col-md-3">
           <label htmlFor="fecha" className="form-label">Fecha 1</label>
           <input className="form-control" type="date" value={fecha_creacion_inicio} onChange={(e) => setFecha(e.target.value)} />

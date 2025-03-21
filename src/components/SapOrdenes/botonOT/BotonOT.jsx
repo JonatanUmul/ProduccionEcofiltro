@@ -2,16 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { Modal, ModalFooter, ModalBody, ModalHeader } from 'reactstrap';
-import OTHP from '../encabezados/OTHP';
-import OTSA from '../encabezados/OTSA';
-import OTCA1 from '../encabezados/OTCA1';
-import OTCA2 from '../encabezados/OTCA2';
-import OTPV from '../encabezados/OTPV';
-import OTFM from '../encabezados/OTFM';
-import OTP from '../encabezados/OTP';
-import OTHH from '../encabezados/OTHH';
-import OTIP from '../encabezados/OTIP'
-import OTCC from '../encabezados/OTCC'
+import OTP from '../otproduccion/Otp';
+import OTBS from '../otproduccion/OTBS';
+import OTAserrinSecoLaUnion from '../otproduccion/OTAserrinSecoLaUnion';
+import OTAserrinTamizadoJordan1 from '../otproduccion/OTAserrinTamizadoJordan1'
+import OTAserrinTamizadoJordan2 from '../otproduccion/OTAserrinTamizadoJordan2';
+import OTAserrinFinolaUnion from '../otproduccion/OTAserrinFinolaUnion';
+import OTAserrinFinolaUnion2 from '../otproduccion/OTAserrinFinolaUnion2';
 // import { useAbility } from '../AbilityContext';
 
 
@@ -46,27 +43,21 @@ const BotonOT = ({darkMode }) => {
   const renderSelectedForm = () => {
     switch (selectedOption) {
       case '1':
-        return <OTHP />;
+        return <OTP />;
       case '2':
-        return <OTSA />;
+        return <OTBS />;
       case '3':
-        return <OTCA1 />;
+        return <OTAserrinSecoLaUnion/>;
       case '4':
-        return <OTCA2 />;
+        return <OTAserrinTamizadoJordan1/>;
       case '5':
-        return <OTPV />;
+        return <OTAserrinTamizadoJordan2/>;
       case '6':
-          return <OTFM />;
+          return <OTAserrinFinolaUnion/>;
+     
       case '7':
-          return <OTP />;
-      case '8':
-          return <OTHH />;
-      case '9':
-          return <OTIP />;
-      // case '10':
-      //       return <OTCC />;
-        
-            
+          return <OTAserrinFinolaUnion2/>;
+
       default:
         return null;
     }
@@ -98,37 +89,29 @@ const BotonOT = ({darkMode }) => {
       </button>
  
       <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '1', 'Orden de Trabajo - Humedad en Patio')}>
-          1. Humedad en patios 
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '1', 'Orden de Trabajo - Producción')}>
+          1. Producción
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '2', 'Orden de Trabajo - Secado de Materia Prima')}>
-          2. Secado de materia prima 
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '2', 'Orden de Trabajo - Barro Seco')}>
+          2. Barro Seco
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '3', 'Orden de Trabajo - Cernido de Aserrin 1')}>
-          3. Cernido de Aserrìn 1 
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '3', 'Orden de Trabajo - Aserrin Seco La Union')}>
+          3. Aserrin Seco La Union
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '4', 'Orden de Trabajo - Cernido de Aserrin 2')}>
-          4. Cernido de Aserrìn 2 
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '4', 'Orden de Trabajo - Aserrin Tamizado la Union 1')}>
+          4. Aserrin Tamizado la Union 1
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '5', 'Orden de Trabajo - Pulverizado de Materia Prima')}>
-          5. Pulverizado de materia prima 
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '5', 'Orden de Trabajo - Aserrin Tamizado la Union 2')}>
+          4. Aserrin Tamizado la Union 2
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '6', 'Orden de Trabajo - Formulacion')}>
-          6.Formulación 
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '6', 'Aserrin Fino la Union')}>
+          5. Aserrin Fino la Union
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '7', 'Orden de Trabajo - Producción')}>
-          7.Producción 
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '7', 'Aserrin Fino la Union 2')}>
+          8. Aserrin Fino la Union 2
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '8', 'Orden de Trabajo - Hornos')}>
-          8.Hornos 
-        </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '9', 'Orden de Trabajo - Impregnación')}>
-          9.Impregnación
-        </a>
-      {/*  <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '10', 'Orden de Trabajo - Control de Calidad')}>
-          10.Control de Calidad
-        </a>
-         */}
+      
+      
      
       </div>
     </div>

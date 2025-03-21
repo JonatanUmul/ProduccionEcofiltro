@@ -18,7 +18,7 @@ import TablaLab from '../laboratorio/TablaLab'
 import TablaPorCodigos from '../laboratorio/TablaPorCodigos'
 import Board from '../planificacionProduccion/Board'
 import AsignarIsuue from '../../components/planificacionProduccion/Isuues/TablaIsuues'
-import OrdenesSap from '../SapOrdenes/OrdenesSap'
+import OrdenesSap from '../SapOrdenes/TablaSap'
 import OpenAi from '../OpenIa/ChatOpenIa'
 import TablaIndicesPlasticos from '../laboratorio/TablaIndicesPlasticos'
 export const renderContent = (pathname) => {

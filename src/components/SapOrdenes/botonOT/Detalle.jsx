@@ -3,16 +3,9 @@ import React, {  useState } from 'react'
 
 import { Modal, ModalFooter, ModalBody, ModalHeader } from 'reactstrap'
 
-import ConsultaDTP from '../consutas/ConsultaDTP'
-import ConsultaDTHP from '../consutas/ConsultaDTHP'
-import ConsultaDTSA from '../consutas/ConsultaDTSA'
-import ConsultaDTCA1 from '../consutas/ConsultaDTCA1'
-import ConsultaDTCA2 from '../consutas/ConsultaDTCA2'
-import ConsultaDTPV from '../consutas/ConsultaDTPV'
-import ConsultaDTFM from '../consutas/ConsultaDTFM'
-import ConsultaDTHH from '../consutas/ConsultaDTHH'
-import ConsultaDTIP from '../consutas/ConsultaDTIP'
-import ConsultaDTCC from '../consutas/ConsultaDTCC'
+
+import ConsultaDTHP from './BotonOT'
+
 
 const Detalle = ({porcentaje,OTDats, encabezado, id,EncName, fecha_creacion }) => {
   const [modalVisible, setModalVisible] = useState(false); 
@@ -38,35 +31,7 @@ console.log('Prueba consulta de',datosdeConsu.id)
       case 'othp':
         return <ConsultaDTHP id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
 
-      case 'otsa':
-        return <ConsultaDTSA id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
-      
 
-      case 'otca1':
-        return <ConsultaDTCA1 id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
-
-      case 'otca2':
-        return <ConsultaDTCA2 id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
-
-      case 'otpv':
-          return <ConsultaDTPV id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
-    
-      case 'otfm':
-          return <ConsultaDTFM id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
-    
-      case 'otp':
-            return <ConsultaDTP id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
-      
-      case 'othh':
-            return <ConsultaDTHH id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
-  
-      case 'otip':
-              return <ConsultaDTIP id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
-  
-      case 'cthh':
-            return <ConsultaDTCC OTDats={OTDats} id={id}/>
-            
-    
 
       default:
         return <p>Formulario no encontrado</p>;

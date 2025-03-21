@@ -32,7 +32,7 @@ import TablaLab from './components/laboratorio/TablaLab.jsx';
 import TablaPorCodigos from './components/laboratorio/TablaPorCodigos.jsx';
 import Board from './components/planificacionProduccion/Board.jsx';
 import AsignarIsuue from './components/planificacionProduccion/Isuues/TablaIsuues.jsx';
-import OrdenesSap from './components/SapOrdenes/OrdenesSap.jsx'
+import OrdenesSap from './components/SapOrdenes/TablaSap.jsx'
 import OpenAI from './components/OpenIa/ChatOpenIa.jsx'
 import TablaIndicesPlasticos from './components/laboratorio/TablaIndicesPlasticos.jsx'
 function App() {

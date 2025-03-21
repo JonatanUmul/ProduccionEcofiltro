@@ -157,8 +157,9 @@ const styles = StyleSheet.create({
 });
 
 const MyDocument = ({ datos }) => {
+  console.log('fiamr',datos)
   const UltimaFirma = datos[datos.length - 1];
-  const FirmaJefe=UltimaFirma?.FirmaJefe || null
+  const FirmaJefe=UltimaFirma?.firmaJefe || null
   const Firma= UltimaFirma?.firmaEncargado || null;
   const rowsPerPage = 12; // Ajusta esto según sea necesario
   const totalPages = Math.ceil(datos.length / rowsPerPage);

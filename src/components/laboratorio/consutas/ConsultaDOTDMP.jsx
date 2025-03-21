@@ -51,6 +51,11 @@ console.log('id seleccionado', fila)
         <li class="list-group-item">Libras de aserrín: {fila.lbaserrin} {fila.lbaserrin2 ? `/${fila.lbaserrin2}`:''} </li>
           <li class="list-group-item">Aserradero: {fila.aserradero1} {fila.aserradero2 ? `/${fila.aserradero2}`:``}</li>
           <li class="list-group-item">Tipo Cernido: {fila.tipocernido1} {fila.tipocernido2 ? `/${fila.tipocernido2}`:``}</li>
+          <li class="list-group-item">≥ 2.00 mm:        <strong style={{ color: "red" }}>{fila.mayor_2mm}%</strong> </li>
+          <li class="list-group-item">2.00 mm - 0.50 mm: <strong style={{ color: "red" }}>{fila.entre_2_y_05mm}%</strong></li>
+          <li className="list-group-item">
+  &lt; 0.5 mm: <strong style={{ color: "red" }}>{fila.menor_05mm}%</strong>
+</li>
         </ul>
       </div>
       </div>):<p>Sin datos de aserrín</p>}

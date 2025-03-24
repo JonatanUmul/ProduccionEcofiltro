@@ -3,6 +3,7 @@ import * as XLSX from 'xlsx'; // Importar todas las exportaciones de xlsx
 import { formatFecha } from '../../utilidades/FormatearFecta.js';
 
 const ExcelROTHP = ({ datos }) => {
+  console.log('Datos en excel',datos)
   const generarExcel = () => {
     // Crear una nueva hoja de cálculo de Excel
     const wb = XLSX.utils.book_new();
@@ -23,6 +24,9 @@ const ExcelROTHP = ({ datos }) => {
         TamañoAserrin2:dato.tamañoAserrin_secundario,
         librasAserrin1: dato.librasAserrin,
         librasAserrin2: dato.librasAserrin2,
+        mayor_2mm:dato.mayor_2mm,
+        entre_2_y_05mm:dato.entre_2_y_05mm,
+        menor_05mm:dato.menor_05mm,
         FormulaTotalAserrin:dato.formulatotal,
         CantidadBarro:dato.librasBarro,
         ContenidoDeArcilla:dato.carcilla,

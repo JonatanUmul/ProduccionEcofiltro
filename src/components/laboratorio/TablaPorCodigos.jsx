@@ -29,7 +29,7 @@ const [cargando, setCargando]=useState(false)
 const [estadoSelect, setestadoSelect]=useState(false)
     const codigo=codigos.toUpperCase()
 
-console.log(codigo)
+console.log('Datos',datos)
   const limpiarInputs = () => {
     setFecha(formatFecha(new Date()));
     setFecha2(formatFecha(new Date()));

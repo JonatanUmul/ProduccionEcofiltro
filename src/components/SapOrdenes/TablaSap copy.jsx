@@ -8,44 +8,25 @@ import Detalle from "./botonOT/Detalle";
 
 import ReactPaginate from "react-paginate";
 import { Divider, message } from "antd";
-const URL = process.env.REACT_APP_URL;
 
 const TablaOT = ({ darkMode }) => {
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 10;
   const [nombreRol, setNombrerol] = useState("");
-  const [loginSL, setLoginSL]=useState([])
+
   const [resultado, setResultado] = useState([]);
 
   console.log("Datos de Odata", resultado);
 
-
   useEffect(() => {
-    const username = 'manager';
-    const password = '2023**.';
-  
-    Promise.all([
-      axios.post(`${URL}/LoginSAP`, { username, password }), // ✅ cuerpo, no en la URL
-      axios.get(`${URL}/OrdenesSap`)
-    ])
-      .then(([loginRes, ordenesRes]) => {
-        setLoginSL(loginRes.data);
-        setResultado(ordenesRes.data.value || []);
-      })
-      .catch(error => {
-        console.error("Error al obtener los datos:", error);
-        setResultado([]);
-      });
-  }, [URL]);
-  
+    setNombrerol(localStorage.getItem("rol"));
+  }, []);
 
 
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
   };
-
-
 
   const offset = currentPage * itemsPerPage;
   const currentPageData = resultado.slice(offset, offset + itemsPerPage);

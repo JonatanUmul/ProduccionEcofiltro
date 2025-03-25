@@ -18,42 +18,42 @@ const HeaderMenu = () => {
     window.location.href = '/'; // Redirigir al inicio de sesión
   };
 
-  const [responseData, setResponseData] = useState(null);
-  const [errorMessage, setErrorMessage] = useState('');
+  // const [responseData, setResponseData] = useState(null);
+  // const [errorMessage, setErrorMessage] = useState('');
 
-  const fetchWeatherData = async () => {
-    setErrorMessage('');
-    setResponseData(null);
+  // const fetchWeatherData = async () => {
+  //   setErrorMessage('');
+  //   setResponseData(null);
 
-    try {
-      const response = await axios.get(
-        'http://api.weatherstack.com/current',
-        {
-          params: {
-            access_key: `${URL}`, // Tu clave de API
-            query: '14.5365925,-90.77110859999999', // Coordenadas o nombre de ciudad
-          },
-        }
-      );
+  //   try {
+  //     const response = await axios.get(
+  //       'http://api.weatherstack.com/current',
+  //       {
+  //         params: {
+  //           access_key: `${URL}`, // Tu clave de API
+  //           query: '14.5365925,-90.77110859999999', // Coordenadas o nombre de ciudad
+  //         },
+  //       }
+  //     );
 
-      if (response.data && response.data.current) {
-        setResponseData(response.data); // Guardamos toda la respuesta
-      } else {
-        setErrorMessage('No se pudo obtener el clima. Verifica la ubicación.');
-      }
-    } catch (error) {
-      console.error('Error al obtener la respuesta:', error);
-      setErrorMessage('Error de conexión o clave API inválida.');
-    }
-  };
+  //     if (response.data && response.data.current) {
+  //       setResponseData(response.data); // Guardamos toda la respuesta
+  //     } else {
+  //       setErrorMessage('No se pudo obtener el clima. Verifica la ubicación.');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error al obtener la respuesta:', error);
+  //     setErrorMessage('Error de conexión o clave API inválida.');
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchWeatherData(); // Consulta inicial
+  // useEffect(() => {
+  //   fetchWeatherData(); // Consulta inicial
 
-    // Repetir la consulta cada 3600000ms (1 hora)
-    const intervalId = setInterval(fetchWeatherData, 3600000);
-    return () => clearInterval(intervalId);
-  }, []);
+  //   // Repetir la consulta cada 3600000ms (1 hora)
+  //   const intervalId = setInterval(fetchWeatherData, 3600000);
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
   return (
     <Header
@@ -68,7 +68,7 @@ const HeaderMenu = () => {
         boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)', // Sombra sutil
       }}
     >
-      <div
+      {/* <div
         style={{
           display: 'flex',
           overflowX: 'auto', // Permitir desplazamiento horizontal
@@ -90,7 +90,7 @@ const HeaderMenu = () => {
             </p>
           </div>
         )}
-      </div>
+      </div> */}
 
       <Menu style={{ flexShrink: 0, background: '', color: 'black' }} mode="horizontal">
         <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout} style={{ color: 'black' }}>

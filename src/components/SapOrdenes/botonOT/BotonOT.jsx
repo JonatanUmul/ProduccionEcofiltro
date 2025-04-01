@@ -13,6 +13,7 @@ import OTAserrinFinolaUnion2 from '../otproduccion/OTAserrinFinolaUnion2';
 
 
 const BotonOT = ({darkMode }) => {
+
   // const ability = useAbility();
   const [modal, setModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -43,7 +44,7 @@ const BotonOT = ({darkMode }) => {
   const renderSelectedForm = () => {
     switch (selectedOption) {
       case '1':
-        return <OTP />;
+        return <OTP/>;
       case '2':
         return <OTBS />;
       case '3':
@@ -101,7 +102,7 @@ const BotonOT = ({darkMode }) => {
         <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '4', 'Orden de Trabajo - Aserrin Tamizado la Union 1')}>
           4. Aserrin Tamizado la Union 1
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '5', 'Orden de Trabajo - Aserrin Tamizado la Union 2')}>
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '5', 'Orden de Trabajo - Aserrin Tamizado la    2')}>
           4. Aserrin Tamizado la Union 2
         </a>
         <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '6', 'Aserrin Fino la Union')}>

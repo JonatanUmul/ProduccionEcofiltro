@@ -15,97 +15,55 @@ const OTAserrinSecoLaUnion = () => {
   const [error, setError] = useState('');
   const [comentario, setComentario]= useState('') //valor solicitados al usuario 
   const [componentDisabled, setComponentDisabled] = useState(true)
-
-
-  const connectSL = async () => {
-    let serv = 'https://sapsl.eco-aplicaciones.com:50000/';
-    const companyDB = 'SBO_ECOFILTRO_LIVE_FACT';
-    const userName = localStorage.getItem('user');
-    const password = localStorage.getItem('pass');
-    const jData = { UserName: userName, Password: password, CompanyDB: companyDB };
-
-    try {
-      const response = await axios.post(`${serv}/b1s/v1/Login`, jData);
-console.log('respuesta del servidor',response)
-      const sessionId = response.data.SessionId;
-      setSessionId(sessionId);
-      setConnected(true);
-      message.success("Conectado a Sap")
-    } catch (error) {
-      setError('Failed to connect');
-      console.error("Error response:", error.response);
-      console.error("Error message:", error.message);
-    }
-  };
-
-  useEffect(() => {
-    // Primero conectamos al Service Layer
-    connectSL();
-  }, []);
-
-  
-
+  const URL = process.env.REACT_APP_URL;
 
   const fetchData = async () => {
-    console.log('sacos en fetch ',sacos)
+    const username = 'manager';
+    const password = '2023**.';
     const payload = {
-        "StartDate" : fechaProduccion,
-        "ItemNo": "MP100018",
-        "PlannedQuantity": produccion,
-        "Series": "33",
-        "Remarks": comentario,
-        "ProductionOrderLines": [
-            {       
-                 "StageID": 1,
-                "PlannedQuantity": sacos,
-                "ItemNo": "MP100001",
-                "ProductionOrderIssueType": "im_Manual",
-                "Warehouse": "Bodega01"
-            },
-      
-        ],
-     "ProductionOrdersSalesOrderLines": [],
-     "ProductionOrdersStages": [
-      {
-          "DocEntry": 28764,
-          "StageID": 1,
-          "SequenceNumber": 1,
-          "StageEntry": 1,
-          "Name": "MATERIALES"
-          
-      },]
-       
+      "StartDate" : fechaProduccion,
+      "ItemNo": "MP100018",
+      "PlannedQuantity": produccion,
+      "Series": "33",
+      "Remarks": comentario,
+      "ProductionOrderLines": [
+          {       
+               "StageID": 1,
+              "PlannedQuantity": sacos,
+              "ItemNo": "MP100001",
+              "ProductionOrderIssueType": "im_Manual",
+              "Warehouse": "Bodega01"
+          },
+    
+      ],
+    "ProductionOrdersSalesOrderLines": [],
+    "ProductionOrdersStages": [
+    {
+        "DocEntry": 28764,
+        "StageID": 1,
+        "SequenceNumber": 1,
+        "StageEntry": 1,
+        "Name": "MATERIALES"
+        
+    },]
+     
     }
-
-    let serv = 'https://sapsl.eco-aplicaciones.com:50000/';
-    try {
-      const response = await axios.post(`${serv}/b1s/v1/ProductionOrders`, payload, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Cookie': `B1SESSION=${sessionId}`
-        },
-        withCredentials: true,
+    Promise.all([
+      axios.post(`${URL}/OtpSAP`, { payload })
+    ])
+      .then(([ordenesRes]) => {
+        setResultado(ordenesRes.data.value || []);
+      })
+      .catch(error => {
+        console.error("Error al obtener los datos:", error);
+        setResultado([]);
       });
-      setResultado([response.data]);
-      message.success('Order successfully submitted');
-    } catch (error) {
-      setError('Error al hacer la solicitud');
-      if (error.response) {
-        console.error('Error response data:', error.response.data);
-        console.error('Error response status:', error.response.status);
-      } else {
-        console.error('Error message:', error.message);
-      }
-      message.error('Houston, tenemos un error: no se pudo realizar el envío.');
-    }
-  };
-
+  }
+  
   const handleSubmit = () => {
-    if (connected && sessionId) {
+   
       fetchData();
-    } else {
-      message.error('Houston, tenemos un error: no estamos conectados al Service Layer.');
-    }
+    
   };
 
   return (
@@ -123,7 +81,7 @@ console.log('respuesta del servidor',response)
         }}>
         
         <Divider orientation="left" orientationMargin={50} style={{ borderColor: '#7cb305' }}>
-          OTBS
+        Aserrín seco la Unión
         </Divider>
         <Col xs={24} sm={20} md={12}>
             <Form.Item label="Fecha de producción" required tooltip="This is a required field" rules={[{ required: true, message: 'Por favor ingrese una cantidad!' }]}>

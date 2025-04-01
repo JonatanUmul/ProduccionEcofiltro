@@ -23,6 +23,71 @@ const TablaOT = ({ darkMode }) => {
     setNombrerol(localStorage.getItem("rol"));
   }, []);
 
+  const connectSL = async () => {
+    
+    let serv = "https://sapsl.eco-aplicaciones.com:50000";
+    const companyDB = "SBO_ECOFILTRO_RIQRA";
+    const userName = "manager";
+    const password = "2023**.";
+
+    const jData = { UserName: userName, Password: password, CompanyDB: companyDB };
+
+    try {
+      const response = await axios.post(`${serv}/b1s/v1/Login`, jData);
+      console.log("Respuesta del servidor", response);
+
+      const sessionId = response.data.SessionId;
+      setSessionId(sessionId);
+      setConnected(true);
+
+      return sessionId; // Retorna el SessionId para usarlo en fetchData()
+    } catch (error) {
+      setError("Failed to connect");
+      console.error("Error al conectar con SAP:", error);
+      message.error("No se pudo conectar con SAP.");
+      return null;
+    }
+  };
+
+  const fetchData = async (sessionId) => {
+    if (!sessionId) {
+      setError("No hay sesión activa en SAP.");
+      return;
+    }
+
+    let serv = "https://sapsl.eco-aplicaciones.com:50000";
+    try {
+      const response = await axios.get(
+        `${serv}/b1s/v1/ProductionOrders?$filter=(ProductionOrderStatus eq 'boposPlanned' or ProductionOrderStatus eq 'boposReleased') and (substringof('PP500', ItemNo) or substringof('MP1000', ItemNo))`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Cookie": `B1SESSION=${sessionId}`,
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          },
+          // withCredentials: true,
+        }
+      );
+
+      setResultado(response.data.value);
+      message.success("Datos obtenidos de SAP.");
+    } catch (error) {
+      setError("Error al hacer la solicitud");
+      console.error("Error en fetchData:", error);
+      message.error("Error al obtener datos de SAP.");
+    }
+  };
+
+  useEffect(() => {
+    const iniciarConexion = async () => {
+      const session = await connectSL();
+      if (session) fetchData(session);
+    };
+
+    iniciarConexion();
+  }, []);
 
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);

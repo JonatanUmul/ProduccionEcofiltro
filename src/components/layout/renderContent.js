@@ -20,7 +20,8 @@ import Board from '../planificacionProduccion/Board'
 import AsignarIsuue from '../../components/planificacionProduccion/Isuues/TablaIsuues'
 import OrdenesSap from '../SapOrdenes/TablaSap'
 import OpenAi from '../OpenIa/ChatOpenIa'
-import TablaIndicesPlasticos from '../laboratorio/TablaIndicesPlasticos'
+// import TablaIndicesPlasticos from '../laboratorio/TablaIndicesPlasticos'
+import FormularioIDPB from '../../components/laboratorio/FormularioIDPB'
 export const renderContent = (pathname) => {
     switch (pathname) {
 
@@ -91,8 +92,10 @@ export const renderContent = (pathname) => {
                     case '/Home/OpenAI':
                       return <OpenAi/>
 
-                      case '/Home/TablaIndicesPlasticos':
-                      return <TablaIndicesPlasticos/>
+                      // case '/Home/TablaIndicesPlasticos':
+                      // return <TablaIndicesPlasticos/>
+                      case '/Home/FormularioIDPB':
+                        return <FormularioIDPB/>
       default:
         return null;
     }

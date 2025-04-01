@@ -17,16 +17,19 @@ const TablaOT = ({ darkMode }) => {
   const [nombreRol, setNombrerol] = useState("");
   const [loginSL, setLoginSL]=useState([])
   const [resultado, setResultado] = useState([]);
+console.log('Login SL',loginSL)
+  
+  const IDSesion=loginSL.sessionId
+localStorage.setItem('SesionSL',IDSesion)
 
-  console.log("Datos de Odata", resultado);
-
+  
 
   useEffect(() => {
     const username = 'manager';
     const password = '2023**.';
   
     Promise.all([
-      axios.post(`${URL}/LoginSAP`, { username, password }), // ✅ cuerpo, no en la URL
+      axios.post(`${URL}/LoginSAP`, { username, password }),
       axios.get(`${URL}/OrdenesSap`)
     ])
       .then(([loginRes, ordenesRes]) => {
@@ -54,7 +57,7 @@ const TablaOT = ({ darkMode }) => {
   return (
     <div className={`table-container ${darkMode ? "dark-mode" : ""}`}>
       <Divider style={{ color: "#f5222d" }}>Ordenes de Trabajo</Divider>
-      <BotonOT />
+      <BotonOT/>
       <div style={{ overflowX: "auto" }} className="table-responsive-sm mb-4 text-center">
         {error && <p className="text-danger">{error}</p>}
         <table className={`table table-striped table-hover text-center ${darkMode ? "table-dark" : ""}`}>

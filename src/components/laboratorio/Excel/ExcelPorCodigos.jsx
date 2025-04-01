@@ -30,9 +30,13 @@ const ExcelROTHP = ({ datos }) => {
         CantidadBarro:dato.librasBarro,
         ContenidoDeArcilla:dato.carcilla,
         ContenidoDeLimo:dato.climo,
+        
         ContenidoDeArena:dato.carena,
         HumedadDeBarro:dato.hbarro,
         IndicePlastico:dato.iplastico,
+        limite_liquido:dato.limite_liquido,
+        limite_plastico:dato.limite_plastico,
+        liindice_plasticomB:dato.indice_plastico,
         Mezcladora:dato.Mezcladora,
         EstadoCrudo:dato.estadoCrudo,
         Horno:dato.horno,

@@ -35,6 +35,7 @@ import AsignarIsuue from './components/planificacionProduccion/Isuues/TablaIsuue
 import OrdenesSap from './components/SapOrdenes/TablaSap.jsx'
 import OpenAI from './components/OpenIa/ChatOpenIa.jsx'
 import TablaIndicesPlasticos from './components/laboratorio/TablaIndicesPlasticos.jsx'
+import FormularioIDPB from './components/laboratorio/FormularioIDPB.jsx'
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
@@ -94,6 +95,8 @@ function App() {
               <Route path='/Home/OrdenesSap' element={<OrdenesSap  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
               <Route path='/Home/OpenAI' element={<OpenAI  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
               <Route path='/Home/TablaIndicesPlasticos' element={<TablaIndicesPlasticos toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/FormularioIDPB' element={<FormularioIDPB  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+
             </Route>
           </Route>
          

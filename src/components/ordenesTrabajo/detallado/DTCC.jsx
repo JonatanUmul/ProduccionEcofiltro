@@ -38,7 +38,6 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id, codInicio, codFin, horn
         setTHornos(HornosResponse.data);
         setTurno(turnoResponse.data);
       } catch (error) {
-        console.log("Error al obtener los datos:", error);
         setError(error)
       }
     };

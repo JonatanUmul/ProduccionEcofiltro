@@ -4,7 +4,7 @@ import { formatFecha } from '../../utilidades/FormatearFecta';
 import axios from 'axios';
 
 const { TextArea } = Input;
-const OTAserrinSecoLaUnion = () => {
+const OTAserrinSecoLaUnion = ({onClose}) => {
 
   const [produccion, setProduccion] = useState(0) //valor solicitados al usuario
   const [sacos, setSacos]=useState(0)
@@ -53,6 +53,10 @@ const OTAserrinSecoLaUnion = () => {
     ])
       .then(([ordenesRes]) => {
         setResultado(ordenesRes.data.value || []);
+        if (onClose) {
+          onClose(); // Cierra el modal
+        }
+        message.success('Orden de producción enviada con éxito');
       })
       .catch(error => {
         console.error("Error al obtener los datos:", error);
@@ -140,4 +144,4 @@ const OTAserrinSecoLaUnion = () => {
   );
 };
 
-export default ()=><OTAserrinSecoLaUnion/>;
+export default OTAserrinSecoLaUnion;

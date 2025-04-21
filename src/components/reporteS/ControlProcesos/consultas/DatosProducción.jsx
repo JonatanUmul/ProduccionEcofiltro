@@ -23,7 +23,6 @@ const DatosProduccion = ({ datos }) => {
     setOpen(false);
   };
 
-  console.log('datos', datos.id);
   const [data, setData] = useState([]);
   const id = datos.id;
 
@@ -33,7 +32,6 @@ const DatosProduccion = ({ datos }) => {
     axios.get(url)
       .then((response) => {
         setData(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.error('Error al obtener los datos:', error);

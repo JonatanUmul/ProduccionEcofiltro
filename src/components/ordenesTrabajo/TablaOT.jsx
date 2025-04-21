@@ -45,8 +45,6 @@ const TablaOT = ({ darkMode }) => {
   };
 
   const handleClickButton = (id, encabezado) => {
-    console.log("ID:", id);
-    console.log("Encabezado:", encabezado);
   };
 
   const puedeGestionar = ability.can('manage', 'BotonOT');

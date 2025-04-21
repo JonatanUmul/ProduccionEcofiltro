@@ -33,7 +33,6 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
     
       })
       .catch((error) => {
-        console.log("Error al obtener los datos:", error);
       });
   }, []);
 

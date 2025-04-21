@@ -27,6 +27,7 @@ const SideMenu = () => {
         
         <Menu.SubMenu key="sub4" icon={<AppstoreAddOutlined />} title="Órdenes SAP">
           <Menu.Item key="17" icon={<AppstoreAddOutlined />}><Link to="/Home/OrdenesSap" style={{ textDecoration: 'none'}}>Órdenes de Producción</Link></Menu.Item>
+          <Menu.Item key="19" icon={<AppstoreAddOutlined />}><Link to="/Home/ManoObra" style={{ textDecoration: 'none'}}>Mano de Obra</Link></Menu.Item>
         </Menu.SubMenu>
   
         <Menu.SubMenu key="sub3" icon={<ProjectOutlined />} title="Planificación">
@@ -65,6 +66,7 @@ const SideMenu = () => {
           <Menu.Item key="9"><Link to="/Home/TablaEstProc" style={{ textDecoration: 'none'}}>Estados Procesos</Link></Menu.Item>
           <Menu.Item key="10"><Link to="/Home/TabProvedores" style={{ textDecoration: 'none'}}>Proveedores</Link></Menu.Item>
           <Menu.Item key="11"><Link to="/Home/TablaMatPrima" style={{ textDecoration: 'none'}}>Materia Prima</Link></Menu.Item>
+          <Menu.Item key="20"><Link to="/Home/GestionHorasLaborales" style={{ textDecoration: 'none'}}>Gestión Horas Laborales</Link></Menu.Item>
         </Menu.SubMenu>
       </Menu>
     </Sider>

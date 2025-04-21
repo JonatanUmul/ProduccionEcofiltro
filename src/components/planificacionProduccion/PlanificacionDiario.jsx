@@ -25,7 +25,6 @@ const App = () => {
   // Variables para almacenar el primer y último día del mes seleccionado
   const [primerDia, setPrimerDia] = useState(null);
   const [ultimoDia, setUltimoDia] = useState(null);
-console.log("Dias", primerDia, ultimoDia)
   const showSkeleton = () => {
     setLoading(true);
     setTimeout(() => {
@@ -107,7 +106,6 @@ console.log("Dias", primerDia, ultimoDia)
       try {
         const response = await axios.get(`${URL}/Procesos`);
         setResultado(response.data.rows);
-        console.log('datos consulta', response.data);
       } catch (error) {
         console.error('Error al obtener los datos:', error);
       }
@@ -177,12 +175,6 @@ console.log("Dias", primerDia, ultimoDia)
     
     const isSelectedDay = arrayDays.includes(fechaFormateada);
     
-    console.log("Eventos:", events);
-console.log("Fecha Inicio:", primerDia);
-console.log("Fecha Fin:", ultimoDia);
-console.log("Cantidad planificada:", planificado);
-console.log("ID del proceso:", proceso_id);
-console.log("ID del creador:", id_creador);
 
     return (
       <div
@@ -216,16 +208,12 @@ console.log("ID del creador:", id_creador);
       setUltimoDia(endOfMonth.format('YYYY-MM-DD'));
   
       // Verificar en consola
-      console.log("Primer Día:", startOfMonth.format('YYYY-MM-DD'));
-      console.log("Último Día:", endOfMonth.format('YYYY-MM-DD'));
     } else {
       // Si date es null, puedes manejarlo aquí, si es necesario
       console.warn('Fecha no válida seleccionada');
     }
   };
   useEffect(() => {
-    console.log("Día inicial capturado:", primerDia);
-    console.log("Día final capturado:", ultimoDia);
   }, [primerDia, ultimoDia]);
 
   return (

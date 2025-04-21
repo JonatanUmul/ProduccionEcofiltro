@@ -15,7 +15,6 @@ const ConsultaDTHP = ({  id, onDataLoaded }) => {
     axios.get(`${URL}/DTHP/${id}`)
       .then((response) => {
         setFila(response.data.data); // Acceder a response.data.data
-        console.log(response.data.data)
        
       })
       .catch((error) => {

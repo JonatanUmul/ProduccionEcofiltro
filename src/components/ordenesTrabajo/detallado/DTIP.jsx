@@ -26,10 +26,10 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
     }, 3000);
   };
 
-  useEffect(()=>{
+useEffect(()=>{
     setid_creador(localStorage.getItem('id_creador'))
   })
-      
+        
   const insumo='Plata' 
   useEffect(() => {
     Promise.all([
@@ -45,7 +45,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
         setError("Error al obtener los datos", error);
       });
   }, []);
-  console.log('Plata',plata)
+
   const onSubmit = async (formData) => {
     try {
       const response = await axios.post(`${URL}/DTIP` ,
@@ -77,7 +77,6 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
     showSkeleton();
   };
 
-console.log('datos props',encabezado, EncName, fecha_creacion,id)
 
 
   return (

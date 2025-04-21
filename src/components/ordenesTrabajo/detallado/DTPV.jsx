@@ -33,11 +33,9 @@ useEffect(() => {
     axios.get(url).then((MateriaPrimresponse)=>{setMatPrim(MateriaPrimresponse.data)})
     
   } catch (error) {
-    console.log(error)
   }
 
 }, [])
-console.log(matPrim)
 
   const onSubmit = async (formData) => {
     try {
@@ -64,7 +62,6 @@ console.log(matPrim)
     }
     showSkeleton()
   };
-console.log('datos props',encabezado, EncName, fecha_creacion,id)
   return (
     <div className="mt-4 container">
       <h4 style={{ textAlign: 'center', color: 'gray' }}>Pulverizado de Barro</h4>

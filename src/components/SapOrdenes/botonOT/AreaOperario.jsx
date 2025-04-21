@@ -3,22 +3,26 @@ import axios from 'axios';
 
 const URL = process.env.REACT_APP_URL;
 
-const AreaOperario = ({ area }) => {
-    console.log('Área actual:', area.Area);
+const AreaOperario = ({ area, actualizarTab }) => {
+    // console.log('Área actual:', area.Area, area.id, area.id_area_sap
+    // );
 
     const [datos, setDatos] = useState([]);
-    const [nuevaArea, setNuevaArea] = useState(area.Area); 
+    const [areas, setAreas]=useState([])
+    const [nuevaArea, setNuevaArea]=useState('')
+    // console.log('Operarios',areas)
+    const id= area.id
+    const id_area=nuevaArea; 
 
-    console.log('Nueva Área seleccionada:', nuevaArea);
-    console.log('Lista de Áreas:', datos);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`${URL}/area`);
+             
                 setDatos(response.data.rows);
+              
             } catch (error) {
-                console.log("No se obtuvieron datos", error);
             }
         };
 
@@ -29,16 +33,19 @@ const AreaOperario = ({ area }) => {
       const fetchData = async () => {
           try {
             //   const response = await axios.put(`${URL}/Operarios/${}/${}`);
-            const response = await axios.put(`${URL}/Operarios`);
+            const response = await axios.put(`${URL}/Operarios/${id}/${id_area}`);
 
               setDatos(response.data.rows);
+              if (actualizarTab) {
+                actualizarTab(); 
+            }
           } catch (error) {
-              console.log("No se obtuvieron datos", error);
+            //   console.log("No se obtuvieron datos", error);
           }
       };
 
       fetchData();
-  }, []);
+  }, [id,id_area]);
 
     const handleChange = (e) => {
         setNuevaArea(e.target.value);
@@ -57,7 +64,7 @@ const AreaOperario = ({ area }) => {
                 <option value="" disabled>Seleccione...</option>
                 {Array.isArray(datos) &&
                     datos.map((areas) => (
-                        <option key={areas.id} value={areas.Area}>
+                        <option key={areas.id} value={areas.id}>
                             {areas.Area}
                         </option>
                     ))}

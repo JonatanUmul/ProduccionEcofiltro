@@ -4,7 +4,7 @@ import { formatFecha } from '../../utilidades/FormatearFecta';
 import axios from 'axios';
 
 const { TextArea } = Input;
-const Otp = () => {
+const OTBS = ({ onClose }) => {
 
   const [produccion, setProduccion] = useState(0) //valor solicitados al usuario
   const [fechaProduccion] = useState(formatFecha(new Date())) //valor solicitados al usuario
@@ -56,6 +56,12 @@ const librasBarro=60
     ])
       .then(([ordenesRes]) => {
         setResultado(ordenesRes.data.value || []);
+        message.success('Orden de producción enviada con éxito');
+
+        if (onClose) {
+          onClose(); // Cierra el modal
+        }
+       
       })
       .catch(error => {
         console.error("Error al obtener los datos:", error);
@@ -142,4 +148,4 @@ const librasBarro=60
   );
 };
 
-export default ()=><Otp/>;
+export default OTBS;

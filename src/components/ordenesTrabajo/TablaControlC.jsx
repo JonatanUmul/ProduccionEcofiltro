@@ -23,7 +23,6 @@ const TablaOT = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 5;
   const id_est=2;
-console.log('Abiliti en tabla OT', ability)
   useEffect(() => {
     const obtenerDatos = async () => {
       try {
@@ -52,14 +51,11 @@ console.log('Abiliti en tabla OT', ability)
   };
   
   const handleClickButton = (id, encabezado) => {
-    console.log("ID:", id);
-    console.log("Encabezado:", encabezado);
   };
 
   const offset = currentPage * itemsPerPage;
   const currentPageData = estOT.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(estOT.length / itemsPerPage);
-console.log('En tabla para C.c',currentPageData)
  
   return (
     // <div>

@@ -13,7 +13,7 @@ const ReporteGeneralDiario = () => {
   const [ipregnacion, setImpregnaion]=useState([])
   const fecha_creacion_fin = fecha_creacion_inicio
   const fecha_CC=fecha_creacion_inicio
-  console.log(produccion)
+
   useEffect(() => {
     axios.all([
       axios.get(`${URL}/DASERRIN/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${ 'null'}/${ 'null'}`),
@@ -37,7 +37,6 @@ const ReporteGeneralDiario = () => {
   const handleFechaInicioChange = (e) => {
     setFechaCreacionInicio(e.target.value);
   };
-console.log('Datos de IP',ipregnacion)
   // const handleFechaFinChange = (e) => {
   //   setFechaCreacionFin(e.target.value);
   // };

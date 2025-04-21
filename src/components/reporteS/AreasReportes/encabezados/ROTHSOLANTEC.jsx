@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { formatFecha } from "../../../utilidades/FormatearFecta.js";
-import ExcelROTHP from '../Excel/ExcelRTH';
+import ExcelRTHSOLANTEC from '../Excel/ExcelRTHSOLANTEC.jsx';
 import Detalle from '../detalles/Detalle_ROTT.jsx';
 import ReactPaginate from 'react-paginate';
 import { Divider } from 'antd';
@@ -43,7 +43,8 @@ console.log('datos solantec',datos)
 
   useEffect(() => {
     // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
-    const url = `${URL}/DTH/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${modeloUF || 'null'}/${turn || 'null'}/${horno||'null'}`;
+ // const url = `${URL}/DTH/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${modeloUF || 'null'}/${turn || 'null'}/${horno||'null'}`;
+    const url = `${URL}/DTHSOLANTEC/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${'null'}/${turn || 'null'}/${horno||'null'}/${'null'}`;
 
     axios.get(url)
       .then((response) => {
@@ -118,7 +119,7 @@ const pageCount = Math.ceil(datos.length / itemsPerPage);
     </select>
   </div>
     <div className="col-md-3 d-flex align-items-end">
-    <ExcelROTHP datos={datos} />
+    <ExcelRTHSOLANTEC datos={datos} />
   </div>
       </div>
 

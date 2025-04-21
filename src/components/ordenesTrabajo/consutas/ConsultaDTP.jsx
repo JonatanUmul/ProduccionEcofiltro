@@ -12,7 +12,6 @@ const ConsultaDTP = ({ encabezado, EncName, fecha_creacion, id }) => {
     axios.get(`${URL}/DTP/${id}`)
       .then((response) => {
         setFila(response.data.data); // Acceder a response.data.data
-        console.log(response.data.data)
       })
       .catch((error) => {
         setError("Error al obtener los datos: " + error.message);

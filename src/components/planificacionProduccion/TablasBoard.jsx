@@ -30,7 +30,6 @@ const [MesLetras, setMesLetras]=useState('')
       // const NumMes = NumeroMes;
       const meses=['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
       const MesSeleccionado= meses[NumeroMes]
-      console.log('Meses dentro de Useefeccr',MesSeleccionado)
     setMesLetras(MesSeleccionado)
   }
 

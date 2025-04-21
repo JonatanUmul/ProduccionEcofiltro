@@ -9,12 +9,10 @@ const ConsultaDTHP = ({OTDats,  id }) => {
   const [error, setError] = useState('');
   const [fila, setFila] = useState([]);
 // const [id]= OTDats.length>0?OTDats[0].id:''
-console.log('id seleccionado', id)
   useEffect(() => {
     axios.get(`${URL}/DTCC/${id || 'null'} `)
       .then((response) => {
         setFila(response.data.data); // Acceder a response.data.data
-        console.log(response.data.data)
       })
       .catch((error) => {
         setError("Error al obtener los datos: " + error.message);

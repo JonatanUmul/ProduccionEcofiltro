@@ -13,7 +13,6 @@ const ConsultaDTHH = ({ id, onDataLoaded }) => {
     axios.get(`${URL}/DTHH/${id}`)
       .then((response) => {
         setFila(response.data.data); // Acceder a response.data.data
-        console.log(response.data.data)
         const respuestaApi=response.data.data
         if(onDataLoaded){onDataLoaded(respuestaApi)}
 
@@ -23,7 +22,6 @@ const ConsultaDTHH = ({ id, onDataLoaded }) => {
       });
   }, [onDataLoaded]);
 
- console.log('Orden seleccionada',id)
   return (
     <div className="table-responsive">
       {error && <div>Error: {error}</div>}

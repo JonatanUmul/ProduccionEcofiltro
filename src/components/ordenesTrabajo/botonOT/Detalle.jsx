@@ -31,7 +31,6 @@ const[datosdeConsu, setDatosConsu]=useState('')
     setDatosConsu(respuestaApi);
   };
 
-console.log('Prueba consulta de',datosdeConsu.id)
   // Función para renderizar el formulario seleccionado según el ID
   const renderSelectedForm = () => {
     switch (encabezado) {

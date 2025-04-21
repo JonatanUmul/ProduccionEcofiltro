@@ -4,7 +4,7 @@ import { formatFecha } from '../../utilidades/FormatearFecta';
 import axios from 'axios';
 
 const { TextArea } = Input;
-const OTAserrinTamizadoJordan2 = () => {
+const OTAserrinTamizadoJordan2 = ({onClose}) => {
 
   const [produccion, setProduccion] = useState(0) //valor solicitados al usuario
   const [libras, setSacos]=useState(0)
@@ -15,97 +15,62 @@ const OTAserrinTamizadoJordan2 = () => {
   const [error, setError] = useState('');
   const [comentario, setComentario]= useState('') //valor solicitados al usuario 
   const [componentDisabled, setComponentDisabled] = useState(true)
-
-
-  const connectSL = async () => {
-    let serv = 'https://sapsl.eco-aplicaciones.com:50000/';
-    const companyDB = 'SBO_ECOFILTRO_LIVE_FACT';
-    const userName = localStorage.getItem('user');
-    const password = localStorage.getItem('pass');
-    const jData = { UserName: userName, Password: password, CompanyDB: companyDB };
-
-    try {
-      const response = await axios.post(`${serv}/b1s/v1/Login`, jData);
-console.log('respuesta del servidor',response)
-      const sessionId = response.data.SessionId;
-      setSessionId(sessionId);
-      setConnected(true);
-      message.success("Conectado a Sap")
-    } catch (error) {
-      setError('Failed to connect');
-      console.error("Error response:", error.response);
-      console.error("Error message:", error.message);
-    }
-  };
-
-  useEffect(() => {
-    // Primero conectamos al Service Layer
-    connectSL();
-  }, []);
-
-  
+  const URL = process.env.REACT_APP_URL;
 
 
   const fetchData = async () => {
-    console.log('libras en fetch ',libras)
+    const username = 'manager';
+    const password = '2023**.';
     const payload = {
-        "StartDate" : fechaProduccion,
-        "ItemNo": "MP100016",
-        "PlannedQuantity": produccion,
-        "Series": "81",
-        "Remarks": comentario,
-        "ProductionOrderLines": [
-            {       
-                 "StageID": 1,
-                "PlannedQuantity": libras,
-                "ItemNo": "MP100019",
-                "ProductionOrderIssueType": "im_Manual",
-                "Warehouse": "Bodega01"
-            },
-      
-        ],
-     "ProductionOrdersSalesOrderLines": [],
-     "ProductionOrdersStages": [
-      {
-          "DocEntry": 28764,
-          "StageID": 1,
-          "SequenceNumber": 1,
-          "StageEntry": 1,
-          "Name": "MATERIALES"
-          
-      },]
-       
-    }
-
-    let serv = 'https://sapsl.eco-aplicaciones.com:50000/';
-    try {
-      const response = await axios.post(`${serv}/b1s/v1/ProductionOrders`, payload, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Cookie': `B1SESSION=${sessionId}`
-        },
-        withCredentials: true,
+      "StartDate" : fechaProduccion,
+      "ItemNo": "MP100016",
+      "PlannedQuantity": produccion,
+      "Series": "81",
+      "Remarks": comentario,
+      "ProductionOrderLines": [
+          {       
+               "StageID": 1,
+              "PlannedQuantity": libras,
+              "ItemNo": "MP100019",
+              "ProductionOrderIssueType": "im_Manual",
+              "Warehouse": "Bodega01"
+          },
+    
+      ],
+   "ProductionOrdersSalesOrderLines": [],
+   "ProductionOrdersStages": [
+    {
+        "DocEntry": 28764,
+        "StageID": 1,
+        "SequenceNumber": 1,
+        "StageEntry": 1,
+        "Name": "MATERIALES"
+        
+    },]
+     
+  }
+  
+  
+    Promise.all([
+      axios.post(`${URL}/OtpSAP`, { payload })
+    ])
+      .then(([ordenesRes]) => {
+        setResultado(ordenesRes.data.value || []);
+        if (onClose) {
+          onClose(); // Cierra el modal
+        }
+        message.success('Orden de producción enviada con éxito');
+      })
+      .catch(error => {
+        console.error("Error al obtener los datos:", error);
+        setResultado([]);
       });
-      setResultado([response.data]);
-      message.success('Order successfully submitted');
-    } catch (error) {
-      setError('Error al hacer la solicitud');
-      if (error.response) {
-        console.error('Error response data:', error.response.data);
-        console.error('Error response status:', error.response.status);
-      } else {
-        console.error('Error message:', error.message);
-      }
-      message.error('Houston, tenemos un error: no se pudo realizar el envío.');
-    }
-  };
-
+  }
+  
   const handleSubmit = () => {
-    if (connected && sessionId) {
+   
       fetchData();
-    } else {
-      message.error('Houston, tenemos un error: no estamos conectados al Service Layer.');
-    }
+    
   };
 
   return (
@@ -133,7 +98,7 @@ console.log('respuesta del servidor',response)
         <Row gutter={16}>
           <Col xs={24} sm={12} md={12}>
             <Form.Item label="Código de Producto" required tooltip="This is a required field" rules={[{ required: true, message: 'Por favor ingrese una cantidad!' }]}>
-              <Input disabled placeholder="Input Product Code" value='MP100019' size="small"  required/>
+              <Input disabled placeholder="Input Product Code" value='MP100016' size="small"  required/>
             </Form.Item>
           </Col>
           <Col xs={24} sm={12} md={12}>
@@ -160,9 +125,9 @@ console.log('respuesta del servidor',response)
 
           <Col xs={24} sm={12} md={12}>
         
-          <Form.Item label="MP100018 Aserrin Seco La Union" required tooltip="This is a required field" name="librasconsumido" rules={[{ required: true, message: 'Por favor ingrese una cantidad!' }]}>
+          <Form.Item label="MP100019 Aserrin Tamizado la Union 1" required tooltip="This is a required field" name="librasconsumido" rules={[{ required: true, message: 'Por favor ingrese una cantidad!' }]}>
               {/* <Input  placeholder="Sacos" size="small" value={libras} readOnly   /> */}
-              <Input placeholder="Sacos usados" size="small" onChange={(e)=>{setSacos(Number(e.target.value))}} />
+              <Input placeholder="Ctd.requerida" size="small" onChange={(e)=>{setSacos(Number(e.target.value))}} />
 
             </Form.Item>
           </Col>
@@ -182,4 +147,4 @@ console.log('respuesta del servidor',response)
   );
 };
 
-export default ()=><OTAserrinTamizadoJordan2/>;
+export default OTAserrinTamizadoJordan2;

@@ -49,7 +49,6 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
       setError("Error al obtener los datos", error);
     }
   }, []);
-  console.log(hornos)
 
   const showSkeleton = () => {
     setLoading(true);

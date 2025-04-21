@@ -9,7 +9,7 @@ const URL = process.env.REACT_APP_URL;
 const TablaUsuarios = ({darkMode }) => {
     const [datos, setDatos] = useState([]);
     const [modal, setModal] = useState(false)
-const [verFirma, setVerFirma]=useState(true)
+    const [verFirma, setVerFirma]=useState(true)
 
 
     useEffect(() => {
@@ -19,7 +19,6 @@ const [verFirma, setVerFirma]=useState(true)
                 setDatos(response.data.rows); // Actualiza los datos con los datos de la respuesta
             })
             .catch(error => {
-                console.error('Error fetching data:', error);
             });
     }, []);
 

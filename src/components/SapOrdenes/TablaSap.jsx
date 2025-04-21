@@ -17,7 +17,6 @@ const TablaOT = ({ darkMode }) => {
   const [nombreRol, setNombrerol] = useState("");
   const [loginSL, setLoginSL]=useState([])
   const [resultado, setResultado] = useState([]);
-console.log('Login SL',loginSL)
   
   const IDSesion=loginSL.sessionId
 localStorage.setItem('SesionSL',IDSesion)

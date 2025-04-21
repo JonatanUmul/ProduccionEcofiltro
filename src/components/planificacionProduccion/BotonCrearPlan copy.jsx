@@ -28,14 +28,11 @@ const items = [
   
     const onMenuClick = (e, option) => {
       setOpcion(option)
-        console.log(item)
-      console.log('click', e);
       setItem(e.key)
       setAbrir(true)
 
       
     };
-    console.log('Item capturado', item)
 switch(item){
     case "1":
       return <CrearIsuues/> 

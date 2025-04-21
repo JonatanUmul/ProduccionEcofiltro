@@ -5,7 +5,6 @@ import PlanificarMes from './PlanificacionDiario';
 
 const App = () => {
   const [opcion, setOpcion] = useState(null);
-  console.log('Opción seleccionada', opcion);
 
   const BuscarOpcion = (e, option) => {
     e.preventDefault(); // Prevenir el comportamiento por defecto de los enlaces
@@ -13,7 +12,6 @@ const App = () => {
   };
 
 const seleccionMenu=()=>{
-  console.log('Entro a seleccion',opcion)
   switch (opcion) {
     case '1':
       return <PlanificarMes />;

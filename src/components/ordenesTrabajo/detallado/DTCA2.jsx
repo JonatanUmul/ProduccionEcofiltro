@@ -44,7 +44,6 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
       
       )
       .catch((error) => {
-        console.log("Error al obtener los datos:", error);
       });
   }, []);
 
@@ -61,7 +60,6 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
         id_creador:id_creador
        
       });
-      console.log(formData.cantidad_inicial)
       setLoading(false)
        // Mostrar SweetAlert de éxito
        Swal.fire({
@@ -80,7 +78,6 @@ const DTCA2= ({ encabezado, EncName, fecha_creacion, id }) => {
       setLoading(false)
     }
   };
-  console.log('hola',aserradero, tipCernido)  
 
   return (
 

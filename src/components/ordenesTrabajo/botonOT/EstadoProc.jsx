@@ -8,7 +8,6 @@ const EstadoProc = ({ id, encabezado }) => {
   const [cambiarEst, setCambiarEst] = useState("");
   const [cambiarRuta, setCambiarRuta] = useState('');
 
-  console.log('Datos recibidos (id, encabezado): ', id, encabezado, cambiarRuta);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,9 +15,7 @@ const EstadoProc = ({ id, encabezado }) => {
         const urls = `${URL}/EstadosProc`;
         const response = await axios.get(urls);
         setEstado(response.data);
-        console.log('Datos de estado: ', response.data);
       } catch (error) {
-        console.log('No se obtuvieron datos', error);
       }
     };
 
@@ -32,7 +29,6 @@ const EstadoProc = ({ id, encabezado }) => {
 
   // Definir la ruta basada en el encabezado seleccionado
   useEffect(() => {
-    console.log('Encabezado cambiado: ', encabezado);
     let ruta = '';
     switch (encabezado) {
       case 'othp':
@@ -72,13 +68,11 @@ const EstadoProc = ({ id, encabezado }) => {
         ruta = '';
         break;  
     }
-    console.log('Ruta establecida antes de actualizar el estado: ', ruta);
     setCambiarRuta(ruta);
   }, [encabezado]);
 
   // Verificar cambios en cambiarRuta
   useEffect(() => {
-    console.log('Ruta establecida después de actualizar el estado: ', cambiarRuta);
   }, [cambiarRuta]);
 
   // Realizar la solicitud PUT cuando se seleccione un estado
@@ -86,13 +80,10 @@ const EstadoProc = ({ id, encabezado }) => {
     const enviarEstado = async () => {
       if (cambiarEst !== "" && cambiarRuta !== "") {
         try {
-          console.log('Enviando datos a la ruta:', cambiarRuta);
           const response = await axios.put(`${URL}/${cambiarRuta}`, { id_est: cambiarEst, id });
-          console.log('Datos de la tabla:', response.data);
           // Aquí puedes hacer algo con los datos de la tabla, por ejemplo, actualizar el estado
           window.location.href = "/Home/TablaOT";
         } catch (error) {
-          console.log('Error al obtener los datos de la tabla:', error);
         }
       }
     };

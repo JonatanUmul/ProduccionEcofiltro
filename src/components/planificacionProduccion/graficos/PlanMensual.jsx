@@ -6,12 +6,6 @@ import { BiAlignJustify } from 'react-icons/bi';
 
 const PorcentajeEficienciaMensual = ({ planCumplido, isDarkMode }) => {
   const chartRef = useRef(null);
-  console.log('Datos en gráfico mensual', planCumplido);
-console.log('dark:',isDarkMode)
-
-
-
-  console.log('isDarkMode',isDarkMode)
   useEffect(() => {
     const myChart = echarts.init(chartRef.current );
 

@@ -18,7 +18,6 @@ import DTCC from '../detallado/DTCC'
 const CrearOT = ({ encabezado, id, EncName, fecha_creacion, codInicio, codFin, horneado,hornero,ModeloEco }) => {
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
   const [nombreRol, setNombrerol]=useState('')
-console.log('propr recibios',encabezado, id, EncName, fecha_creacion, codInicio, codFin, horneado)
 
   // Función para abrir el modal cuando se hace clic en el botón
   const handleOpenModal = () => {
@@ -31,7 +30,6 @@ console.log('propr recibios',encabezado, id, EncName, fecha_creacion, codInicio,
   };
 
   useEffect(()=>{setNombrerol( localStorage.getItem('rol'))},[])
-  console.log('RolName capturado',nombreRol)
   
 
   // Función para renderizar el formulario seleccionado según el ID
@@ -77,8 +75,6 @@ console.log('propr recibios',encabezado, id, EncName, fecha_creacion, codInicio,
 
   // Definir una función de manejo de clics
   const handleClick = () => {
-    console.log(`Se ha seleccionado la orden de trabajo con ID: ${encabezado}`);
-    console.log(`Se ha seleccionado la orden de trabajo con ID: ${id}`);
     // Aquí puedes realizar cualquier acción necesaria con el ID seleccionado
     // Por ejemplo, abrir el modal correspondiente
     handleOpenModal();

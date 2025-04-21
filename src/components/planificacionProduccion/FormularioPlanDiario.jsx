@@ -12,7 +12,6 @@ const App = ({ selectedValue }) => {
   const [resultado, setResultado] = useState([]);
   const fechaPlanificacion = selectedValue;
 
-  console.log('Valores seleccionados:', areaSeleccionados, planificado);
 
   const onFinish = (values) => {
     const seleccionados = values.users.map(user => ({
@@ -32,7 +31,6 @@ const App = ({ selectedValue }) => {
       try {
         const response = await axios.get(`${URL}/Procesos`);
         setResultado(response.data.rows);
-        console.log('datos consulta', response.data);
       } catch (error) {
         console.error('Error al obtener los datos:', error);
         // Podrías mostrar un mensaje al usuario en caso de error
@@ -42,7 +40,6 @@ const App = ({ selectedValue }) => {
     fetchProcesos();
   }, [URL]);
 
-  console.log('Procesos', resultado);
 
   return (
 

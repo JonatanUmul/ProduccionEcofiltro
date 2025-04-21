@@ -9,6 +9,11 @@ import OTAserrinTamizadoJordan1 from '../otproduccion/OTAserrinTamizadoJordan1'
 import OTAserrinTamizadoJordan2 from '../otproduccion/OTAserrinTamizadoJordan2';
 import OTAserrinFinolaUnion from '../otproduccion/OTAserrinFinolaUnion';
 import OTAserrinFinolaUnion2 from '../otproduccion/OTAserrinFinolaUnion2';
+import Horneados from '../otproduccion/Horneados';
+import OTAserrinPinoTamizado from '../otproduccion/OTAserrinPinoTamizado';
+import OTAserrinPinoGrueso from '../otproduccion/OTAserrinPinoGrueso';
+import ControlCalidad from '../otproduccion/ControlCalidad'
+import Impregnacion from '../otproduccion/Impregnacion'
 // import { useAbility } from '../AbilityContext';
 
 
@@ -44,20 +49,29 @@ const BotonOT = ({darkMode }) => {
   const renderSelectedForm = () => {
     switch (selectedOption) {
       case '1':
-        return <OTP/>;
+        return <OTP onClose={toggleModal}/>;
       case '2':
-        return <OTBS />;
+        return <OTBS onClose={toggleModal}/>;
       case '3':
-        return <OTAserrinSecoLaUnion/>;
+        return <OTAserrinSecoLaUnion onClose={toggleModal}/>;
       case '4':
-        return <OTAserrinTamizadoJordan1/>;
+        return <OTAserrinTamizadoJordan1 onClose={toggleModal}/>;
       case '5':
-        return <OTAserrinTamizadoJordan2/>;
+        return <OTAserrinTamizadoJordan2 onClose={toggleModal}/>;
       case '6':
-          return <OTAserrinFinolaUnion/>;
-     
+          return <OTAserrinFinolaUnion onClose={toggleModal}/>;
       case '7':
-          return <OTAserrinFinolaUnion2/>;
+          return <OTAserrinFinolaUnion2 onClose={toggleModal}/>;
+      case '8':
+          return <OTAserrinPinoTamizado onClose={toggleModal}/>
+      case '9':
+          return <OTAserrinPinoGrueso onClose={toggleModal}/>
+      case '10':
+          return <Horneados onClose={toggleModal}/>
+      case '11':
+            return <ControlCalidad onClose={toggleModal}/>
+      case '12':
+            return <Impregnacion onClose={toggleModal} />
 
       default:
         return null;
@@ -67,14 +81,14 @@ const BotonOT = ({darkMode }) => {
   return (
     <div className="dropdown">
       <Modal isOpen={modal} toggle={toggleModal} backdrop="static" collapse={true}>
-        {/* Solo mostrar el ModalHeader si hay un título */}
+   
         {modalTitle && <ModalHeader toggle={toggleModal}>{modalTitle}</ModalHeader>}
         <ModalBody>
-          {/* Renderiza el componente correspondiente al formulario seleccionado dentro del modal */}
+        
           {renderSelectedForm()}
         </ModalBody>
         <ModalFooter>
-          {/* Puedes agregar botones de acción necesarios */}
+
         </ModalFooter>
       </Modal>
 
@@ -96,22 +110,37 @@ const BotonOT = ({darkMode }) => {
         <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '2', 'Orden de Trabajo - Barro Seco')}>
           2. Barro Seco
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '3', 'Orden de Trabajo - Aserrin Seco La Union')}>
-          3. Aserrin Seco La Union
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '3', 'Orden de Trabajo - Aserrín Seco La Union')}>
+          3. Aserrín Seco La Union
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '4', 'Orden de Trabajo - Aserrin Tamizado la Union 1')}>
-          4. Aserrin Tamizado la Union 1
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '4', 'Orden de Trabajo - Aserrín Tamizado la Union 1')}>
+          4. Aserrín Tamizado la Union 1
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '5', 'Orden de Trabajo - Aserrin Tamizado la    2')}>
-          4. Aserrin Tamizado la Union 2
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '5', 'Orden de Trabajo - Aserrín Tamizado la Union 2')}>
+          5. Aserrín Tamizado la Union 2
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '6', 'Aserrin Fino la Union')}>
-          5. Aserrin Fino la Union
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '6', 'Aserrín Fino la Union')}>
+          6. Aserrín Fino la Union
         </a>
-        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '7', 'Aserrin Fino la Union 2')}>
-          8. Aserrin Fino la Union 2
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '7', 'Aserrín Fino la Union 2')}>
+          7. Aserrin Fino la Union 2
         </a>
-      
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '8', 'Aserrín Pino Tamizado')}>
+          8. Aserrín Pino Tamizado
+        </a>
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '9', 'Aserrín Pino Grueso')}>
+          9. Aserrín Pino Grueso
+        </a>
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '10', 'Horneados')}>
+          10. Horneados
+        </a>
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '11', 'Control de Calidad')}>
+          11. Control de Calidad
+        </a>
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '12', 'Impregnación')}>
+          12. Impregnación
+        </a>
+       
       
      
       </div>

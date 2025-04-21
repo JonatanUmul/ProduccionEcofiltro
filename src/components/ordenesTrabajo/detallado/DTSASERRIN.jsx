@@ -29,7 +29,6 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
         setMatPrim(MatprimaResponse.data)
       })
       .catch((error) => {
-        console.log("Error al obtener los datos:", error);
       });
   }, []);
 
@@ -49,7 +48,6 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
         showConfirmButton: false,
         timer: 1500
       });
-      console.log('hoa aca',formData.id_MP)
       // Redirigir a la página de TablaOT después de 1.5 segundos
       setTimeout(() => {
         window.location.href = "/Home/TablaOT";
@@ -58,7 +56,6 @@ const DTSASERRIN = ({ encabezado, EncName, fecha_creacion, id }) => {
       console.error("Error al enviar los datos:", error);
     }
   };
-  console.log('datos props',encabezado, EncName, fecha_creacion,id)
 
   return (
     <div className="mt-4">

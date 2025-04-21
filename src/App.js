@@ -36,6 +36,8 @@ import OrdenesSap from './components/SapOrdenes/TablaSap.jsx'
 import OpenAI from './components/OpenIa/ChatOpenIa.jsx'
 import TablaIndicesPlasticos from './components/laboratorio/TablaIndicesPlasticos.jsx'
 import FormularioIDPB from './components/laboratorio/FormularioIDPB.jsx'
+import ManoObra from './components/SapOrdenes/manoObra.jsx'
+import GestionHorasLaborales from './components/mantenimientos/users/GestionHorasLaborales.jsx'
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
@@ -93,10 +95,11 @@ function App() {
               <Route path='/Home/BoardPlanificacion' element={<Board toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
               <Route path='/Home/AsignarIsuue' element={<AsignarIsuue/>}></Route>
               <Route path='/Home/OrdenesSap' element={<OrdenesSap  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/ManoObra' element={<ManoObra  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>              
               <Route path='/Home/OpenAI' element={<OpenAI  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
               <Route path='/Home/TablaIndicesPlasticos' element={<TablaIndicesPlasticos toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
               <Route path='/Home/FormularioIDPB' element={<FormularioIDPB  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
-
+              <Route path='/Home/GestionHorasLaborales' element={<GestionHorasLaborales  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
             </Route>
           </Route>
          

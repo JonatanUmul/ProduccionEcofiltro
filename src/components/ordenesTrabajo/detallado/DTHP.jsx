@@ -12,7 +12,6 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
   const [patio, setPatio] = useState([]);
   const [matPrim, setMatPrim]= useState([])
   const [id_creador, setid_creador] = useState('');
-  console.log('consultando iddddddddddddddddddddddddddddd'. id_creador)
   useEffect(()=>{
     setid_creador(localStorage.getItem('id_creador'))
   })
@@ -29,7 +28,6 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
         setMatPrim(MatprimaResponse.data)
       })
       .catch((error) => {
-        console.log("Error al obtener los datos:", error);
       });
   }, []);
 

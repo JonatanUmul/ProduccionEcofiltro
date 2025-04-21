@@ -28,7 +28,6 @@ useEffect(()=>{
         setMatPrim(MatprimaResponse.data)
       })
       .catch((error) => {
-        console.log("Error al obtener los datos:", error);
       });
   }, []);
 
@@ -43,7 +42,6 @@ useEffect(()=>{
         CantidadFinal: formData.cantidad_final,
         id_creador:id_creador
       });
-      console.log("Respuesta del servidor:", response.data);
 
       // Mostrar SweetAlert de éxito
       Swal.fire({

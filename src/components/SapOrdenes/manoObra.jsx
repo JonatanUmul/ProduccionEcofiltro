@@ -63,7 +63,12 @@ const OperariosTable = () => {
 
   
     const Guardar=()=>{
-      axios.post(`${URL}/RegistroTrabajo`, operarios)
+      const operariosCOnHoras = operarios.map(op=>({
+        ...op,
+        horas: diaActual
+      }))
+      console.log(operariosCOnHoras)
+      axios.post(`${URL}/RegistroTrabajo`, operariosCOnHoras)
       .then(response => {
       })
       .catch(error => {
@@ -75,7 +80,7 @@ const OperariosTable = () => {
     return (
         <div>
         {/* Grid de tablas por área */}
-        <h1>{nombreDia.toUpperCase()}-{diaActual}</h1>
+        <h1>{nombreDia.toUpperCase()} - Horas laborales: {diaActual}</h1>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))", gap: "20px", padding: "20px", textAlign:'center' }}>
          
           {Object.entries(operariosPorArea).map(([area, ops]) => (
@@ -92,12 +97,13 @@ const OperariosTable = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {ops.map((op, index) => (
+                  {ops.map((op,index) => (
                     <tr key={op.id}>
                       <td>{index + 1}</td>
                       <td>{op.estado}</td>
                       <td>{op.Nombre}</td>
                       <td>{op.Area}</td>
+                      <td>{diaActual}</td>
                       <td><AreaOperario area={op} actualizarTab={getOperarios} /></td>
                       
                     </tr>

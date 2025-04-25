@@ -6,13 +6,13 @@ import Swal from 'sweetalert2'; // Importar SweetAlert
 const URL = process.env.REACT_APP_URL;
 const DCPB= ({ encabezado, EncName, fecha_creacion, id }) => {
   const { handleSubmit, register } = useForm();
-  const [ pulidor, setPulidor] = useState([]);
+  // const [ pulidor, setPulidor] = useState([]);
   const [maq, setTMaquinaria] = useState([]);
   const [calificacion, setCalificaciones] = useState([]);
   const [modeloUF, setModeloUf] = useState([]);
   const [modulos, setModulos]= useState([])
   const [id_creador, setid_creador] = useState('');
-  
+  console.log('Modelo',modeloUF)
   useEffect(()=>{
     setid_creador(localStorage.getItem('id_creador'))
   })
@@ -21,14 +21,15 @@ const DCPB= ({ encabezado, EncName, fecha_creacion, id }) => {
   const maquinaria = 'Prensa';
   useEffect(() => {
     Promise.all([
-      axios.get(`${URL}/Operarios/${id_area}`),
+      // axios.get(`${URL}/Operarios/${id_area}`),
       axios.get(`${URL}/maquinaria/${maquinaria}`),
       axios.get(`${URL}/calificacion`),
       axios.get(`${URL}/ModelosUF`),
       axios.get(`${URL}/modulosTarimas`)
     ])
-      .then(([PulidorResponse, MoldeResponse, CalificacionesResponse, ModelosResponse, ModulosResponse]) => {
-        setPulidor(PulidorResponse.data);
+      // .then(([PulidorResponse, MoldeResponse, CalificacionesResponse, ModelosResponse, ModulosResponse]) => {
+        .then(([MoldeResponse, CalificacionesResponse, ModelosResponse, ModulosResponse]) => {
+        // setPulidor(PulidorResponse.data);
         setTMaquinaria(MoldeResponse.data);
         setCalificaciones(CalificacionesResponse.data);
         setModeloUf(ModelosResponse.data);

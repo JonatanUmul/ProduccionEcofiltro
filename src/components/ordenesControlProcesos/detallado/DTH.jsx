@@ -47,12 +47,13 @@ const DRM = ({  encabezado, EncName,fecha_creacion, id }) => {
   };
 
   const onSubmit = async (formData) => {
+    console.log('turno',formData.id_turno)
     try {
       
    
       const response = await axios.post(`${URL}/DTH`, {
         id_cth: id.toString(),
-        fecha_real: fecha_creacion,
+        fecha_real:formatFecha(fecha_creacion),
         id_modelo: formData.id_modelo,
         id_modelo2:formData.id_modelo2,
         id_horno: formData.id_horno,

@@ -8,17 +8,25 @@ const URL = process.env.REACT_APP_URL;
 const OperariosTable = () => {
     const [operarios, setOperarios] = useState([]);
     const [DiaLaboral, setDiaLaboral]= useState([]);
-   
+    const [tipoHora, setTipoHora]=useState([])
+ 
+    const precioHora = tipoHora.find(u => u.tipo_hora === 'Normal')?.precio;
+    console.log(precioHora ?? 'No se encontró el tipo de hora');
+    
+
+
     const hoy=new Date()
 
       const getOperarios = async () => {
         try {
-          const [respuesta1,respuesta2] = await Promise.all([
+          const [respuesta1,respuesta2, respuesta3] = await Promise.all([
             axios.get(`${URL}/RegistroTrabajo`),
-            axios.get(`${URL}/GestionDiasLaborales`)
+            axios.get(`${URL}/GestionDiasLaborales`),
+            axios.get(`${URL}/GestionHorasLaborales`)
           ]);
           setOperarios(respuesta1.data.data);
-          setDiaLaboral(respuesta2.data.rows)
+          setDiaLaboral(respuesta2.data.rows);
+          setTipoHora(respuesta3.data.rows)
         } catch (error) {
           console.error("Error al consultar APIs:", error);
         }
@@ -53,7 +61,7 @@ const OperariosTable = () => {
     const [diaActual, setDiaActual] = useState('');
 
     const operariosPorArea = operarios.reduce((acc, operario) => {
-        const area = operario.Area || "Sin Área";
+        const area = operario.proceso || "Sin Área";
         if (!acc[area]) {
             acc[area] = [];
         }
@@ -61,11 +69,13 @@ const OperariosTable = () => {
         return acc;
     }, {});
 
-  
     const Guardar=()=>{
       const operariosCOnHoras = operarios.map(op=>({
+      
         ...op,
-        horas: diaActual
+        horas: diaActual,
+        tipoHora: 1,
+        precioHora: precioHora
       }))
       console.log(operariosCOnHoras)
       axios.post(`${URL}/RegistroTrabajo`, operariosCOnHoras)
@@ -102,7 +112,7 @@ const OperariosTable = () => {
                       <td>{index + 1}</td>
                       <td>{op.estado}</td>
                       <td>{op.Nombre}</td>
-                      <td>{op.Area}</td>
+                      <td>{op.proceso}</td>
                       <td>{diaActual}</td>
                       <td><AreaOperario area={op} actualizarTab={getOperarios} /></td>
                       
@@ -116,9 +126,13 @@ const OperariosTable = () => {
       
         {/* Botón fuera del grid, al final */}
         <div style={{ textAlign: "center", marginBottom: "40px" }}>
-          <button type="submit" onClick={Guardar} className="btn btn-primary">
+
+         {diaActual>0 ?
+         <button type="submit" onClick={Guardar} className="btn btn-primary">
             Guardar Mano de Obra
-          </button>
+          </button>:
+          'Sin horas'}
+          
         </div>
       </div>
       

@@ -67,8 +67,9 @@ localStorage.setItem('SesionSL',IDSesion)
               <th scope="col" style={{ width: "1%" }}>Cantidad Planificada</th>
               <th scope="col" style={{ width: "1%" }}>Numero de Orden</th>
               <th scope="col" style={{ width: "1%" }}>Producto</th>
+              <th scope="col" style={{ width: "1%" }}>Ver Orden</th>
               <th scope="col" style={{ width: "1%" }}>Mano de Obra</th>
-              <th scope="col" style={{ width: "1%" }}>Acciones</th>
+              {/* <th scope="col" style={{ width: "1%" }}>Acciones</th> */}
             </tr>
           </thead>
           <tbody>
@@ -79,12 +80,13 @@ localStorage.setItem('SesionSL',IDSesion)
                 <td>{OTDats.PlannedQuantity}</td>
                 <td>{OTDats.ProductDescription}</td>
                 <td>{OTDats.DocumentNumber}</td>
+                <td><Detalle resultado={OTDats}/></td>
                 <td>
-                  <CrearOT resultado={OTDats.DocumentNumber} />
+                  <CrearOT resultado={OTDats} />
                 </td>
-                <td>
+                {/* <td>
                   <ButtnEst darkMode={darkMode} handleClickButton={(id, encabezado) => console.log(id, encabezado)} id={OTDats.id} encabezado={OTDats.encabezado} />
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>

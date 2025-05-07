@@ -52,45 +52,176 @@ const Otp = ({ onClose }) => {
   const AserrinPlinificado1 = formulas * librasA1;
   const AserrinPlinificado2 = formulas * librasA2;
   const [modeloreq, setSelectModelo] = useState("");
-  const [creador, setid_creador] = useState('');
-
-  useEffect(() => {
-    setid_creador(localStorage.getItem('nombre'));
-  }, []);
-
 
   const fetchData = async () => {
     const username = "manager";
     const password = "2023**.";
-    // const payload = {
-    //   StartDate: fechaProduccion,
-    //   // "ItemNo": "PP500000",
-    //   ItemNo: modeloreq,
-    //   PlannedQuantity: producción,
-    //   Series: "83",
-    //   Remarks: comentario,
-
-    // };
     const payload = {
-    
-      "Series": 83,
-      "ItemNo": modeloreq,
-      "ProductionOrderType": "bopotStandard",
-      "PlannedQuantity": producción,
-      "CompletedQuantity": 0.0,
-      "RejectedQuantity": 0.0,
-      "ProductionOrderOrigin": "bopooManual",
-      "UserSignature": 1,
-      "Remarks": `${comentario} | Creado por: ${creador}`,
-      "Warehouse": "Bodega03",
-      "JournalRemarks": "Orden fabricación: PP500300",
-      "StartDate": "2025-05-06",
-      "Priority": 100,
-      "RoutingDateCalculation": "raOnStartDate",
-      "UpdateAllocation": "bouaCalculated",
-      "SAPPassport": null
-}
-    
+      StartDate: fechaProduccion,
+      // "ItemNo": "PP500000",
+      ItemNo: modeloreq,
+      PlannedQuantity: producción,
+      Series: "83",
+      Remarks: comentario,
+      ProductionOrderLines: [
+        {
+          StageID: 1,
+          PlannedQuantity: BarroPlanificado,
+          ItemNo: "MP100004",
+          ProductionOrderIssueType: "im_Manual",
+          Warehouse: "Bodega01",
+        },
+        {
+          StageID: 1,
+          PlannedQuantity: AserrinPlinificado1,
+          ItemNo: SelectAserrin1,
+          ProductionOrderIssueType: "im_Manual",
+          Warehouse: "Bodega01",
+        },
+        {
+          StageID: 1,
+          PlannedQuantity: AserrinPlinificado2,
+          ItemNo: SelectAserrin2,
+          ProductionOrderIssueType: "im_Manual",
+          Warehouse: "Bodega01",
+        },
+        {
+          StageID: 1,
+          PlannedQuantity: bolsas,
+          ItemNo: "SU300000",
+          ProductionOrderIssueType: "im_Manual",
+          Warehouse: "Bodega02",
+        },
+        {
+          StageID: 1,
+          PlannedQuantity: esponjas,
+          ItemNo: "SU300001",
+          ProductionOrderIssueType: "im_Manual",
+          Warehouse: "Bodega02",
+        },
+        {
+          StageID: 2,
+          ItemNo: "MO000001",
+          ProductionOrderIssueType: "im_Backflush",
+          ItemName: "Mano de Obra",
+          Warehouse: "Bodega99",
+          U_CostoXHora: 17.153711,
+          U_Calcular: "S",
+        },
+        {
+          StageID: 2,
+          ItemNo: "MO000007",
+          ProductionOrderIssueType: "im_Backflush",
+          Warehouse: "Bodega99",
+          ItemName: "Mano de Obra Gerencia",
+          U_CostoXHora: 68.728522,
+          U_Calcular: "S",
+        },
+        {
+          StageID: 2,
+          ItemNo: "MO000004",
+          ProductionOrderIssueType: "im_Backflush",
+          Warehouse: "Bodega99",
+          ItemName: "Mano de Obra Bonificación incentivo",
+          U_CostoXHora: 1.28866,
+          U_Calcular: "S",
+        },
+        {
+          StageID: 3,
+          ItemNo: "PR000001",
+          ProductionOrderIssueType: "im_Backflush",
+          Warehouse: "Bodega99",
+          ItemName: "BONO14",
+          U_CostoXHora: 0.0,
+          U_Calcular: "S",
+        },
+        {
+          StageID: 3,
+          ItemNo: "PR000002",
+          ProductionOrderIssueType: "im_Backflush",
+          Warehouse: "Bodega99",
+          ItemName: "AGUINALDO",
+          U_CostoXHora: 0.0,
+          U_Calcular: "S",
+        },
+        {
+          StageID: 3,
+          ItemNo: "PR000003",
+          ProductionOrderIssueType: "im_Backflush",
+          Warehouse: "Bodega99",
+          ItemName: "INDEMNIZACION",
+          U_CostoXHora: 0.0,
+          U_Calcular: "S",
+        },
+        {
+          StageID: 3,
+          ItemNo: "PR000004",
+          Warehouse: "Bodega99",
+          ItemName: "IGSS PATRONAL",
+          U_CostoXHora: 0.0,
+          U_Calcular: "S",
+          U_Personal: null,
+        },
+        {
+          StageID: 4,
+          ItemNo: "GF000001",
+          ProductionOrderIssueType: "im_Backflush",
+          Warehouse: "Bodega99",
+          ItemName: "Depreciación Edificio Fabrica y Maquinaria",
+          U_CostoXHora: 0.0,
+          U_Calcular: "N",
+        },
+        {
+          StageID: 4,
+          ItemNo: "GF000002",
+          ProductionOrderIssueType: "im_Backflush",
+          Warehouse: "Bodega99",
+          ItemName: "Gastos Mantenimiento de Maquinaria",
+          U_CostoXHora: 0.0,
+          U_Calcular: "N",
+        },
+        {
+          StageID: 4,
+          ItemNo: "GF000003",
+          ProductionOrderIssueType: "im_Backflush",
+          Warehouse: "Bodega99",
+          ItemName: "Herramientas y Enseres Menores Produccion",
+          U_CostoXHora: 0.0,
+          U_Calcular: "N",
+        },
+      ],
+      ProductionOrdersSalesOrderLines: [],
+      ProductionOrdersStages: [
+        {
+          DocEntry: 28764,
+          StageID: 1,
+          SequenceNumber: 1,
+          StageEntry: 1,
+          Name: "MATERIALES",
+        },
+        {
+          DocEntry: 28764,
+          StageID: 2,
+          SequenceNumber: 2,
+          StageEntry: 2,
+          Name: "MANO DE OBRA",
+        },
+        {
+          DocEntry: 28764,
+          StageID: 3,
+          SequenceNumber: 3,
+          StageEntry: 3,
+          Name: "PRESTACIONES",
+        },
+        {
+          DocEntry: 28764,
+          StageID: 4,
+          SequenceNumber: 4,
+          StageEntry: 4,
+          Name: "GASTOS DE FABRICACIÓN",
+        },
+      ],
+    };
 
     Promise.all([axios.post(`${URL}/OtpSAP`, { payload })])
       .then(([ordenesRes]) => {

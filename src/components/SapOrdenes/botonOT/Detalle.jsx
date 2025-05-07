@@ -2,12 +2,13 @@
 import React, {  useState } from 'react'
 
 import { Modal, ModalFooter, ModalBody, ModalHeader } from 'reactstrap'
+import DetalleOrders from '../otproduccion/DetalleOrders'
+
+// import ConsultaDTHP from './BotonOT'
 
 
-import ConsultaDTHP from './BotonOT'
-
-
-const Detalle = ({porcentaje,OTDats, encabezado, id,EncName, fecha_creacion }) => {
+const Detalle = ({resultado}) => {
+  console.log(resultado)
   const [modalVisible, setModalVisible] = useState(false); 
 const[datosdeConsu, setDatosConsu]=useState('')
   // Función para abrir el modal cuando se hace clic en el botón
@@ -24,19 +25,17 @@ const[datosdeConsu, setDatosConsu]=useState('')
     setDatosConsu(respuestaApi);
   };
 
-console.log('Prueba consulta de',datosdeConsu.id)
+
   // Función para renderizar el formulario seleccionado según el ID
   const renderSelectedForm = () => {
-    switch (encabezado) {
-      case 'othp':
-        return <ConsultaDTHP id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
-
-
-
-      default:
-        return <p>Formulario no encontrado</p>;
-    }
+    // switch (1) {
+    //   case 'othp':
+        return <DetalleOrders resultado={resultado} />
+    //   default:
+    //     return <p>Formulario no encontrado</p>;
+    // }
   };
+
 
   // Definir una función de manejo de clics
   const handleClick = () => {
@@ -50,12 +49,11 @@ console.log('Prueba consulta de',datosdeConsu.id)
       {/* Botón para abrir el modal */}
       
       <a type="button"  onClick={handleClick}>
-      {porcentaje? <i style={{color:'red'}} class="icon ion-md-attach"></i>:<i class="bi bi-arrow-bar-right"></i> }
-      
+      Detalle
       </a>
       {/* Modal */}
-      <Modal isOpen={modalVisible} toggle={handleCloseModal} size="xl">
-        <ModalHeader toggle={handleCloseModal}>{encabezado } - {EncName}</ModalHeader>
+      <Modal isOpen={modalVisible} toggle={handleCloseModal} size="xl" backdrop="static">
+        <ModalHeader toggle={handleCloseModal}></ModalHeader>
         <ModalBody>
           {/* Renderiza el componente correspondiente al formulario seleccionado dentro del modal */}
           {renderSelectedForm()}

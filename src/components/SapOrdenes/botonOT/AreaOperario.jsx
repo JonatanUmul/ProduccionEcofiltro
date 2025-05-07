@@ -18,7 +18,7 @@ const AreaOperario = ({ area, actualizarTab }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${URL}/area`);
+                const response = await axios.get(`${URL}/procesos`);
              
                 setDatos(response.data.rows);
               
@@ -65,7 +65,7 @@ const AreaOperario = ({ area, actualizarTab }) => {
                 {Array.isArray(datos) &&
                     datos.map((areas) => (
                         <option key={areas.id} value={areas.id}>
-                            {areas.Area}
+                            {areas.proceso}
                         </option>
                     ))}
             </select>

@@ -1,123 +1,152 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Form, Input, Row, Col, Divider, message, Checkbox } from 'antd';
+import { responsiveArray } from 'antd/es/_util/responsiveObserver';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
-const ManoOTP = ({resultadoItem}) => {
-  const [sessionId, setSessionId] = useState('');
-  const [connected, setConnected] = useState(false);
-  const [resultado, setResultado] = useState([]);
-  const [error, setError] = useState("");
-  const [componentDisabled, setComponentDisabled] = useState(true);
-  const [manodeobra, setManoDeObra] = useState({ ItemName: '', costo: '' });
-console.log("Resultado en mano de obra",resultado)
-  const connectSL = async () => {
-    let serv = 'https://sapsl.eco-aplicaciones.com:50000/';
-    const companyDB = 'SBO_ECOFILTRO_LIVE_TEST';
-    const userName = localStorage.getItem('user');
-    const password = localStorage.getItem('pass');
-    const jData = { UserName: userName, Password: password, CompanyDB: companyDB };
-
-    try {
-      const response = await axios.post(`${serv}/b1s/v1/Login`, jData);
-      console.log('respuesta del servidor', response);
-      const sessionId = response.data.SessionId;
-      setSessionId(sessionId);
-      setConnected(true);
-      message.success("Conectado a SAP");
-    } catch (error) {
-      setError('Failed to connect');
-      console.error("Error response:", error.response);
-      console.error("Error message:", error.message);
-    }
-  };
-
-  useEffect(() => {
-    connectSL();
-  }, []);
-  
+const ManoOTP = ({ resultadoItem }) => {
+  console.log('Resultados',resultadoItem.ItemNo, resultadoItem.DocumentNumber)
+  const [respon, setResponse]=useState([])
+  const URL = process.env.REACT_APP_URL;
+  const fecha=resultadoItem.CreationDate
+  const ItemNo= resultadoItem.ItemNo
+  const OrderManoObra=resultadoItem.DocumentNumber
+console.log(respon)
 
  
-    console.log("Numero de orden", resultadoItem)
+const fetchData = () => {
+  axios.get(`${URL}/ManoObraParaSap`, {
+    params: {
+      fecha,
+      ItemNo
+    }
+  })
+  .then(response => {
+    setResponse(response.data.data  );
+  })
+  .catch(error => {
+    console.error('Error al obtener datos:', error);
+  });
+};
 
-  const fetchData = async () => {
-    const orden= resultadoItem;
-    let serv = 'https://sapsl.eco-aplicaciones.com:50000/';
-    try {
-      const response = await axios.get(`${serv}/b1s/v1/PProductionOrders?$filter=DocumentNumber eq ${orden}`, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Cookie': `B1SESSION=${sessionId}`
-        },
-        withCredentials: true,
+
+  
+// const EnviarManoObraSap = () => {
+//   for(let a of respon){
+//     const payload=
+//     {
+//       "Code": "30001929-MO000001",
+//        "POFB1Collection": [
+//           {
+//               "Code": `${OrderManoObra}-MO000001`,
+//               "LineId": 1,
+//               "U_EmpId": respon.U_empID,
+//               "U_Horas": respon.horas_trabajadas,
+//               "U_CostoXHora": respon.precioHora
+//           },
+//                           ]
+// }
+
+//     axios.get(`${URL}/ManoObraOrders`, {
+//       payload    })
+//     .then(response => {
+//       setResponse(response.data.data  );
+//     })
+//     .catch(error => {
+//       console.error('Error al obtener datos:', error);
+//     });
+
+//   }
+ 
+// };
+
+const EnviarManoObraSap = () => {
+  for (let a of respon) {
+    const payload = {
+      "Code": `${OrderManoObra}-MO000001`, 
+      "POFB1Collection": [
+        {
+          "Code": `${OrderManoObra}-MO000001`,
+          "LineId": 1,
+          "U_EmpId": a.U_empID,
+          "U_Horas": a.horas_trabajadas,
+          "U_CostoXHora": a.precioHora
+        }
+      ]
+    };
+
+    axios.post(`${URL}/ManoObraOrders`, payload) 
+      .then(response => {
+        console.log('Mano de obra enviada:', response.data);
+      })
+      .catch(error => {
+        console.error('Error al enviar datos:', error.response?.data || error.message);
       });
-      setResultado([response.data]);
-      message.success('Orden obtenida con éxito');
-    } catch (error) {
-      setError('Error al hacer la solicitud');
-      if (error.response) {
-        console.error('Error response data:', error.response.data);
-        console.error('Error response status:', error.response.status);
-      } else {
-        console.error('Error message:', error.message);
-      }
-      message.error('Houston, tenemos un error: no se pudo realizar la solicitud.');
-    }
-  };
+  }
+};
 
-  const handleSubmit = () => {
-    if (connected && sessionId) {
-      fetchData();
-    } else {
-      message.error('Houston, tenemos un error: no estamos conectados al Service Layer.');
-    }
-  };
 
-  useEffect(() => {
-    if (resultado.length > 0) {
-      const manodeobraData = resultado[0];
-      if (manodeobraData.ProductionOrderLines && manodeobraData.ProductionOrderLines.length > 0) {
-        setManoDeObra({
-          ItemName: manodeobraData.ProductionOrderLines[0].ItemName,
-          costo: manodeobraData.ProductionOrderLines[0].U_CostoXHora
-        });
-      }
-    }
-  }, [resultado]);
+
+
+
+  useEffect(()=>{
+    fetchData()
+},[fecha,ItemNo])
+
 
   return (
-    <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-      <Checkbox
-        checked={componentDisabled}
-        onChange={(e) => setComponentDisabled(e.target.checked)}
-      >
-        Formulario deshabilitado
-      </Checkbox>
+    <div>
+      <table className="table text-center">
+        <thead>
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Código Artículo</th>
+            <th scope="col">Cantidad Planificada</th>
+            <th scope="col">Orden</th>
+            <th scope="col">Comentario</th>
+          </tr>
+        </thead>
+        <tbody>
+              <tr >
+               <td>{resultadoItem.CreationDate}</td>
+               <td>{resultadoItem.ItemNo}</td>
+               <td>{resultadoItem.PlannedQuantity}</td>
+               <td>{resultadoItem.ProductDescription}</td>
+               <td>{resultadoItem.Remarks}</td>
+              </tr>
+        </tbody>
+      </table>
 
-      <Form layout="vertical" onFinish={handleSubmit} disabled={componentDisabled} style={{ maxWidth: 600 }}>
-        <Divider orientation="left" orientationMargin={50} style={{ borderColor: '#7cb305' }}>
-          Mano de Obra
-        </Divider>
+      <table className="table text-center">
+        <thead>
+          <tr>
+          <th scope="col">#</th>
+          <th scope="col">ID empleado</th>
+            <th scope="col">Operasio</th>
+            <th scope="col">Horas normales</th>
+            <th scope="col">Costo por hora</th>
+            <th scope="col">Total</th>
+            
+          
+          </tr>
+        </thead>
+        <tbody>
+        {Array.isArray(respon)&&respon.map((res, index)=>(
+ <tr key={index}>
+  <td>{index+1}</td>
+  <td>{res.U_empID}</td>
+ <td>{res.Nombre}</td>
+ <td>{res.horas_trabajadas}</td>
+ <td>{res.precioHora}</td>
+ <td>{res.precioHora*res.horas_trabajadas}</td>
 
-        <Row gutter={16}>
-          <Col xs={12} sm={6} md={6}>
-            <Form.Item label="Item de Mano de Obra" name="itemName">
-              <Input value={manodeobra.ItemName} readOnly />
-            </Form.Item>
-          </Col>
-        </Row>
 
-        <Row gutter={16}>
-          <Col xs={12} sm={6} md={6}>
-            <Form.Item label="Costo por Hora" name="costo">
-              <Input value={manodeobra.costo} readOnly />
-            </Form.Item>
-          </Col>
-        </Row>
+</tr>
+))}
+             
+        </tbody>
+      </table>
+      <button type="button" onClick={EnviarManoObraSap}>Enviar</button>
 
-        <Form.Item>
-          <Button type="primary" htmlType="submit">Submit</Button>
-        </Form.Item>
-      </Form>
+
     </div>
   );
 };

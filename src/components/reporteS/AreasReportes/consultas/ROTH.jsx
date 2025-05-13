@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import { formatFecha } from "../../../utilidades/FormatearFecta";
-import PdfROTHP from '../pdfECO/PdfROTHH'
+import PdfROTHP from '../pdfECO/PdfROTPB'
 import ExcelROTHP from '../Excel/ExcelRothp'
 const URL = process.env.REACT_APP_URL
 

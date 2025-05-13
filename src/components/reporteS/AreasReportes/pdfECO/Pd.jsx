@@ -199,7 +199,7 @@ const MyDocument = ({ datos }) => {
 
             <View style={[styles.titleContainer, { flex: 4 }]}>
               <Text style={[styles.title]}>GESTIÓN DE CALIDAD</Text>
-              <Text style={[styles.title]}>CONTROL FORMULACIÓN PESADO DE ASERRÍN</Text>
+              <Text style={[styles.title]}>CONTROL PULIDO BASE</Text>
             </View>
 
             <View style={[styles.titleContainer, { flex: 1 }]}>
@@ -219,26 +219,18 @@ const MyDocument = ({ datos }) => {
             <View style={styles.tableHeader}>
               <Text style={styles.tableCell}>Fecha</Text>
               <Text style={styles.tableCell}>Modelo</Text>
-              <Text style={styles.tableCell}>Horno</Text>
-              <Text style={styles.tableCell}>Horneado</Text>
-              <Text style={styles.tableCell}>Mermas</Text>
-              <Text style={styles.tableCell}>Aserrín</Text>
-              <Text style={styles.tableCell}>Aprobados</Text>
-              <Text style={styles.tableCell}>%Aprobado</Text>
-              <Text style={styles.tableCell}>Firma</Text>
+              <Text style={styles.tableCell}>Pulido</Text>
+              <Text style={styles.tableCell}>Calificación</Text>
+              <Text style={styles.tableCell}>Firma Encargado</Text>
             </View>
             {pageData.map((fila, index) => (
               <View key={index} style={styles.tableRow}>
-                <Text style={styles.tableCell}>{formatFecha(fila.fechaHorneado)}</Text>
-                <Text style={styles.tableCell}>{fila.ModeloEco}</Text>
-                <Text style={styles.tableCell}>{fila.Horno}</Text>
-                <Text style={styles.tableCell}>{fila.horneado}</Text>
-                <Text style={styles.tableCell}>{fila.mermasCrudas}</Text>
-                <Text style={styles.tableCell}>{fila.librasAserrin}/{fila.librasAserrin2}</Text>
-                <Text style={styles.tableCell}>{fila.aprobados}</Text>
-                <Text style={styles.tableCell}>{fila.porcentaje}</Text>
-                {fila.FirmaEncargado ? (
-                  <Image style={styles.tablefirma} source={fila.FirmaEncargado} />
+                <Text style={styles.tableCell}>{formatFecha(fila.fechaProduccion)}</Text>
+                <Text style={styles.tableCell}>{fila.modelo}</Text>
+                <Text style={styles.tableCell}>{fila.pulido}</Text>
+                <Text style={styles.tableCell}>{fila.calificacion}</Text>
+                {fila.firmaEncargado ? (
+                  <Image style={styles.tablefirma} source={fila.firmaEncargado} />
                 ) : (
                   <Text style={styles.tableCell}>Sin Firma</Text>
                 )}

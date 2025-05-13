@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { formatFecha } from "../../../utilidades/FormatearFecta.js";
-import PdfROTHP from '../pdfECO/PdfROTHH.jsx';
+import PdfROTHP from '../pdfECO/PdfROTPB.jsx';
 import ExcelROTHP from '../Excel/ExcelRothp';
 import Detalle from '../detalles/Detalle_ROTT.jsx';
 import { Divider } from 'antd';

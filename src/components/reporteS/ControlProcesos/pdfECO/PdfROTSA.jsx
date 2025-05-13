@@ -155,7 +155,7 @@ const MyDocument = ({ datos, patio, fechaSecado, cantidad_final }) => {
   const UltimaFirma = datos[datos.length - 1];
   const Firma = UltimaFirma?.firma ? { uri: UltimaFirma.firma } : 'S/F';
   const FirmaJefe = UltimaFirma?.firmaJefe ? { uri: UltimaFirma.firmaJefe } : 'S/F';
-  
+  console.log('datos en pdf',datos)
 
   const rowsPerPage=12;
   const totalPages = Math.ceil(datos.length/rowsPerPage);

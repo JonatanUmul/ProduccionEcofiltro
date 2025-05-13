@@ -4,6 +4,7 @@ import axios from 'axios';
 const URL = process.env.REACT_APP_URL;
 
 const EstadoProc = ({ id, encabezado }) => {
+  console.log('Cerrar Orden',id, encabezado)
   const [estado, setEstado] = useState([]);
   const [cambiarEst, setCambiarEst] = useState("");
   const [cambiarRuta, setCambiarRuta] = useState('');

@@ -53,7 +53,7 @@ useEffect(()=>{
         id_OTIP: id.toString(),
         TipoPlata:formData.TipoPlata,
         TipoPlata2:formData.TipoPlata2,
-        fecha_real:fecha_creacion,
+        fecha_real:formatFecha(fecha_creacion),
         id_modelo: formData.id_modelo,
         codigoInicio: formData.codigoInicio.replace(/\s+/g, ''),
         codigoFinal: formData.codigoFinal.replace(/\s+/g, ''),

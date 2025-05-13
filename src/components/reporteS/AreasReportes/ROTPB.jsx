@@ -14,26 +14,41 @@
       const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
       const [modeloUF, setModeloUf] = useState([]);
       const [pulidor, setPulidor] = useState([]);
-
       const [id_pulidor, setOpulidor]= useState('');
       const [ufmodelo, setUfmodelo]= useState('')
-      console.log('Pulidor: ',id_pulidor, 'modelo', ufmodelo)
+    console.log('Modelo',modeloUF)
       // Realizar las solicitudes para obtener datos
+      
       useEffect(() => {
-        axios.all([
+        Promise.allSettled([
           axios.get(`${URL}/ModelosUF`),
-          axios.get(`${URL}/Operarios/${id_area}`),
-        
+          axios.get(`${URL}/Operarios/${id_area || 'null'}`),
         ])
-        .then(axios.spread((modeloufReponse, PulidorResponse) => {
-          setModeloUf(modeloufReponse.data);
-          setPulidor(PulidorResponse.data)
-        
-        }))
-        .catch((error) => {
-          console.error('Error al obtener los datos:', error);
+        .then(results => {
+          console.log('Resultados de las promesas:', results); 
+      
+          const [modeloResult, operariosResult] = results;
+      
+          // Mostrar cada estado individualmente
+          console.log('ModelosUF status:', modeloResult.status);
+          console.log('Operarios status:', operariosResult.status);
+      
+          if (modeloResult.status === 'fulfilled' && modeloResult.value.data) {
+            setModeloUf(modeloResult.value.data);
+          } else {
+            console.warn('Error en ModelosUF:', modeloResult.reason?.message);
+            setModeloUf(['Sin Datos']);
+          }
+      
+          if (operariosResult.status === 'fulfilled') {
+            setPulidor(operariosResult.value.data);
+          } else {
+            console.warn('Error en Operarios:', operariosResult.reason?.message);
+            setPulidor([]);
+          }
         });
       }, []);
+      
  
 
       useEffect(() => {

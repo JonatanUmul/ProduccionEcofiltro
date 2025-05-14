@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import { formatFecha } from "../../../utilidades/FormatearFecta";
-import PdfROTHP from '../pdfECO/PdfROTPB'
+import PdfRDTTT from '../pdfECO/PdfRDTTT'
 import ExcelROTHP from '../Excel/ExcelRothp'
 const URL = process.env.REACT_APP_URL
 
@@ -77,7 +77,7 @@ console.log('datos en dtt', id, nombretabla, codigoInicio, codigoFinal, cantidad
 </strong>
 
   <div className="col-md-3 d-flex align-items-center justify-content-center">
-  <PdfROTHP datos={datos} />
+  <PdfRDTTT datos={datos} />
   <ExcelROTHP datos={datos} />
 </div>
   

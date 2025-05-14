@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { formatFecha } from "../../../utilidades/FormatearFecta.js";
-import PdfROTHP from '../pdfECO/PdfROTPB.jsx';
+import PdfROTT from '../pdfECO/PdfROTT.jsx';
 import ExcelROTHP from '../Excel/ExcelRothp';
 import Detalle from '../detalles/Detalle_ROTT.jsx';
 import { Divider } from 'antd';
@@ -40,7 +40,7 @@ const ROTHP = () => {
           <input className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha2(e.target.value)} />
         </div>
         <div className="col-md-3 d-flex align-items-end">
-          <PdfROTHP datos={datos} />
+          <PdfROTT datos={datos} />
           <ExcelROTHP datos={datos} />
         </div>
       </div>

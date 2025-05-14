@@ -18,6 +18,15 @@
       const [turnoProd, setTurnoProd]= useState ('')
       const [id_prensador, setOpulidor]= useState('');
       const [ufmodelo, setUfmodelo]= useState('')
+      const [paginaActual, setPaginaActual] = useState(1);
+      const filasPorPagina = 10; 
+
+      const totalPaginas = Math.ceil(datos.length / filasPorPagina);
+const indexInicio = (paginaActual - 1) * filasPorPagina;
+const indexFin = indexInicio + filasPorPagina;
+const datosPaginados = datos.slice(indexInicio, indexFin);
+
+
       console.log(datos)
       // Realizar las solicitudes para obtener datos
       useEffect(() => {
@@ -135,7 +144,10 @@ console.log('dps',datos)
 
     </div>
 
-          <table className="table text-center">
+          <table 
+          pagination={{ pageSize: 20 }}
+          
+          className="table text-center">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
@@ -151,23 +163,66 @@ console.log('dps',datos)
               </tr>
             </thead>
             <tbody>
-              {Array.isArray(datos) && datos.map((fila, index) => (
-                <tr key={index}>
-                  <th scope="row">{index + 1}</th>
-                  <td>{formatFecha(fila.fecha_produccion) }</td>
-                  <td>{fila.hora_produccion}</td>
-                  <td>{fila.prensador}</td>
-                  <td>{fila.prensa}</td>
-                  <td>{fila.modeloUF}</td>
-                  <td>{fila.calificacion}</td>
-                  <td>{fila.auditor}</td>
-                  
-                </tr>
-              ))}
+  {Array.isArray(datosPaginados) && datosPaginados.map((fila, index) => (
+    <tr key={index}>
+      <th scope="row">{indexInicio + index + 1}</th>
+      <td>{formatFecha(fila.fecha_produccion)}</td>
+      <td>{fila.hora_produccion}</td>
+      <td>{fila.prensador}</td>
+      <td>{fila.prensa}</td>
+      <td>{fila.modeloUF}</td>
+      <td>{fila.calificacion}</td>
+      <td>{fila.auditor}</td>
+    </tr>
+  ))}
+</tbody>
 
-           
-            </tbody>
-          </table>
+          </table >
+          <nav className="d-flex justify-content-center">
+  <ul className="pagination flex-wrap">
+    <li className={`page-item ${paginaActual === 1 && 'disabled'}`}>
+      <button className="page-link" onClick={() => setPaginaActual(paginaActual - 1)}>
+        Anterior
+      </button>
+    </li>
+
+    {paginaActual > 2 && (
+      <li className="page-item disabled">
+        <span className="page-link">...</span>
+      </li>
+    )}
+
+    {[...Array(totalPaginas)]
+      .map((_, i) => i + 1)
+      .filter(
+        (numero) =>
+          numero === 1 ||
+          numero === totalPaginas ||
+          Math.abs(numero - paginaActual) <= 1
+      )
+      .map((numero) => (
+        <li key={numero} className={`page-item ${paginaActual === numero ? 'active' : ''}`}>
+          <button className="page-link" onClick={() => setPaginaActual(numero)}>
+            {numero}
+          </button>
+        </li>
+      ))}
+
+    {paginaActual < totalPaginas - 1 && (
+      <li className="page-item disabled">
+        <span className="page-link">...</span>
+      </li>
+    )}
+
+    <li className={`page-item ${paginaActual === totalPaginas && 'disabled'}`}>
+      <button className="page-link" onClick={() => setPaginaActual(paginaActual + 1)}>
+        Siguiente
+      </button>
+    </li>
+  </ul>
+</nav>
+
+
         </div>
       );
     }

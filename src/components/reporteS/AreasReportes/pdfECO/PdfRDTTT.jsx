@@ -50,14 +50,16 @@ const styles = StyleSheet.create({
     // marginVertical:0,
     fontSize: 10,
     fontWeight: 'bold',
+    textAlign: 'center',
     width: '100%',
     borderWidth: 0.5,
     flex: 1,
+    padding: 8,
     marginBottom:0,
     marginTop:-0.5,
     marginLeft:-0.5,
-    marginRight:1,
-    borderStyle: 'solid'
+    marginRight:1
+
   },
 
   sectionColumn: {
@@ -119,7 +121,7 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     padding: 3,
     flex: 1,
-    height:'20'
+    height:'25'
   },
   text: {
     marginLeft: 2,
@@ -196,8 +198,8 @@ const MyDocument = ({ datos }) => {
             </View>
 
             <View style={[styles.titleContainer, { flex: 4 }]}>
-            
-              <Text style={[styles.title]}>CONTROL CALIDAD PRODUCCIÓN CRUDOS DIARIA</Text>
+              <Text style={[styles.title]}>GESTIÓN DE CALIDAD</Text>
+              <Text style={[styles.title]}>CONTROL TEMPERATURA TUNEL</Text>
             </View>
 
             <View style={[styles.titleContainer, { flex: 1 }]}>
@@ -213,65 +215,34 @@ const MyDocument = ({ datos }) => {
             </View>
           </View>
 
-          <View style={[styles.container, { textAlign: 'center' }]}>
-    
-          <View style={[styles.titleContainer, { flex: 1,  }]}>
-            {/* <Text style={[styles.tableCell]}>FECHA</Text>
-            <Text style={[styles.tableCell]}>MODELO</Text>
-            <Text style={[styles.tableCell]}>TURNO</Text>
-            <Text style={[styles.tableCell]}>PESO DISCO</Text> */}
-          </View>
-       
-          <View  style={[styles.titleContainer, { flex: 1,  }]}>
-
-            <Text style={[styles.title]}>{datos.fecha_produccion}</Text>
-            <Text style={[styles.title]}></Text>
-            <Text style={[styles.title]}></Text> 
-          
-          </View>
-        
-          <View style={[styles.titleContainer, { flex: 1,  }]}></View>
-          <View style={[styles.titleContainer, { flex: 1,  }]}>
-          <Text style={[styles.tableCell]}>LIMITES</Text>
-          <Text style={[styles.tableCell]}>MINIMA</Text>
-          <Text style={[styles.tableCell]}>MAXIMA</Text>
-      
-        </View>
-        <View style={[styles.titleContainer, { flex: 1,  }]}>
-        <Text style={[styles.tableCell]}>20 lts</Text>
-        <Text style={[styles.tableCell]}>25.5 CM</Text>
-        <Text style={[styles.tableCell]}>27.5 CM</Text>
-    
-      </View>
-      <View style={[styles.titleContainer, { flex: 1,  }]}>
-      <Text style={[styles.tableCell]}>MINIS</Text>
-      <Text style={[styles.tableCell]}>13 CM</Text>
-      <Text style={[styles.tableCell]}>14 CM</Text>
-  
-    </View>
-        </View>
-          
-
-          <View style={styles.table}>codigocodigo
+          <View style={styles.table}>
             <View style={styles.tableHeader}>
               <Text style={styles.tableCell}>Fecha</Text>
-              <Text style={styles.tableCell}>Serie</Text>
+              <Text style={styles.tableCell}>Hora</Text>
               <Text style={styles.tableCell}>Modelo</Text>
-              <Text style={styles.tableCell}>Prensa</Text>
               <Text style={styles.tableCell}>Calificación</Text>
-              <Text style={styles.tableCell}>Turno</Text>
-              <Text style={styles.tableCell}>Firma</Text>
+              <Text style={styles.tableCell}>Calificación</Text>
+              <Text style={styles.tableCell}>Calificación</Text>
+              <Text style={styles.tableCell}>Calificación</Text>
+              <Text style={styles.tableCell}>Calificación</Text>
+              <Text style={styles.tableCell}>Calificación</Text>
+              <Text style={styles.tableCell}>Firma Encargado</Text>
             </View>
             {pageData.map((fila, index) => (
               <View key={index} style={styles.tableRow}>
-                <Text style={styles.tableCell}>{formatFecha(fila.fecha_produccion)}</Text>
-                <Text style={styles.tableCell}>{fila.codigo}</Text>
-                <Text style={styles.tableCell}>{fila.modeloUF}</Text>
-                <Text style={styles.tableCell}>{fila.prensa}</Text>
-                <Text style={styles.tableCell}>{fila.calificacion}</Text>
+                <Text style={styles.tableCell}>{formatFecha(fila.fecha_creacion)}</Text>
+                <Text style={styles.tableCell}>{fila.hora_creacion}</Text>
                 <Text style={styles.tableCell}>{fila.turnos}</Text>
-                {fila.firmaEncargaro ? (
-                  <Image style={styles.tablefirma} source={fila.firmaEncargaro} />
+                <Text style={styles.tableCell}>{fila.cabezaDerecha1}</Text>
+                <Text style={styles.tableCell}>{fila.pieDerecho1}</Text>
+                <Text style={styles.tableCell}>{fila.cabezaDerecha2}</Text>
+                <Text style={styles.tableCell}>{fila.pieDerecho2}</Text>
+                <Text style={styles.tableCell}>{fila.cabezaDerecha3}</Text>
+                <Text style={styles.tableCell}>{fila.pieIzquierdo1}</Text>
+                <Text style={styles.tableCell}>{fila.cabezaizquierda1}</Text>
+                <Text style={styles.tableCell}>{fila.pieIzquierdo2}</Text>
+                {fila.firmaEncargado ? (
+                  <Image style={styles.tablefirma} source={fila.firmaEncargado} />
                 ) : (
                   <Text style={styles.tableCell}>Sin Firma</Text>
                 )}
@@ -315,13 +286,22 @@ const PdfROTHP = ({ datos }) => {
     setIsOpen(!isOpen);
   };
 
+  const downloadPDF = async () => {
+    const doc = <MyDocument datos={datos} />;
+    const asPdf = pdf([]);
+    asPdf.updateContainer(doc);
+    const blob = await asPdf.toBlob();
+    saveAs(blob, 'document.pdf');
+  };
 
   return (
     <div>
       <button className="btn" onClick={togglePDFViewer}>
         <i className="bi bi-file-earmark-pdf"></i>
       </button>
-     
+      <button className="btn" onClick={downloadPDF}>
+        {/* Descargar PDF */}
+      </button>
       <Modal isOpen={isOpen} toggle={togglePDFViewer} size="xl">
         <div style={{ position: 'absolute', top: '10px', right: '20px', zIndex: 1 }}>
           <Button close className="btn-close" onClick={togglePDFViewer} style={{ color: 'black', fontSize: '24px' }} />

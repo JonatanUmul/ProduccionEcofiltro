@@ -82,7 +82,7 @@ console.log('propr recibios', encabezado, id)
     {NameButton()}
    </button>  */}
  
- <button disabled={existenciaAserrin!=null ? true :false} type="button" className={existenciaAserrin!=null || existenciaBarro!=null ? 'btn' :"btn btn-success bt-sm"} style={{  width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center', alignItems:'center', border:'1px solid black'  }} onClick={handleClick}>
+ <button  type="button" className={existenciaAserrin!=null || existenciaBarro!=null ? 'btn' :"btn btn-success bt-sm"} style={{  width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center', alignItems:'center', border:'1px solid black'  }} onClick={handleClick}>
     {NameButton()}
    </button> 
 

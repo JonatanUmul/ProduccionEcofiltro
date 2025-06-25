@@ -297,7 +297,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion,id }) => {
         
         <div className="col-12">
         <div className="col-4">
-        <button disabled type="button" className="btn btn-danger mb-3" onClick={llamar}>Mix</button>
+        <button type="button" className="btn btn-danger mb-3" onClick={llamar}>Mix</button>
         </div>
           <button type="submit" className="btn btn-primary" disabled={loading}>Guardar</button>
         </div>

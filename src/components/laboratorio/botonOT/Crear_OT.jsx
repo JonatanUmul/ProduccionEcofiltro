@@ -78,11 +78,13 @@ console.log('propr recibios', encabezado, id)
   return (
     <div>
      
-    <button disabled={existenciaAserrin!=null || existenciaBarro!=null ? true :false} type="button" className={existenciaAserrin!=null || existenciaBarro!=null ? 'btn' :"btn btn-success bt-sm"} style={{  width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center', alignItems:'center'  }} onClick={handleClick}>
+     {/* <button disabled={existenciaAserrin!=null || existenciaBarro!=null ? true :false} type="button" className={existenciaAserrin!=null || existenciaBarro!=null ? 'btn' :"btn btn-success bt-sm"} style={{  width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center', alignItems:'center'  }} onClick={handleClick}>
     {NameButton()}
-   </button>
-    
-        
+   </button>  */}
+ 
+ <button disabled={existenciaAserrin!=null ? true :false} type="button" className={existenciaAserrin!=null || existenciaBarro!=null ? 'btn' :"btn btn-success bt-sm"} style={{  width: '60px', fontSize: '0.8rem', display: 'flex', justifyContent: 'center', alignItems:'center', border:'1px solid black'  }} onClick={handleClick}>
+    {NameButton()}
+   </button> 
 
       
       {/* Modal */}

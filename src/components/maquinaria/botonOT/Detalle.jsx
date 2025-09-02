@@ -12,6 +12,7 @@ import ConsultaCKMM from '../consutas/ConsultaCKMM'
 import ConsultaCKPH2 from '../consutas/ConsultaCKPH2'
 import ConsultaCKPHM from '../consutas/ConsultaCKPHM'
 import ConsultaCKPM from '../consutas/ConsultaCKPM'
+import ConsultaCkscrubber from '../consutas/ConsultaCkscrubber'
 const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
   const [modalVisible, setModalVisible] = useState(false); 
 
@@ -52,6 +53,8 @@ const Detalle = ({ encabezado, id,EncName, fecha_creacion }) => {
         return <ConsultaCKPHM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
       case 'ckpm':
         return <ConsultaCKPM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
+      case 'ckscrubber':
+        return <ConsultaCkscrubber id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
                 
         
     

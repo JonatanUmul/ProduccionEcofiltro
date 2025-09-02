@@ -14,20 +14,35 @@ const TablaMaq = ({ OTDats }) => {
   const [estOT, setEstot] = useState([]);
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    const obtenerDatos = async () => {
-      try {
-        const response = await axios.get(`${URL}/TablaMaquinaria`);
-        setEstot(response.data);
-        console.log("ver aca ", response);
-      } catch (error) {
-        setError("No hay órdenes de trabajo activas en este momento.");
-        console.error("Error al obtener los datos:", error);
-      }
-    };
 
-    obtenerDatos();
-  }, []); 
+
+  useEffect(() => {
+    Promise.all([
+      axios.get(`${URL}/TablaMaquinaria`)
+    ])
+      .then(([RespuestasResponse]) => {
+        setEstot(RespuestasResponse.data);
+  
+      })
+      .catch((error) => {
+        console.log("Error al obtener los datos:", error);
+      });
+  }, []);
+
+  // useEffect(() => {
+  //   const obtenerDatos = async () => {
+  //     try {
+  //       const response = await axios.get(`${URL}/TablaMaquinaria`);
+  //       setEstot(response.data);
+  //       console.log("ver aca ", response);
+  //     } catch (error) {
+  //       setError("No hay órdenes de trabajo activas en este momento.");
+  //       console.error("Error al obtener los datos:", error);
+  //     }
+  //   };
+
+  //   obtenerDatos();
+  // }, []); 
 
   const selectForm = (id) => {
     
@@ -36,9 +51,10 @@ const TablaMaq = ({ OTDats }) => {
   const handleClickButton = (id, encabezado) => {
     // Aquí puedes trabajar con el id y el encabezado recibidos
     console.log("ID:", id);
-    console.log("Encabezado:", encabezado);
+    console.log("Encabezado ssss:", encabezado);
     // Luego puedes realizar la operación que necesites con estos datos
   };
+
 
   return (
     <div>
@@ -73,6 +89,9 @@ const TablaMaq = ({ OTDats }) => {
                 Crear OT
               </th>
               <th scope="col" style={{ width: "0%" }}>
+                Crear OT
+              </th>
+              <th scope="col" style={{ width: "0%" }}>
                 Estado
               </th>
              
@@ -81,6 +100,7 @@ const TablaMaq = ({ OTDats }) => {
           
           <tbody>
             {estOT.map((OTDats, index) => (
+              
               <tr key={index} onClick={() => selectForm(OTDats.encabezado)}>
                 <th>
                  <Detalle
@@ -95,8 +115,23 @@ const TablaMaq = ({ OTDats }) => {
                 {/* <td>{OTDats.id_maquina}</td> */}
                 <td>{OTDats.EncName}</td>
                 <td>
+                {OTDats.encabezado=='ckscrubber'?
+                (ability && (ability.can('create', 'BotonOT') || ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
+                 
+                  <CrearOT
+                    encabezado={'ckmotores'}
+                    EncName={OTDats.EncName}
+                    fecha_creacion={OTDats.fecha_creacion}
+                    id={OTDats.id}
+                  />
+                ):<Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                OT
+              </Button>
+              :null}
+                </td>
+                <td>
                 {(ability && (ability.can('create', 'BotonOT') || ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
-
+                 
                   <CrearOT
                     encabezado={OTDats.encabezado}
                     EncName={OTDats.EncName}
@@ -113,7 +148,7 @@ const TablaMaq = ({ OTDats }) => {
                 {(ability && (ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
 
                   <ButtnEst
-                    handleClickButton={handleClickButton} // Pasar la función handleClickButton como prop
+                    handleClickButton={handleClickButton} 
                     id={OTDats.id}
                     encabezado={OTDats.encabezado}
                   />

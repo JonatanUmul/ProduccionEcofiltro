@@ -11,6 +11,7 @@ import CKMM from '../encabezados/CKMM'
 import CKM2 from '../encabezados/CKM2'
 import CKCTAM from '../encabezados/CKCTAM'
 import CKPM from '../encabezados/CKPM'
+import CKSCRUBBER from '../encabezados/CKSCRUBBER'
 
 const BotonOT = () => {
   const [modal, setModal] = useState(false);
@@ -69,6 +70,9 @@ const BotonOT = () => {
             modalTitle={modalTitle}/>; 
       case '10':
           return <CKPM
+             modalTitle={modalTitle}/>;   
+      case '11':
+          return <CKSCRUBBER
              modalTitle={modalTitle}/>;   
 
       default:
@@ -134,6 +138,9 @@ const BotonOT = () => {
         </a>
         <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '10', 'Prensa Hidraulica Manual')}>
           10. Prensa Hidraulica Manual
+        </a>
+        <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '11', 'Arranque Scrubber')}>
+          11. Arranque Scrubber
         </a>
 
     

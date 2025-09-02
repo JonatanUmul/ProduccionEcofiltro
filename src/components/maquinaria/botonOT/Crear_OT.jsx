@@ -11,6 +11,8 @@ import DCKMM from '../detallado/DCKMM'
 import DCKPH2 from '../detallado/DCKPH2'
 import DCKPHM from '../detallado/DCKPHM'
 import DCKPM from '../detallado/DCKPM'
+import DCKSCRUBBER from '../detallado/DCKSCRUBBER'
+import DCKSCRUBBER_MOTORES from '../detallado/DCKSCRUBBER_MOTORES'
 
 const CrearOT = ({ encabezado, id,EncName, fecha_creacion }) => {
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar la visibilidad del modal
@@ -51,7 +53,11 @@ console.log('propr recibios', encabezado, id)
       case 'ckphm':
           return <DCKPHM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
       case 'ckpm':
-          return <DCKPM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
+          return <DCKPM id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} /> 
+      case 'ckscrubber':
+          return <DCKSCRUBBER id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
+      case 'ckmotores':
+          return <DCKSCRUBBER_MOTORES id={id}  encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion} />
           
   
       default:
@@ -71,8 +77,8 @@ console.log('propr recibios', encabezado, id)
   return (
     <div>
   
-      <button type="button" className="btn btn-success btn-sm" style={{ width: '60px' }} onClick={handleClick}>
-  OT
+      <button type="button" className="btn btn-success btn-sm" style={{ width: '80px', textAlign:'center',  justifyContent:'center' }} onClick={handleClick}>
+  {encabezado ? encabezado: 'OT'}
 </button>
 
       {/* Modal */}

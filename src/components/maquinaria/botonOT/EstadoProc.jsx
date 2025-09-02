@@ -60,6 +60,9 @@ const EstadoProc = ({ id, encabezado }) => {
       case 'ckpm':
             setCambiarRuta('ckpm');
             break;
+      case 'ckscrubber':
+            setCambiarRuta('ckscrubber');
+            break;      
      
     }
   }, [encabezado]); // Ejecutar el efecto cuando el encabezado cambie 

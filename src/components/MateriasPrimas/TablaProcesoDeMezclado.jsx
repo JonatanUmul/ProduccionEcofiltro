@@ -18,7 +18,7 @@ const TablaBarro = () => {
   const [id_creador, setid_creador] = useState("");
   const location=useLocation()
   const materiaPrim= location?.state?.materiaPrima
-console.log('datosApi',datosApi)
+
   useEffect(() => {
     setid_creador(localStorage.getItem("id_creador"));
   }, []);

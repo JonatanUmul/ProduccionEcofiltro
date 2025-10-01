@@ -17,15 +17,17 @@ const TablaMermasCrudos = () => {
   const [estadosPorSerie, setEstadosPorSerie] = useState({});
   const datosOrden = datos.state?.fila;
   const reporte = datos.state?.reporte;
-  console.log(reporte)
+  console.log(datosOrden)
   const id_dtp = datosOrden.id;
-  const id_proceso=4
+  const id_ufmodelo = datosOrden.id_ufmodelo;
+  const id_proceso=id_ufmodelo==1 ? 4: 6
   const [NuevoEstadoSerir, setnuevoEstadoSerir]=useState([])
   const navigate=useNavigate()
 
  console.log(seriesDeOrdenes)
  const obtenerSeries = async () => {
   const response = await GetSeriesPorOrdenDeProduccion({ id_dtp, id_proceso });
+  console.log('datosOrdendatosOrden',datosOrden)
   const series = response.data.response;
 
   setSeriesDeOrdenes(series);

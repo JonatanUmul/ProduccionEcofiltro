@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 const URL = process.env.REACT_APP_URL;
 const EstadoProc = ({ id, encabezado, tabla }) => {
+  console.log('Buscar aca',encabezado)
   const [estado, setEstado] = useState([]);
   const [cambiarEst, setCambiarEst] = useState(""); // Estado para almacenar el estado seleccionado
   const [cambiarRuta, setCambiarRuta] = useState("");
-  console.log("encabezado", encabezado);
+  console.log("cambiarRutacambiarRuta", cambiarRuta);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,6 +53,7 @@ const EstadoProc = ({ id, encabezado, tabla }) => {
         break;
       case "ProcesoMezclado":
         setCambiarRuta("OT_mezclado_aserrin");
+        break;
       case "registroMuestra":
         setCambiarRuta("registroMuestra");
         break;
@@ -69,11 +71,11 @@ const EstadoProc = ({ id, encabezado, tabla }) => {
           });
           console.log("Datos de la tabla:", response.data);
       
-          {
-       /*  if(encabezado === "ProcesoMezclado"){(window.location.href = "/Home/TablaProcesoDeMezclado")}
+          
+    if(encabezado === "ProcesoMezclado"){(window.location.href = "/Home/TablaProcesoDeMezclado")}
           else if(encabezado==="registroMuestra"){(window.location.href = "/Home/TablaProduccion")}
-          else{(window.location.href = "/Home/TablaCP")}*/
-          }
+          else{(window.location.href = "/Home/TablaCP")}
+          
 
     // {
     //         encabezado === "ProcesoMezclado"

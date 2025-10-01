@@ -13,7 +13,7 @@ const CodigosEcofiltro = () => {
   const fila = location.state?.fila;
   const id_modelo= fila.id_ufmodelo
 
-  console.log(fila, id_modelo)
+  console.log('en creacion de codigo',fila)
 
 const model=fila.nombre_ufmodelo
 const id_model=()=>{
@@ -38,7 +38,7 @@ useEffect(()=>{
 
   const producido = fila.producido;
   const identificador = fila.letra_fin;
-  const CodigoInicioNumber = fila.codigoFinal;
+  const CodigoInicioNumber = fila.codigoInicio;
   const fecha_cre = new Date(fila.fecha_real);
   const id_dtp = fila.id;
 

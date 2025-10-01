@@ -56,7 +56,7 @@ console.log('id_camionada_barro',id_camionada_barro)
   const CodigoInicioNumber=consultaUltimoCodigo[0]?.codigoFinal
   const codigoFinal = parseInt(consultaUltimoCodigo[0]?.codigoFinal || 0);
   const cantidadProducida = parseInt(producido || 0);
-  const CodigoFinalNumber = codigoFinal + cantidadProducida;
+  const CodigoFinalNumber = codigoFinal + cantidadProducida-1;
   const codigoFin = identificador + CodigoFinalNumber + '0' + dia + mes + año;
 
 
@@ -211,7 +211,7 @@ console.log('id_camionada_barro',id_camionada_barro)
             {formatFecha(fecha_creacion)}
           </p>
 
-         
+{/*          
 <div className="col-md-6">
   <label htmlFor="otfm_correlativo" className="form-label">
     Lote de Aserrín
@@ -231,13 +231,13 @@ console.log('id_camionada_barro',id_camionada_barro)
       ))}
   </select>
 
-  {/* Mensaje de error */}
+
   {errors.otfm_correlativo && (
     <span style={{ color: "red", fontSize: "14px" }}>
       {errors.otfm_correlativo.message}
     </span>
   )}
-</div>
+</div> */}
 
           <div className="col-md-6">
             <label htmlFor="aserradero" className="form-label">
@@ -451,7 +451,7 @@ console.log('id_camionada_barro',id_camionada_barro)
   className="form-control"
   id="codigoInicio"
   placeholder={codigoInicio}
-  defaultValue={CodigoInicioNumber}  // 👈 editable
+  value={CodigoInicioNumber}  
   {...register("codigoInicio")}
   required
 />
@@ -635,6 +635,11 @@ console.log('id_camionada_barro',id_camionada_barro)
                 </div>
               )} */}
 
+<div className="col-12">
+    <button type="submit" className="btn btn-primary">
+      Guardar
+    </button>
+  </div>
 
  {loteSelect>0 && Number(Disponible) >= Number(TotalLbBarro) && Number(Disponible) >= 0  ?(
     <div className="col-12">

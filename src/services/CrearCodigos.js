@@ -2,7 +2,7 @@
 const CreateCodigosProduccion=({datosParaCodigos})=>{
 
 const NumerosSeries=[]
-const codInicio= Number(datosParaCodigos.CodigoInicioNumber+1)
+const codInicio= Number(datosParaCodigos.CodigoInicioNumber)
 const producido= Number(datosParaCodigos.producido)
 
 for(let i=0; i<producido; i++){

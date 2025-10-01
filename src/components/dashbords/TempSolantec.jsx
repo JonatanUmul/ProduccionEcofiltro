@@ -24,7 +24,7 @@ const Bar3DChartComponent = () => {
   const [turno, setTurno] = useState([]);
   const [turn, setTurn] = useState();
  const minutos=[1,5,10,15,20,25,30,35,40,45,50,55,60];
-const [tiempo, setMin]=useState(40);
+const [tiempo, setMin]=useState(1);
 const [label, setLabel]=useState(false);
  console.log('Turno',turn)
 
@@ -80,7 +80,7 @@ const Etiquets = (e) => {
 
       const requests = hornosIds.map((horno) =>
         axios.get(
-          `${URL}/DTH/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${'null'}/${turn || 'null'}/${horno|| 'null'}/${tiempo|| 'null'}`
+          `${URL}/DTHSOLANTEC/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${'null'}/${turn || 'null'}/${horno|| 'null'}/${tiempo|| 'null'}`
         )
       );
 

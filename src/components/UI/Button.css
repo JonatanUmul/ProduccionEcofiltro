@@ -1,0 +1,27 @@
+.custom-btn {
+    background-color: #1677ff;         /* Azul moderno */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .custom-btn:hover {
+    background-color: #0958d9;
+    transform: scale(1.02);
+  }
+  
+  .custom-btn:active {
+    background-color: #003eb3;
+    transform: scale(0.98);
+  }
+  
+  .custom-btn:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+  }
+  

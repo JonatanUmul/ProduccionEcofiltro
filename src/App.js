@@ -19,6 +19,8 @@ import TabProvedores from './components/mantenimientos/proveedores/TablaProv';
 import TablaMatPrima from './components/mantenimientos/materiaPrima/TablaMatPrima';
 import CrearMatPrima from './components/mantenimientos/materiaPrima/Form.CrearMatPrima';
 import TablaOT from './components/ordenesTrabajo/TablaOT';
+import TablaTasaDeFiltracion from './components/ordenesTrabajo/TablaControlCalidadTasaFiltracion.jsx';
+import TablaControlImpregnacion from './components/ordenesTrabajo/TablaControlImpregnacion.jsx';
 import TablaControlC from './components/ordenesTrabajo/TablaControlC.jsx';
 import TablaCP from './components/ordenesControlProcesos/TablaCP';
 import TableMantenimientoMaq from './components/mantenimientosMaq/TablaMantenimientosMaq';
@@ -38,6 +40,22 @@ import TablaIndicesPlasticos from './components/laboratorio/TablaIndicesPlastico
 import FormularioIDPB from './components/laboratorio/FormularioIDPB.jsx'
 import ManoObra from './components/SapOrdenes/manoObra.jsx'
 import GestionHorasLaborales from './components/mantenimientos/users/GestionHorasLaborales.jsx'
+import TablaRecepcionBarro from './components/MateriasPrimas/TablaRecepcionBarro.jsx'
+import TablaRecepcionAserrin from './components/MateriasPrimas/TablaRecepcionAserrin.jsx'
+import TablaLotesAprobados from './components/MateriasPrimas/TablaLotesAprobados.jsx'
+import TablaProcesoDeMezclado from './components/MateriasPrimas/TablaProcesoDeMezclado.jsx'
+import TablaProcesoDeFormulacion from './components/MateriasPrimas/TablaProcesoDeFormulacion.jsx'
+import TablaFormulasProduccion from './components/MateriasPrimas/TablaFormulasProduccion.jsx'
+import TablaPulverizado from './components/MateriasPrimas/TablaPulverizado.jsx'
+import TablaProduccion from './components/MateriasPrimas/TablaProduccion.jsx'
+import CreacionSeriesProduccion from './components/reporteS/ControlProcesos/CreacionSeriesProduccion.jsx'
+import ROTP from './components/reporteS/ControlProcesos/ROTP.jsx'
+import MermasOTP from './components/reporteS/ControlProcesos/ROTP.jsx'
+import TablaMermasCrudos from './components/ordenesTrabajo/TablaMermasCrudos.jsx'
+import TablaMermasAprobados from './components/ordenesTrabajo/TablaMermasAprobados.jsx'
+import CodigosTasaFiltracion from './components/reporteS/ControlProcesos/CodigosTasaFiltracion.jsx'
+import Dthh from "./components/ordenesTrabajo/detallado/DTHH.jsx"
+import DTIP from "./components/ordenesTrabajo/detallado/DTIP.jsx"
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
@@ -85,6 +103,9 @@ function App() {
               <Route path="/Home/CrearMatPrima" element={<CrearMatPrima toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />
               <Route path="/Home/TableMantenimientoMaq" element={<TableMantenimientoMaq toggleDarkMode={toggleDarkMode} darkMode={darkMode} />} />
               <Route path="/Home/TablaOT" element={<TablaOT toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />
+              <Route path="/Home/TablaOT/TablaTasaDeFiltracion" element={<TablaTasaDeFiltracion toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />
+              <Route path="/Home/TablaOT/TablaControlImpregnacion" element={<TablaControlImpregnacion toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />
+              <Route path="/Home/TablaOT/DTIP" element={<DTIP toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />
               <Route path="/Home/TablaControlC" element={<TablaControlC toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />
               <Route path="/Home/TablaCP" element={<TablaCP toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />
               <Route path="/Home/TablaMaq" element={<TablaMaq toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>} />
@@ -101,6 +122,22 @@ function App() {
               <Route path='/Home/TablaIndicesPlasticos' element={<TablaIndicesPlasticos toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
               <Route path='/Home/FormularioIDPB' element={<FormularioIDPB  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
               <Route path='/Home/GestionHorasLaborales' element={<GestionHorasLaborales  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/TablaRecepcionBarro' element={<TablaRecepcionBarro  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/TablaRecepcionAserrin' element={<TablaRecepcionAserrin  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/TablaLotesAprobados' element={<TablaLotesAprobados  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/TablaProcesoDeMezclado' element={<TablaProcesoDeMezclado  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/TablaProcesoDeFormulacion' element={<TablaProcesoDeFormulacion  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/TablaFormulasProduccion' element={<TablaFormulasProduccion  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/TablaPulverizado' element={<TablaPulverizado  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/TablaProduccion' element={<TablaProduccion  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/CreacionSeriesProduccion' element={<CreacionSeriesProduccion  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/TablaReportesOT' element={<ROTP  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/TablaReportesOT/MermasOTP' element={<MermasOTP  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/TablaReportesOT/CodigosTasaFiltracion' element={<CodigosTasaFiltracion  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/TablaMermasCrudos' element={<TablaMermasCrudos  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/TablaMermasAprobados' element={<TablaMermasAprobados  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              <Route path='/Home/Order/dthh' element={<Dthh  toggleDarkMode={toggleDarkMode} darkMode={darkMode}/>}></Route>
+              
             </Route>
           </Route>
          

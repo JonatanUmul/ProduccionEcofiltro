@@ -36,9 +36,9 @@ const TablaMaq = ({ OTDats }) => {
 
   const handleClickButton = (id, encabezado) => {
     // Aquí puedes trabajar con el id y el encabezado recibidos
-    console.log("ID:", id);
-    console.log("Encabezado:", encabezado);
-    // Luego puedes realizar la operación que necesites con estos datos
+    // console.log("ID:", id);
+    // console.log("Encabezado:", encabezado);
+  
   };
 
   return (

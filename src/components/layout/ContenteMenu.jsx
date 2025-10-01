@@ -9,7 +9,7 @@ import '../layout/estiloContent.css'
 
 const { Content } = Layout;
 
-const ContentMenu = () => {
+const ContentMenu = ({children}) => {
   const location = useLocation();
   const [nombreUser, setNombreUser]=useState('')
 const [id_creador, setCreador]=useState('')
@@ -40,8 +40,8 @@ const [id_creador, setCreador]=useState('')
         }}
       >
         {/* Renderizar contenido dinámico según la ruta */}
-        {renderContent(location.pathname)}
-       
+         {renderContent(location.pathname)} 
+
       </div>
     </Content>
   );

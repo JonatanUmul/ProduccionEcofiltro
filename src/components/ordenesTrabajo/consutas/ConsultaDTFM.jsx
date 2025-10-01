@@ -4,7 +4,7 @@ import { formatFecha } from "../../utilidades/FormatearFecta";
 import './estiloTabla.css'
 const URL = process.env.REACT_APP_URL
 
-const ConsultaDTFM = ({ encabezado, EncName, fecha_creacion, id }) => {
+const ConsultaDTFM = ({  id }) => {
   const [error, setError] = useState('');
   const [fila, setFila] = useState([]); 
 
@@ -30,10 +30,10 @@ const ConsultaDTFM = ({ encabezado, EncName, fecha_creacion, id }) => {
             <th scope="col">#</th>
             <th scope="col">Fecha de Producción</th>
             <th scope="col">OTFM</th>
-            <th scope="col">Materia Prima</th>
-            <th scope="col">Aserradero</th>
+            <th scope="col">Correlativo</th>
             <th scope="col">Cantidad</th>
             <th scope="col">Peso</th>
+            <th scope="col">Peso Libras</th>
             <th scope="col">Humedad</th>
             <th scope="col">Modelo</th>
          
@@ -46,10 +46,10 @@ const ConsultaDTFM = ({ encabezado, EncName, fecha_creacion, id }) => {
               <td>{index + 1}</td>
               <td>{formatFecha(fila.fecha_creacion)}</td>
               <td>{fila.id_otfm}</td>
-              <td>{fila.descripcion_matprima}</td>
-              <td>{fila.aserradero}/{fila.aserradero2}</td>
+              <td>{fila.correlativo}</td>
               <td>{fila.cantidad}</td>
-              <td>{fila.peso}/{fila.peso2}</td>
+              <td>{fila.peso}</td>
+              <td>{fila.peso_libras}</td>
               <td>{fila.humedad}%</td>
               <td>{fila.modelo}</td>
               

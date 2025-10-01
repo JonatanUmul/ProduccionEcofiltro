@@ -5,32 +5,31 @@ import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
 const URL = process.env.REACT_APP_URL
 
-const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
-  const { handleSubmit, register } = useForm();
-  const [aserradero, setAserradero] = useState([]);
-  const [matPrima, setMatPrima] = useState([]);
-  const [formula2, setFormula2]=useState(false);
-  const [cernidoDetalle, setCernidoDetalle] = useState([]);
+const DTFM = ({datosApi}) => {
+  console.log('dtfm',datosApi)
+  const { handleSubmit, register, watch } = useForm();
   const [modelos, setModelos] = useState([]);
   const [id_creador, setid_creador] = useState('');
-  
+  const [LotesAserrinOK, setlotesAserrinOK] = useState([]);
+  const formulas=watch('cantidad')
+  const peso=watch('peso')
+
+  const cantidadLibras=(formulas*peso)
+
   useEffect(()=>{
     setid_creador(localStorage.getItem('id_creador'))
   })
 
   useEffect(() => {
     Promise.all([
-      axios.get(`${URL}/Aserradero`),
-      axios.get(`${URL}/MateriaPrima`),
-      axios.get(`${URL}/CernidoDetalle`),
+
       axios.get(`${URL}/ModelosUF`),
+      axios.get(`${URL}/LotesAserrinMezcladosAprobados`),
     ])
-      .then(([AserraderoResponse, MatPrimResponse, CernidodetalleResponse, ModelosufResponse]) => {
-        setAserradero(AserraderoResponse.data);
-        setMatPrima(MatPrimResponse.data);
-        setCernidoDetalle(CernidodetalleResponse.data);
+      .then(([ ModelosufResponse, LotesAserrinAprobados]) => {
+  
         setModelos(ModelosufResponse.data);
-    
+        setlotesAserrinOK(LotesAserrinAprobados.data)
       })
       .catch((error) => {
       });
@@ -39,18 +38,13 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
   const onSubmit = async (formData) => {
     try {
       const response = await axios.post(`${URL}/DTFM`, {
-        id_OTFM: id.toString(),
-        id_Aserradero: formData.id_Aserradero,
-        id_cernidodetalle:formData.id_cernidodetalle,
+        id_OTFM: datosApi.id.toString(),
         cantidad: formData.cantidad,
         peso: formData.peso,
         humedad: formData.humedad,
-        id_matPrim: formData.id_matPrim,
-        id_Aserradero2: formData.id_Aserradero2,
-        peso2: formData.peso2,
-        humedad2: formData.humedad2,
-        id_cernidodetalle2:formData.id_cernidodetalle2,
         id_modelo: formData.id_modelo,
+        cantidadLibras:cantidadLibras,
+        correlativo: formData.correlativo,
         id_creador:id_creador
       });  // Mostrar SweetAlert de éxito
       Swal.fire({
@@ -62,16 +56,13 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
 
      // Redirigir a la página de TablaOT después de 1.5 segundos
      setTimeout(() => {
-       window.location.href = "/Home/TablaOT";
+       window.location.href = "/Home/TablaProcesoDeFormulacion";
      },1500 );
     } catch (error) {
       console.error("Error al enviar los datos:", error);
     }
   };
 
-  const llamar=()=>{
-    setFormula2(true);
-  }
 
  
   
@@ -81,62 +72,33 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
       <div className="card">
         <div className="card-body">
           <label htmlFor="materiaPrima" className="form-label">
-            Orden
+            Orden {datosApi.EncName}-{datosApi.encabezado}
           </label>
-          <p id="materiaPrima" className="form-control-static">{encabezado} - {EncName}</p>
+          <p id="materiaPrima" className="form-control-static">{datosApi.encabezado} - {datosApi.EncName}-{datosApi.id}</p>
           <label htmlFor="fecha" className="form-label">
             Fecha de Creación
           </label>
-          <p id="fecha" className="form-control-static">{formatFecha(fecha_creacion)}</p>
+          <p id="fecha" className="form-control-static">{formatFecha(datosApi.fecha_creacion)}</p>
         </div>
       </div>
 
 {/*  iniico de fomrulario*/}
 
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
-           <div className="col-md-6">
-          <label htmlFor="aserradero" className="form-label">
-            Materia Prima
-          </label>
-          <select className="form-select" id="id_matPrim" {...register("id_matPrim")} required>
-          <option value="" disabled selected>Seleccione...</option>
-          {Array.isArray(matPrima.rows)
-            && matPrima.rows.length>0 && matPrima.rows.map((matPrima) => (
-              <option key={matPrima.id_enc} value={matPrima.id_enc}>
-                {matPrima.nom_matPrima}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="col-md-6">
-          <label htmlFor="aserradero" className="form-label">
-            Aserradero
-          </label>
-          <select className="form-select" id="id_Aserradero" {...register("id_Aserradero")} required>
-          <option value="" disabled selected>Seleccione...</option>
-          {Array.isArray(aserradero.rows)
-            && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
-              <option key={aserradero.id} value={aserradero.id}>
-                {aserradero.nombre_aserradero}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="col-md-6">
-        <label htmlFor="aserradero" className="form-label">
-            Detalle Cernido
-        </label>
-        <select className="form-select" id="id_cernidodetalle" {...register("id_cernidodetalle")} required>
-        <option value="" disabled selected>Seleccione...</option>
-        
-        {Array.isArray(cernidoDetalle.rows)
-          && cernidoDetalle.rows.length>0 && cernidoDetalle.rows.map((cernidoDetalle) => (
-            <option key={cernidoDetalle.id} value={cernidoDetalle.id}>
-              {cernidoDetalle.detalle}
-            </option>
-          ))}
-        </select>
-      </div>
+
+      <div className="col-md-6">
+      <label htmlFor="aserradero" className="form-label">
+          Lote de aserrín
+      </label>
+      <select className="form-select" id="correlativo" {...register("correlativo")} required>
+      <option value="" disabled selected>Seleccione...</option>
+      {Array.isArray(LotesAserrinOK.rows)&& LotesAserrinOK.rows.map(Lotes => (
+          <option key={Lotes.id} value={Lotes.correlativo}>
+            {Lotes.correlativo}
+          </option>
+        ))}
+      </select>
+    </div>
 
       <div className="col-md-6">
       <label htmlFor="aserradero" className="form-label">
@@ -163,7 +125,13 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
           <label htmlFor="esquinaSD" className="form-label">
             Peso
           </label>
-          <input type="text" className="form-control" id="peso" {...register("peso")} required />
+          <input type="number" className="form-control" id="peso" step="0.05" {...register("peso")} required />
+        </div>
+        <div className="col-md-6">
+          <label htmlFor="esquinaSD" className="form-label">
+            Total Libras
+          </label>
+          <input disabled value={cantidadLibras} type="text" className="form-control"   />
         </div>
         <div className="col-md-6">
           <label htmlFor="centro" className="form-label">
@@ -171,42 +139,14 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
           </label>
           <input type="text" className="form-control" id="humedad" {...register("humedad")} required />
         </div>  
-
+{/* 
         {formula2 ? (
           <div className="row mt-3"> 
     <div className="col-md-12">
     <div className="row">
           <h5>Formula 2</h5>
-          <div className="col-md-6">
-          <label htmlFor="aserradero" className="form-label">
-            Aserradero
-          </label>
-          <select className="form-select" id="id_Aserradero2" {...register("id_Aserradero2")} required>
-          <option value="" disabled selected>Seleccione...</option>
-          {Array.isArray(aserradero.rows)
-            && aserradero.rows.length>0 && aserradero.rows.map((aserradero) => (
-              <option key={aserradero.id} value={aserradero.id}>
-                {aserradero.nombre_aserradero}
-              </option>
-            ))}
-          </select>
-        </div>
-        
-        <div className="col-md-6">
-        <label htmlFor="aserradero" className="form-label">
-            Detalle Cernido
-        </label>
-        <select className="form-select" id="id_cernidodetalle2" {...register("id_cernidodetalle2")} required>
-        <option value="" disabled selected>Seleccione...</option>
-        
-        {Array.isArray(cernidoDetalle.rows)
-          && cernidoDetalle.rows.length>0 && cernidoDetalle.rows.map((cernidoDetalle) => (
-            <option key={cernidoDetalle.id} value={cernidoDetalle.id}>
-              {cernidoDetalle.detalle}
-            </option>
-          ))}
-        </select>
-      </div>
+       
+      
 
             <div className="col-md-6">
               <label htmlFor="esquinaSD" className="form-label">
@@ -224,14 +164,14 @@ const DTFM = ({ encabezado, EncName, fecha_creacion,id }) => {
           </div>
           </div>
 
-        ) :false}
+        ) :false} */}
         
         
         
         <div className="col-12">
-        <div className="col-4">
+        {/* <div className="col-4">
         <a type="button" className="btn btn-danger mb-3" onClick={llamar}>Mix</a>
-        </div>
+        </div> */}
           <button type="submit" className="btn btn-primary">Guardar</button>
         </div>
         

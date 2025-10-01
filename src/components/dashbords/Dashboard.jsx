@@ -68,7 +68,7 @@ const Dashboard = () => {
     </div> 
     <div className="col mb-5">
     <div style={{ marginBottom: '20px' }}>
-      {/* <TempSolantec/> */}
+    {/*  <TempSolantec/>*/}
     </div>
     </div>
     </div>

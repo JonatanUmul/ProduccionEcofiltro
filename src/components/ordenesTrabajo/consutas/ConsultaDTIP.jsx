@@ -8,7 +8,7 @@ const URL = process.env.REACT_APP_URL
 const ConsultaDTP = ({  id }) => {
   const [error, setError] = useState('');
   const [fila, setFila] = useState([]);
-
+console.log('fila',fila, id)
   useEffect(() => {
     axios.get(`${URL}/DTIP/${id}`)
       .then((response) => {

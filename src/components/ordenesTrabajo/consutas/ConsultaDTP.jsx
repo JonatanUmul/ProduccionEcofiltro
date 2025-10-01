@@ -20,7 +20,7 @@ const ConsultaDTP = ({ encabezado, EncName, fecha_creacion, id }) => {
 
  
   return (
-    <div className="table-responsive">
+    <div className="table-responsive" style={{textAlign:'center'}}>
       {error && <div>Error: {error}</div>}
       <table className="table">
         <thead>
@@ -29,13 +29,12 @@ const ConsultaDTP = ({ encabezado, EncName, fecha_creacion, id }) => {
             <th scope="col">Fecha de Producción</th>
             <th scope="col">OTHP</th>
             <th scope="col">Turno</th>
-            <th scope="col">Tipo de Cernido</th>
-            <th scope="col">Aserradero</th>
             <th scope="col">Modelo</th>
             <th scope="col">Producido</th>
             <th scope="col">Codigo de Inicio</th>
             <th scope="col">Codigo Final</th>
             <th scope="col">Barro</th>
+            <th scope="col">Correlativo Lote Formulación</th>
             <th scope="col">Aserrín</th>
            
           </tr>
@@ -47,14 +46,13 @@ const ConsultaDTP = ({ encabezado, EncName, fecha_creacion, id }) => {
               <td>{formatFecha(fila.fecha_creacion)}</td>
               <td>{fila.id_OTP}</td>
               <td>{fila.nombre_turno}</td>
-              <td>{fila.cernidodetalle}{fila.cernidodetalle2!=null ? '/'+fila.cernidodetalle2:''}</td>
-              <td>{fila.aserradero1}{fila.aserradero2!=null ? '/'+fila.aserradero2:''}</td>
               <td>{fila.nombre_ufmodelo}</td>
               <td>{fila.producido}</td>
-              <td>{fila.codigoInicio}</td>
-              <td>{fila.codigoFinal}</td>
+              <td>{fila.letra_inicio}{fila.codigoInicio}</td>
+              <td>{fila.letra_fin}{fila.codigoFinal}</td>
               <td>{fila.librasBarro}</td>
-              <td>{fila.librasAserrin}</td>
+              <td>{fila.correlativo}</td>
+              <td>{fila.peso}</td>
               
             </tr>
           ))}

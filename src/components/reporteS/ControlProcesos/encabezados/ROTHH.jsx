@@ -6,6 +6,9 @@ import ExcelRHorneados from '../Excel/ExcelRHorneados.jsx';
 import Detalle from '../detalles/RedireccionDetalle_ROTT.jsx';
 import DetalleCC from '../detalles/RedireccionDetalleCC.jsx'
 import { Divider } from 'antd';
+import Button from '../../../UI/Button.jsx';
+import { useNavigate } from 'react-router-dom';
+
 const URL = process.env.REACT_APP_URL;
 
 const ROTHP = () => {
@@ -17,6 +20,7 @@ const [modeloUF, setModeloUF]=useState('')
 const [turn, setMturn]=useState('')
 const [horno, sethorno]=useState('')
 const [porcentaje, setPorcentaje]=useState(0)
+const navigate=useNavigate()
 const id_est='3'
   useEffect(() => {
     // Realizar la solicitud axios incluso si no se selecciona una opción en uno de los campos
@@ -65,15 +69,16 @@ console.log('porcentage',porcentaje );
           <th scope="col">C.Fin</th>
           <th scope="col">Horneado</th>
           <th scope="col">Mermas C.</th>
-          <th scope="col">Barro</th>
+          {/* <th scope="col">Barro</th>
           <th scope="col">Aserrín</th>
           <th scope="col">Aserradero</th>
-          <th scope="col">T. Cernido</th>
+          <th scope="col">T. Cernido</th> */}
           <th scope="col">Modelo</th>
           <th scope="col">Horno</th>
           <th scope="col">%Aprobado</th>
           <th scope="col">Hornero</th>
           <th scope='col'>Temperatura</th>
+          <th scope='col'>Codigos Con tasa</th>
         </tr>
       </thead>
       <tbody>
@@ -93,10 +98,10 @@ console.log('porcentage',porcentaje );
             <td>{fila.codigoFin}</td>
             <td>{fila.horneado}</td>
             <td>{fila.mermasCrudas}</td>
-            <td>{fila.librasBarro}</td>
+            {/* <td>{fila.librasBarro}</td>
             <td>{fila.librasAserrin}/{fila.librasAserrin2}</td>
             <td>{fila.aserradero}/{fila.aserradero1}</td>
-            <td>{fila.tipocernido1}/{fila.tipocernido2}</td>
+            <td>{fila.tipocernido1}/{fila.tipocernido2}</td> */}
             <td>{fila.ModeloEco}</td>
             <td>{fila.Horno}</td>
             
@@ -109,6 +114,9 @@ console.log('porcentage',porcentaje );
      
             <td>{fila.Hornero}</td>
             <td>{fila.promedio}</td>
+            <td><Button onClick={()=>navigate('/Home/TablaReportesOT/CodigosTasaFiltracion',{state:{
+              fila
+            }})} >Series</Button></td>
           </tr>
         ))}
 

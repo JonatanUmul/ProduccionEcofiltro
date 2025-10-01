@@ -7,8 +7,9 @@ const URL = process.env.REACT_APP_URL
 const OTPV = () => {
   const { handleSubmit, register } = useForm();
   const [mtp, setMtp] = useState([]);
+  const [correlativo, setCorrelativo] = useState([]);
   const [id_creador, setid_creador] = useState('');
-  
+
   useEffect(()=>{
     setid_creador(localStorage.getItem('id_creador'))
   })
@@ -17,10 +18,12 @@ const OTPV = () => {
   useEffect(() => {
     Promise.all([
       axios.get(`${URL}/MateriaPrima`),
+      axios.get(`${URL}/OTFM`),
     ])
-      .then(([estadosResponse, rolesResponse]) => {
+      .then(([estadosResponse, MAX_idotfm]) => {
         setMtp(estadosResponse.data);
-        console.log("Datos de Estadosroutes:", estadosResponse.data);
+        setCorrelativo(MAX_idotfm.data.correlativo);
+
       })
       .catch((error) => {
         console.log("Error al obtener los datos:", error);
@@ -33,9 +36,9 @@ const OTPV = () => {
     try {
  
       const response = await axios.post(
-        `${URL}/OTFM`,{id_creador}
+        `${URL}/OTFM`,{id_creador, correlativo}
       );
-      window.location.href = "/Home/TablaOT";
+      window.location.href = "/Home/TablaProcesoDeFormulacion";
       console.log("Respuesta del servidor:", response.data);
       // Aquí podrías agregar lógica adicional, como mostrar un mensaje de éxito al usuario, por ejemplo
     } catch (error) {
@@ -54,6 +57,9 @@ const OTPV = () => {
       <div className="mb-3">
         <label htmlFor="estados" className="form-label">
           Formulación
+        </label>
+        <label htmlFor="estados" className="form-label">
+          Correlativo: {correlativo}
         </label>
       
       </div>

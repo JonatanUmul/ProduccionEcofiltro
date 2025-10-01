@@ -1,0 +1,16 @@
+input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+  }
+  
+  input[type="number"]:focus {
+    border-color: #1677ff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.2);
+  }
+  

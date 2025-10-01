@@ -2,20 +2,23 @@ import React, { useEffect, useState } from "react";
 import ButtnEst from "./botonOT/EstadoProc";
 import axios from "axios";
 import { formatFecha } from "../utilidades/FormatearFecta";
-import CrearOT from "./botonOT/Crear_OT";
+// import CrearOT from "./botonOT/Crear_OT";
+import TablaControlCalidadTasaFiltracion from "./TablaControlCalidadTasaFiltracion";
 import Detalle from "./botonOT/Detalle";
 // import '../maquinaria/TablaEstilos.css'
 import { useAbility } from '../AbilityContext';
 import ReactPaginate from 'react-paginate';
 import {Button} from 'antd'
-const URL = process.env.REACT_APP_URL
+import { useNavigate } from "react-router-dom";
 
+const URL = process.env.REACT_APP_URL
 
 // const ability = useAbility();
 // const [canManageAll, setCanManageAll] = useState(false);
 
 
 const TablaOT = () => {
+  const navigate = useNavigate()
   const ability = useAbility();
 
   const [estOT, setEstot] = useState([]);
@@ -57,6 +60,14 @@ const TablaOT = () => {
   const currentPageData = estOT.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(estOT.length / itemsPerPage);
  
+  const TablaControlCalidadTasaFiltracion=({OTDats})=>{
+    navigate("/Home/TablaOT/TablaTasaDeFiltracion", {state:{
+      OTDats
+    }});
+
+  }
+
+  console.log('OTDats',currentPageData)
   return (
     // <div>
    
@@ -127,16 +138,29 @@ const TablaOT = () => {
                 <td>
                 {(ability && (ability.can('create', 'BotonOT') || ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
 
-                <CrearOT
-                  encabezado={OTDats.tabla}
-                  id={OTDats.id}
-                  codInicio={OTDats.codigoInicio}
-                  codFin={OTDats.codigoFin}
-                  fecha_creacion={OTDats.fechaHorneado}
-                  horneado={OTDats.horneado}
-                  hornero={OTDats.Hornero}
-                  ModeloEco={OTDats.ModeloEco}
-                />
+                // <CrearOT
+                //   encabezado={OTDats.tabla}
+                //   id={OTDats.id}
+                //   codInicio={OTDats.codigoInicio}
+                //   codFin={OTDats.codigoFin}
+                //   fecha_creacion={OTDats.fechaHorneado}
+                //   horneado={OTDats.horneado}
+                //   hornero={OTDats.Hornero}
+                //   ModeloEco={OTDats.ModeloEco}
+                // />
+                
+                <Button
+                disabled={OTDats.aprobados>0? true:false}
+                onClick={()=>TablaControlCalidadTasaFiltracion({OTDats})}
+                // encabezado={OTDats.tabla}
+                // id={OTDats.id}
+                // codInicio={OTDats.codigoInicio}
+                // codFin={OTDats.codigoFin}
+                // fecha_creacion={OTDats.fechaHorneado}
+                // horneado={OTDats.horneado}
+                // hornero={OTDats.Hornero}
+                // ModeloEco={OTDats.ModeloEco}
+              > Tasa de Filtración </Button>
               ):<Button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
               OT
             </Button>}

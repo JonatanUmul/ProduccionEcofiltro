@@ -13,8 +13,9 @@ import ConsultaDTFM from '../consutas/ConsultaDTFM'
 import ConsultaDTHH from '../consutas/ConsultaDTHH'
 import ConsultaDTIP from '../consutas/ConsultaDTIP'
 import ConsultaDTCC from '../consutas/ConsultaDTCC'
+import CodigosEnProduccion from '../consutas/CodigosEnProduccion'
 
-const Detalle = ({porcentaje,OTDats, encabezado, id,EncName, fecha_creacion }) => {
+const Detalle = ({porcentaje,OTDats, encabezado, id,EncName, fecha_creacion, datosParaCodigos,crearCodigos, datosApi}) => {
   const [modalVisible, setModalVisible] = useState(false); 
 const[datosdeConsu, setDatosConsu]=useState('')
   // Función para abrir el modal cuando se hace clic en el botón
@@ -51,7 +52,7 @@ const[datosdeConsu, setDatosConsu]=useState('')
           return <ConsultaDTPV id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
     
       case 'otfm':
-          return <ConsultaDTFM id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
+          return <ConsultaDTFM id={datosApi.id} datosApi={datosApi}/>
     
       case 'otp':
             return <ConsultaDTP id={id} encabezado={encabezado} EncName={EncName} fecha_creacion={fecha_creacion}/>
@@ -64,6 +65,9 @@ const[datosdeConsu, setDatosConsu]=useState('')
   
       case 'cthh':
             return <ConsultaDTCC OTDats={OTDats} id={id}/>
+      
+      case 'CodigosProduccion':
+            return <CodigosEnProduccion  datosParaCodigos={datosParaCodigos} crearCodigos={crearCodigos}/>
             
     
 

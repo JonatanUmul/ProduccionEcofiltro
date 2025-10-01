@@ -155,7 +155,7 @@ const TablaOT = ({ darkMode }) => {
           activeClassName={'active'}
         />
       </div>
-      <Divider style={{ color: '#f5222d' }}>Horneados</Divider>
+      <Divider style={{ color: '#f5222d' }}>Horneados/Control de Calidad</Divider>
       <TablaControlC darkMode={darkMode} />
     </div>
   );

@@ -4,6 +4,7 @@ import axios from 'axios';
 const URL = process.env.REACT_APP_URL;
 
 const EstadoProc = ({ id, encabezado }) => {
+  console.log(encabezado)
   console.log('Cerrar Orden',id, encabezado)
   const [estado, setEstado] = useState([]);
   const [cambiarEst, setCambiarEst] = useState("");
@@ -65,6 +66,9 @@ const EstadoProc = ({ id, encabezado }) => {
       case 'cthh':
         ruta = 'dthh';
         break;
+      case 'TablaFormulasProduccion':
+        ruta = 'otfm_estado_para_produccion';
+        break;
       default:
         ruta = '';
         break;  
@@ -83,7 +87,8 @@ const EstadoProc = ({ id, encabezado }) => {
         try {
           const response = await axios.put(`${URL}/${cambiarRuta}`, { id_est: cambiarEst, id });
           // Aquí puedes hacer algo con los datos de la tabla, por ejemplo, actualizar el estado
-          window.location.href = "/Home/TablaOT";
+         // window.location.href = "/Home/TablaOT";
+        encabezado=='TablaFormulasProduccion' ? window.location.href = "/Home/TablaFormulasProduccion"  :window.location.href = "/Home/TablaOT";
         } catch (error) {
         }
       }

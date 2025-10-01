@@ -22,15 +22,15 @@ const maquinaria=modalTitle;
     ])
       .then(([maquinaResponse]) => {
         setMaquina(maquinaResponse.data);
-        console.log("Datos de Estadosroutes:", maquinaResponse.data);
+
       })
       .catch((error) => {
-        console.log("Error al obtener los datos:", error);
+
       });
   }, []);
   enviarId = (id_est) => {
     // Aquí puedes realizar la llamada a la API con el id_est
-    console.log('Enviando id_est a la API:', id_est);
+
   };
 
   const onSubmit = async (formData) => {

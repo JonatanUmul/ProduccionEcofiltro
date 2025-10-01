@@ -13,7 +13,8 @@ const URL = process.env.REACT_APP_URL;
  * Si el usuario pulsa "Mix", se habilita el segundo set de campos y, al enviar,
  * se crean dos registros consecutivos en la misma ruta `/DOTDMP`.
  */
-const DTHH = ({ encabezado, EncName, fecha_creacion, id }) => {
+const DTHH = ({ encabezado, EncName, fecha_creacion, id, datosApi }) => {
+  console.log(datosApi.muestra_id.toString())
   const {
     handleSubmit,
     register,
@@ -68,7 +69,7 @@ const DTHH = ({ encabezado, EncName, fecha_creacion, id }) => {
 
       // ----- primer registro -----
       await axios.post(`${URL}/DOTDMP`, {
-        id_dtp: id.toString(),
+        id_dtp:datosApi.muestra_id,
         id_creador,
         id_aserradero: data.id_aserradero,
         id_cernidodetalle: data.id_cernidodetalle,
@@ -90,7 +91,8 @@ const DTHH = ({ encabezado, EncName, fecha_creacion, id }) => {
 
       if (secondIsValid) {
         await axios.post(`${URL}/DOTDMP`, {
-          id_dtp: id.toString(),
+          // id_dtp: id.toString(),
+          id_dtp:datosApi.muestra_id,
           id_creador,
           id_aserradero: data.id_aserradero2,
           id_cernidodetalle: data.id_cernidodetalle2,
@@ -128,13 +130,13 @@ const DTHH = ({ encabezado, EncName, fecha_creacion, id }) => {
       {/* Encabezado */}
       <div className="card">
         <div className="card-body">
-          <label className="form-label">Orden</label>
+          <label className="form-label">Lote</label>
           <p className="form-control-plaintext">
-            {encabezado} - {EncName}
+            {datosApi.codigo_lote}
           </p>
 
           <label className="form-label">Fecha de creación</label>
-          <p className="form-control-plaintext">{formatFecha(fecha_creacion)}</p>
+          <p className="form-control-plaintext">{formatFecha(datosApi.fecha)}</p>
         </div>
       </div>
 

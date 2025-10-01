@@ -6,6 +6,8 @@ import TablaEstProc from "../mantenimientos/Estados_Proc/TablaEstProc";
 import TabProvedores from "../mantenimientos/proveedores/TablaProv";
 import TablaMatPrima from "../mantenimientos/materiaPrima/TablaMatPrima";
 import TablaOT from "../ordenesTrabajo/TablaOT";
+import TablaTasaDeFiltracion from "../ordenesTrabajo/TablaControlCalidadTasaFiltracion.jsx";
+import TablaControlImpregnacion from "../ordenesTrabajo/TablaControlImpregnacion.jsx";
 import TablaControlC from "../ordenesTrabajo/TablaControlC";
 import Buttn from "../ordenesTrabajo/botonOT/BotonOT";
 import Dashboard from "../dashbords/Dashboard";
@@ -23,9 +25,25 @@ import OpenAi from "../OpenIa/ChatOpenIa";
 // import TablaIndicesPlasticos from '../laboratorio/TablaIndicesPlasticos'
 import FormularioIDPB from "../../components/laboratorio/FormularioIDPB";
 import ManoObra from "../../components/SapOrdenes/manoObra";
-import GestionHorasLaborales from '../mantenimientos/users/GestionHorasLaborales'
-
+import GestionHorasLaborales from "../mantenimientos/users/GestionHorasLaborales";
+import TablaRecepcionBarro from "../MateriasPrimas/TablaRecepcionBarro.jsx";
+import TablaRecepcionAserrin from "../MateriasPrimas/TablaRecepcionAserrin.jsx"
+import TablaLotesAprobados from "../MateriasPrimas/TablaLotesAprobados";
+import TablaProcesoDeMezclado from "../MateriasPrimas/TablaProcesoDeMezclado.jsx";
+import TablaProcesoDeFormulacion from "../MateriasPrimas/TablaProcesoDeFormulacion.jsx";
+import TablaFormulasProduccion from "../MateriasPrimas/TablaFormulasProduccion.jsx";
+import TablaPulverizado from "../MateriasPrimas/TablaPulverizado.jsx";
+import TablaProduccion from "../MateriasPrimas/TablaProduccion.jsx";
+import CreacionSeriesProduccion from "../reporteS/ControlProcesos/CreacionSeriesProduccion.jsx";
+import ROTP from "../reporteS/ControlProcesos/ROTP.jsx"
+import Dthh from "../ordenesTrabajo/detallado/DTHH.jsx"
+import MermasOTP from "../reporteS/ControlProcesos/ROTP.jsx"
+import TablaMermasCrudos from '../ordenesTrabajo/TablaMermasCrudos.jsx'
+import TablaMermasAprobados from '../ordenesTrabajo/TablaMermasAprobados.jsx'
+import DTIP from "../ordenesTrabajo/detallado/DTIP.jsx"
+import CodigosTasaFiltracion from "../reporteS/ControlProcesos/CodigosTasaFiltracion.jsx"
 export const renderContent = (pathname) => {
+  console.log('pathname', pathname)
   switch (pathname) {
     //Ruta para el Dashboard
     case "/Home/Dashboard":
@@ -63,9 +81,15 @@ export const renderContent = (pathname) => {
 
     case "/Home/TablaMatPrima":
       return <TablaMatPrima />;
-
-    case "/Home/TablaOT":
-      return <TablaOT />;
+      
+      case "/Home/TablaOT":
+        return <TablaOT />;
+   
+      case "/Home/TablaOT/TablaTasaDeFiltracion":
+        return <TablaTasaDeFiltracion />;
+      
+        case "/Home/TablaOT/TablaControlImpregnacion":
+          return <TablaControlImpregnacion />;
 
     case "/Home/TablaControlC":
       return <TablaControlC />;
@@ -101,9 +125,50 @@ export const renderContent = (pathname) => {
 
     case "/Home/ManoObra":
       return <ManoObra />;
+
+    case "/Home/GestionHorasLaborales":
+      return <GestionHorasLaborales />;
+
+    case "/Home/TablaRecepcionBarro":
+      return <TablaRecepcionBarro />;
+      
+    case "/Home/TablaRecepcionAserrin":
+      return <TablaRecepcionAserrin />;
+
+    case "/Home/TablaLotesAprobados":
+      return <TablaLotesAprobados />;
+   
+      case "/Home/TablaProcesoDeMezclado":
+      return <TablaProcesoDeMezclado />;
+
+      case "/Home/TablaProcesoDeFormulacion":
+      return <TablaProcesoDeFormulacion />;
+      case "/Home/TablaFormulasProduccion":
+      return <TablaFormulasProduccion />;
+      
+    case "/Home/TablaPulverizado":
+      return <TablaPulverizado />;
+
+    case "/Home/TablaProduccion":
+      return <TablaProduccion />;
+
+    case "/Home/CreacionSeriesProduccion":
+      return <CreacionSeriesProduccion />;
+    case "/Home/TablaReportesOT/ROTP":
+      return <ROTP />;
+    case "/Home/TablaMermasCrudos":
+      return <TablaMermasCrudos />;
+    case "/Home/TablaMermasAprobados":
+      return <TablaMermasAprobados />;
+    case "/Home/Order/dthh":
+      return <Dthh />;
+    case "/Home/TablaReportesOT/MermasOTP":
+      return <MermasOTP />;
+    case "/Home/TablaReportesOT/CodigosTasaFiltracion":
+      return <CodigosTasaFiltracion />;
+    case "/Home/TablaOT/DTIP":
+      return <DTIP />;
     
-      case "/Home/GestionHorasLaborales":
-        return <GestionHorasLaborales/>;
     default:
       return null;
   }

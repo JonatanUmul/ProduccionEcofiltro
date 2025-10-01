@@ -9,6 +9,7 @@ import ROTFM from './ROTFM'
 import ROTP from './ROTP'
 import ROTHH from './encabezados/ROTHH'
 import ROTIP from './ROTIP'
+import ReporteMermasProduccion from './ReporteMermasProduccion'
 import TablaPorCodigos from '../../laboratorio/TablaPorCodigos'
 import ReporteGeneralDiario from '../ReporteGeneralDiario';
 
@@ -61,6 +62,8 @@ const BotonOT = () => {
         return <TablaPorCodigos/>
       case '10':
           return <ROTIP/>
+      case '11':
+          return <ReporteMermasProduccion/>
        
 
       default:
@@ -113,6 +116,9 @@ const BotonOT = () => {
   </a>
   <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '10', 'Impregnación')}>
     10. Impregnación
+  </a>
+  <a className="dropdown-item" href="#" onClick={(e) => handleDropdownItemClick(e, '11', 'Mermas Producción')}>
+    10. Mermas Producción
   </a>
 
 

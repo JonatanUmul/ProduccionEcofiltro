@@ -25,6 +25,7 @@ const DTHH = () => {
 
   const [highlighted, setHighlighted] = useState([]);
   const modeloSeleccionado = watch("id_modelo");
+  console.log(modeloSeleccionado)
   const codigoInicio = watch("codigoInicio");
   const codigoFin = watch("codigoFin");
   const [id_dtp, setId_dtp] = useState();
@@ -33,7 +34,7 @@ const DTHH = () => {
   const id_area = 3;
   const [id_creador, setIdCreador] = useState("");
   const location=useLocation().state
-  const id_proceso = 4
+  const id_proceso =modeloSeleccionado=='1' ? 4: 6
   const fecha_creacion=location.fecha_creacion
   const id=location.id
   const EncName=location.EncName

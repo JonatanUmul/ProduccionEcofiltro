@@ -31,6 +31,7 @@ const DTHP = ({
       crudoCC: 0,
       quemados: 0,
       ahumados: 0,
+      sin_tasa: 0,
       fecha_real: "",
       id_operarioCC: "",
       id_auditor: "",
@@ -121,9 +122,20 @@ console.log('id_dthh',datosOrden)
 
 
   // lista de series con estado OK
+  // const seriesOK = (TodasLasSeries ?? [])
+  // .filter(x => String(x.estado).trim().toUpperCase() === 'OK')
+  // .map(x => x.serie);
+
   const seriesOK = (TodasLasSeries ?? [])
-  .filter(x => String(x.estado).trim().toUpperCase() === 'OK')
+  .filter(x => {
+    const estado = String(x.estado).trim().toUpperCase();
+    return estado === 'OK' || estado === 'REASIGNADO';
+  })
   .map(x => x.serie);
+
+
+  console.log('series ok y reasignado',seriesOK)
+
 
   const TodasSeriesSelect = (TodasLasSeries ?? [])
   .filter(x => String(x.estado).trim().toUpperCase())
@@ -153,6 +165,7 @@ console.log('id_dthh',datosOrden)
         rajados_horno:     Number(c.RAJADO_HORNO ?? 0),
         desportillado:     Number(c.DESPORTILLADO ?? 0),
         desportillado_horno:     Number(c.DESPORTILLADO_HORNO ?? 0),
+        sin_tasa:     Number(c.SIN_TASA ?? 0),
 
         // Regla de mermas_hornos: ahora = OVALADO
         // Si prefieres (RAJADO + OVALADO + BAJO + ALTO) usa la línea comentada debajo
@@ -188,6 +201,7 @@ console.log('id_dthh',datosOrden)
     "rajados_horno",
     "crudoCC",
     "quemados",
+    "sin_tasa",
     "quemados_horno",
     "ahumados",
     "ahumados_horno",
@@ -235,6 +249,7 @@ console.log('id_dthh',datosOrden)
         rajadosCC: formData.rajadosCC,
         crudoCC: formData.crudoCC,
         quemados: formData.quemados,
+        sin_tasa: formData.sin_tasa,
         ahumados: formData.ahumados,
 
         rajados_horno:formData.rajados_horno,
@@ -247,7 +262,8 @@ console.log('id_dthh',datosOrden)
         id_creador,
       });
 
-
+      window.location.href = "/Home/TablaOT";
+      
       if (seriesOK.length > 0) {
         await PostSeriesProduccion({
           serialProduccion: seriesOK,
@@ -385,6 +401,10 @@ console.log('id_dthh',datosOrden)
             <div className="col-md-6">
               <label className="form-label">Altos</label>
               <input type="number" className="form-control" id="altos" {...register("altos", { valueAsNumber: true })} required />
+            </div>
+            <div className="col-md-6">
+              <label className="form-label">Sin Tasa</label>
+              <input type="number" className="form-control" id="sin_tasa" {...register("sin_tasa", { valueAsNumber: true })} required />
             </div>
 
             <div className="col-md-6">

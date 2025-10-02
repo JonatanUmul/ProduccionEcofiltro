@@ -149,7 +149,7 @@ console.log('id_camionada_barro',id_camionada_barro)
         CodigoInicioNumber,
         CodigoFinalNumber,
         formData,
-        // otfm_correlativo:formData.otfm_correlativo,
+         otfm_correlativo:formData.otfm_correlativo,
         loteSelect:id_camionada_barro,
         id_creador: id_creador,
       }) ;
@@ -211,7 +211,6 @@ console.log('id_camionada_barro',id_camionada_barro)
             {formatFecha(fecha_creacion)}
           </p>
 
-{/*          
 <div className="col-md-6">
   <label htmlFor="otfm_correlativo" className="form-label">
     Lote de Aserrín
@@ -237,7 +236,7 @@ console.log('id_camionada_barro',id_camionada_barro)
       {errors.otfm_correlativo.message}
     </span>
   )}
-</div> */}
+</div> 
 
           <div className="col-md-6">
             <label htmlFor="aserradero" className="form-label">

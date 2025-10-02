@@ -37,16 +37,18 @@ const TablaMermasCrudos = () => {
     return contador;
   };
   const resultadosContador = contarElemento(segundaLinea);
-  const orden = ["OK",
+  const orden = [
+    "OK",
   "Bajo", 
   "Alto",
   "Reasignado", 
   "Rajado",
   "Desportillado", 
   "Ahumado", 
-  "Desperfecto de produccion" ,
+  "Desperfecto_de_produccion" ,
   "Ovalado", 
   "Quemado",
+  "sin_tasa",
   "Rajado_Horno",
   "Desportillado_Horno",
   "Ahumado_Horno",
@@ -182,6 +184,7 @@ const TablaMermasCrudos = () => {
   type="checkbox"
   checked={!!(estadosPorSeriePunto[row.serie] ?? Number(row.estado_punto))}
   onChange={handleEstadoChangePunto(row.serie, row.id_proceso)}
+  onClick={obtenerSeries}
 />
 
 
@@ -201,7 +204,7 @@ const TablaMermasCrudos = () => {
       className="form-select form-select-sm"
       value={estadosPorSerie[row.serie] ?? row.estado ?? ""}
       onChange={handleEstadoChange(row.serie, row.id_proceso)}
-    
+      onClick={obtenerSeries}
     >
       <option value="OK">OK</option> 
       <option value="Bajo">Bajo</option>
@@ -212,6 +215,7 @@ const TablaMermasCrudos = () => {
       <option value="Desperfecto_de_produccion">Desperfecto de producción</option>
       <option value="Quemado">Quemado</option>
       <option value="Ovalado">Ovalado</option>
+      <option value="sin_tasa">Sin Tasa</option>
       <option value="Reasignado">Reasignado</option>
       
       <option value="Rajado_Horno">Rajado Horno</option>

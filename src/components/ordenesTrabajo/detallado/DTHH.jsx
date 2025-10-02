@@ -21,7 +21,7 @@ const DTHH = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [serie1, setSerie] = useState([]);
-  console.log(serie1)
+  console.log('serie serie',serie1)
 
   const [highlighted, setHighlighted] = useState([]);
   const modeloSeleccionado = watch("id_modelo");
@@ -203,7 +203,7 @@ const DTHH = () => {
         id_creador: id_creador,
         id_est: 2,
       });
-  
+  window.location.href = "/Home/TablaOT";
       //  1. Enviar series OK para producción
       const seriesOkUnicas = [...new Set(seriesOK.map((row) => row.serie))];
   console.log('okok',seriesOkUnicas)

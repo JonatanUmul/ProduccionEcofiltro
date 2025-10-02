@@ -24,7 +24,7 @@ const TablaMermasCrudos = () => {
 
   const [NuevoEstadoSerir, setnuevoEstadoSerir] = useState([]);
   const [NuevoEstadoSerirTasa, setnuevoEstadoSerirTasa] = useState([]);
-  console.log(NuevoEstadoSerirTasa)
+
   const navigate = useNavigate();
 
   // convertir el objeto de estados a arreglo de valores y contarlos
@@ -115,12 +115,12 @@ const TablaMermasCrudos = () => {
   };
 
   // BUGFIX: aquí debe actualizar estadosPorSerieTasa (antes actualizaba estadosPorSerie)
-  const handleEstadoChangeTasa = (serie, id_proceso) => (e) => {
+  const handleEstadoChangeTasa = (serie, id_proceso, id_ufmodelo) => (e) => {
     setEstadosPorSerieTasa((prev) => ({
       ...prev,
       [serie]: e.target.value,
     }));
-    setnuevoEstadoSerirTasa([serie, id_proceso, e.target.value]);
+    setnuevoEstadoSerirTasa([serie, id_proceso, e.target.value, id_ufmodelo]);
   };
 
   const handleEstadoChangePunto = (serie, id_proceso) => (e) => {
@@ -189,7 +189,7 @@ const TablaMermasCrudos = () => {
     <input
   type="text"
   value={estadosPorSerieTasa[row.serie] ?? row.tasa ?? ""}
-  onChange={handleEstadoChangeTasa(row.serie, row.id_proceso)}
+  onChange={handleEstadoChangeTasa(row.serie, row.id_proceso, row.id_ufmodelo)}
   onClick={obtenerSeries}
   maxLength={2}
   pattern="\d*"

@@ -6,7 +6,7 @@ const ExcelROTHP = ({ dats }) => {
   // Datos con encabezado definido
   const fecha= Array.isArray(dats) ? dats.map((rows) => ({ fecha:rows[0] })) : [];
   console.log(fecha)
-  const datos = Array.isArray(dats) ? dats.map((rows) => ({fechaHorneado:formatFecha(rows.fecha_creacion), Serie: rows.serie, Estado: rows.estado })) : [];
+  const datos = Array.isArray(dats) ? dats.map((rows) => ({fechaHorneado:formatFecha(rows.fecha_creacion), Serie: rows.serie, Estado: rows.estado, Tasa: rows.tasa, Horno: rows.horno })) : [];
 
   const limitarTexto = (datos) => {
     return datos?.map(fila => {
@@ -37,6 +37,7 @@ const ExcelROTHP = ({ dats }) => {
   return (
     <div>
       <button className="btn" onClick={generarExcel}>
+        Excel
         <i className="bi bi-file-earmark-excel-fill"></i>
       </button>
     </div>

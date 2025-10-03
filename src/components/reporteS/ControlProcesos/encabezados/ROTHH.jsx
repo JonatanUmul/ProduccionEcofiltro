@@ -13,6 +13,7 @@ const URL = process.env.REACT_APP_URL;
 
 const ROTHP = () => {
   const [datos, setDatos] = useState([]);
+  console.log('datosHorneados',datos)
   const [fecha_creacion_inicio, setFecha] = useState(formatFecha(new Date()));
   const [fecha_creacion_fin, setFecha2] = useState(formatFecha(new Date()));
   const fecha_CC='';

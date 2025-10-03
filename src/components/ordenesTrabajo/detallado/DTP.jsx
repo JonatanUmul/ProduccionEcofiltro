@@ -634,11 +634,6 @@ console.log('id_camionada_barro',id_camionada_barro)
                 </div>
               )} */}
 
-<div className="col-12">
-    <button type="submit" className="btn btn-primary">
-      Guardar
-    </button>
-  </div>
 
  {loteSelect>0 && Number(Disponible) >= Number(TotalLbBarro) && Number(Disponible) >= 0  ?(
     <div className="col-12">

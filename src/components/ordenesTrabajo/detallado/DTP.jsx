@@ -28,18 +28,18 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
   const [loteSelect, setLoteSelect] = useState("");
   const [inventarioBarro, setInventarioBarro] = useState([]);
   const [idSelect, setIdSelect] = useState("");
+  const [cambiarSerie, setCambiarSerie]=useState(false);
   const [consultaUltimoCodigo, setConsultaUltimoCodigo] = useState([]);
   const TotalLbBarro = watch("librasBarro") * watch("formulas_usadas");
   const TotalLbAserrin = watch("librasAserrin") * watch("formulas_usadas");
   const modelo = watch("id_ufmodelo");
+  const codigoInicioLiberado =watch("codigoInicioLiberado");
+  console.log('codigoInicioLiberado',codigoInicioLiberado)
   const producido = watch("producido");
   const identificador = watch("identificador");
-
+console.log('Cambiar ruta', cambiarSerie)
   const id_camionada_barro = watch("id_camionada_barro");
-  //const otfm_correlativo = watch("otfm_correlativo");
-console.log('dtfmLiberados',dtfmLiberados)
-console.log('id_camionada_barro',id_camionada_barro)
-//console.log('otfm_correlativo',otfm_correlativo)
+console.log()
   
   const Disponible =
     Array.isArray(inventarioBarro) &&
@@ -47,18 +47,20 @@ console.log('id_camionada_barro',id_camionada_barro)
       return inv.peso_total_libras;
     });
 
+    //Fecha de la produccion
   const fecha_cre = new Date(fecha_creacion);
   const dia = String(fecha_cre.getDate()).padStart(2, "0");
   const mes = String(fecha_cre.getMonth() + 1).padStart(2, "0");
   const año = fecha_cre.getFullYear().toString().slice(-2);
   const fechaConcatenado=dia+mes+año
-  const codigoInicio = identificador + consultaUltimoCodigo[0]?.codigoFinal+'0'+dia+mes+año;
-  const CodigoInicioNumber=consultaUltimoCodigo[0]?.codigoFinal
-  const codigoFinal = parseInt(consultaUltimoCodigo[0]?.codigoFinal || 0);
+  
+  const codigoInicio =codigoInicioLiberado>0? identificador + codigoInicioLiberado+'0'+dia+mes+año:
+  identificador + consultaUltimoCodigo[0]?.codigoFinal+'0'+dia+mes+año;
+  const CodigoInicioNumber=codigoInicioLiberado>0?codigoInicioLiberado:consultaUltimoCodigo[0]?.codigoFinal;
+  const codigoFinal = codigoInicioLiberado>0? parseInt(codigoInicioLiberado) : parseInt(consultaUltimoCodigo[0]?.codigoFinal || 0);
   const cantidadProducida = parseInt(producido || 0);
-  const CodigoFinalNumber = codigoFinal + cantidadProducida-1;
+  const CodigoFinalNumber = codigoFinal + cantidadProducida;
   const codigoFin = identificador + CodigoFinalNumber + '0' + dia + mes + año;
-
 
 
   const datosParaCodigos={
@@ -439,9 +441,34 @@ console.log('id_camionada_barro',id_camionada_barro)
                 />
               </div>
 
-              <div className="col-md-6">
+<div>
+  {cambiarSerie?
+ <button type="button" className={"btn btn-warning"}  onClick={()=>setCambiarSerie(false)}>Bloquear Inicio</button>:
+  <button type="button" className={"btn btn-secondary"}  onClick={()=>setCambiarSerie(true)}>Cambiar Inicio</button>
+  }
+
+
+</div>
+{cambiarSerie?
+(
+  <div className="col-md-6">
+  <label htmlFor="esquinaSD" className="form-label">
+    Código de Inicio Editable
+  </label>
+  <input
+autoComplete="off"
+style={{ textTransform: "uppercase" }}
+type="text"
+className="form-control"
+id="codigoInicioLiberado"
+
+{...register("codigoInicioLiberado")}
+required/>    </div>
+)
+: 
+ (<div className="col-md-6">
                 <label htmlFor="esquinaSD" className="form-label">
-                  Código de Inicio
+                  Código de Inicio del Sistema
                 </label>
                 <input
   autoComplete="off"
@@ -450,12 +477,13 @@ console.log('id_camionada_barro',id_camionada_barro)
   className="form-control"
   id="codigoInicio"
   placeholder={codigoInicio}
-  value={CodigoInicioNumber}  
+  value={CodigoInicioNumber} 
   {...register("codigoInicio")}
-  required
-/>
-
-              </div>
+  required/>    </div>
+ )
+ }
+            
+          
               <div className="col-md-6">
                 <label htmlFor="esquinaSD" className="form-label">
                   Código Final
@@ -528,76 +556,6 @@ console.log('id_camionada_barro',id_camionada_barro)
                 </div>
               </div>
 
-              {/* <div className="col-md-6">
-                <label htmlFor="esquinaID" className="form-label">
-                  Libras de Aserrin
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="librasAserrin"
-                  {...register("librasAserrin")}
-                  required
-                />
-              </div>
-              <div className="col-md-4">
-                    <label htmlFor="formulas_usadas" className="form-label">
-                      Total Lb Barro
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="total_lb_barro"
-                      value={TotalLbAserrin + " lb"}
-                      disabled
-                    />
-                  </div> */}
-
-              {/* {formula2 ? (
-                <div className="col-md-12">
-                  <div className="row">
-                    <div className="col-md-6">
-                      <label htmlFor="aserradero" className="form-label">
-                        <strong>Aserradero 2</strong>
-                      </label>
-                      <select
-                        className="form-select"
-                        id="id_Aserradero2"
-                        {...register("id_Aserradero2")}
-                        required
-                      >
-                        <option value="" disabled selected>
-                          Seleccione...
-                        </option>
-
-                        {Array.isArray(aserradero.rows) &&
-                          aserradero.rows.length > 0 &&
-                          aserradero.rows.map((aserradero) => (
-                            <option key={aserradero.id} value={aserradero.id}>
-                              {aserradero.nombre_aserradero}
-                            </option>
-                          ))}
-                      </select>
-                    </div>
-
-                   
-                    <div className="col-md-6">
-                      <label htmlFor="esquinaID" className="form-label">
-                        <strong>Libras de Aserrin 2 </strong>
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="librasAserrin2"
-                        {...register("librasAserrin2")}
-                        required
-                      />
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                false
-              )} */}
               <div className="col-md-6">
                 <label htmlFor="detalle" className="form-label">
                   Observaciòn:
@@ -612,29 +570,7 @@ console.log('id_camionada_barro',id_camionada_barro)
               <div className="col-12">
                 <label style={{ color: "red" }}>{error}</label>
               </div>
-              {/* <div className="col-4">
-                <a
-                  type="button"
-                  className="btn btn-danger mb-3"
-                  onClick={llamar}
-                >
-                  Mix
-                </a>
-              </div> */}
      
-              {/* {loteSelect >1 && TotalLbBarro < Disponible ? (
-                <div className="col-12">
-                  <button type="submit" className="btn btn-primary">
-                    Guardar
-                  </button>
-                </div>
-              ) : (
-                <div className="alert alert-warning" role="alert">
-                  Para activar el botón de guardar, seleccione el lote de barro.
-                </div>
-              )} */}
-
-
  {loteSelect>0 && Number(Disponible) >= Number(TotalLbBarro) && Number(Disponible) >= 0  ?(
     <div className="col-12">
     <button type="submit" className="btn btn-primary">

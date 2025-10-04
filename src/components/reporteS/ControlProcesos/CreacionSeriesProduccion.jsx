@@ -69,11 +69,10 @@ useEffect(()=>{
 
   const PostCodigos = async () => {
     const response = await PostSeriesProduccion({ serialProduccion, id_dtp, id_proceso, id_modelo });
-    console.log(response);
 
-    window.location.href = "/Home/TablaReportesOT/ROTP";
+    window.location.href = "/Home/TablaReportesOT/MermasOTP";
   };
-  // 💡 Divide los códigos en filas con 5 columnas cada una
+  //  Divide los códigos en filas con 5 columnas cada una
   const chunkedCodes = [];
   const columnasPorFila = 5;
 

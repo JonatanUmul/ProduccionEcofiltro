@@ -88,7 +88,18 @@ const EstadoProc = ({ id, encabezado }) => {
           const response = await axios.put(`${URL}/${cambiarRuta}`, { id_est: cambiarEst, id });
           // Aquí puedes hacer algo con los datos de la tabla, por ejemplo, actualizar el estado
          // window.location.href = "/Home/TablaOT";
-        encabezado=='TablaFormulasProduccion' ? window.location.href = "/Home/TablaFormulasProduccion"  :window.location.href = "/Home/TablaOT";
+         switch(encabezado){
+          case 'TablaFormulasProduccion':
+            window.location.href = "/Home/TablaFormulasProduccion"
+            break
+          case "otfm":
+             window.location.href = "/Home/TablaProcesoDeMezclado"
+            break
+          default:
+            window.location.href = "/Home/TablaOT"
+
+         }
+        // encabezado=='TablaFormulasProduccion' ? window.location.href = "/Home/TablaFormulasProduccion"  :window.location.href = "/Home/TablaOT";
         } catch (error) {
         }
       }

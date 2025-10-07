@@ -59,7 +59,7 @@ console.log()
   const CodigoInicioNumber=codigoInicioLiberado>0?codigoInicioLiberado:consultaUltimoCodigo[0]?.codigoFinal;
   const codigoFinal = codigoInicioLiberado>0? parseInt(codigoInicioLiberado) : parseInt(consultaUltimoCodigo[0]?.codigoFinal || 0);
   const cantidadProducida = parseInt(producido || 0);
-  const CodigoFinalNumber = codigoFinal + cantidadProducida;
+  const CodigoFinalNumber = codigoFinal + cantidadProducida-1;
   const codigoFin = identificador + CodigoFinalNumber + '0' + dia + mes + año;
 
 

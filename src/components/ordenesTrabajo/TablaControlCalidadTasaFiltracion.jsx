@@ -10,6 +10,7 @@ import Table from "../UI/Table";
 import Selects from "../UI/Select";
 import { useNavigate, useLocation } from "react-router-dom";
 import CrearOT from "./botonOT/Crear_OT"
+import ExcelSeriesTasaDeFiltracion from "../reporteS/ControlProcesos/Excel/ExcelSeriesTasaDeFiltracion"
 
 const TablaMermasCrudos = () => {
   const datos = useLocation();
@@ -244,6 +245,7 @@ const TablaMermasCrudos = () => {
           <div className="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
             <div>
               <h5 className="mb-0">Mermas – Orden {id_dtp ?? ""}</h5>
+             <ExcelSeriesTasaDeFiltracion dats={seriesDeOrdenes}/>
               <small className="text-muted">
                 Series cargadas: {seriesDeOrdenes.length}
               </small>

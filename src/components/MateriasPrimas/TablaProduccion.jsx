@@ -7,7 +7,7 @@ import EstadoProc from "./botonOT/EstadoProceso";
 import PaginasBarro from "../UI/PaginasBarro";
 const TablaBarro = () => {
   const [datosApi, setdatosApi] = useState([]);
-
+console.log('barro liberado',datosApi)
   const id_fase_aprobacion=5
   const estado_proceso=2
   useEffect(() => {

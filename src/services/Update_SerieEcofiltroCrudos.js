@@ -3,7 +3,7 @@ import ErrorAlert from "../components/UI/alerts/ErrorAlert";
 import SuccessAlertFlotante from "../components/UI/alerts/SuccesAletFlotante";
 
 const Update_SerieEcofiltroCrudos = async ({ NuevoEstadoSerir }) => {
-  const URL = process.env.REACT_APP_URL;
+  const URL = process.env.REACT_APP_URL_MICRO1;
 
   try {
     const response = await axios.put(`${URL}/DTP_CodigosProduccion`, {

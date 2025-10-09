@@ -2,13 +2,13 @@ import axios from "axios";
 import SuccessAlert from "../components/UI/alerts/succesAlert";
 import ErrorAlert from "../components/UI/alerts/ErrorAlert";
 
-const URL = process.env.REACT_APP_URL;
+const URL_MICRO1 = process.env.REACT_APP_URL_MICRO1;
 const PostSeriesProduccion=async({serialProduccion, id_dtp, id_proceso, id_modelo})=>{
    
     console.log(serialProduccion, id_dtp, id_proceso, id_modelo)
 
     try {
-        const response= await axios.post(`${URL}/DTP_CodigosProduccion`,{
+        const response= await axios.post(`${URL_MICRO1}/DTP_CodigosProduccion`,{
             serialProduccion, id_dtp, id_proceso, id_modelo
         })
 

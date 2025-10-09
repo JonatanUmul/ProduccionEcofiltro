@@ -124,6 +124,14 @@ console.log()
       .then((res) => setInventarioBarro(res.data.rows))
       .catch((error) => console.log(error));
   };
+  
+  const InventarioAserrin = async () => {
+    await axios
+      .get(`${URL}/BarroInventario/${idSelect}`)
+      .then((res) => setInventarioBarro(res.data.rows))
+      .catch((error) => console.log(error));
+  };
+
   const DTPUltimoCodigo = async () => {
     await axios
       .get(`${URL}/DTPUltimoCodigo/${modelo}`)

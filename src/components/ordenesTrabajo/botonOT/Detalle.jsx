@@ -76,10 +76,8 @@ const[datosdeConsu, setDatosConsu]=useState('')
     }
   };
 
-  // Definir una función de manejo de clics
   const handleClick = () => {
-    // Aquí puedes realizar cualquier acción necesaria con el ID seleccionado
-    // Por ejemplo, abrir el modal correspondiente
+   
     handleOpenModal();
   };
 

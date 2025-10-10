@@ -6,7 +6,7 @@ const URL = process.env.REACT_APP_URL;
 const ConsultaDTCC = ({ id }) => {
   const [fila, setFila] = useState(null);
   const [error, setError] = useState("");
-
+console.log('datos de conctro de calidad',fila)
   useEffect(() => {
     axios
       .get(`${URL}/DTCC/${id || "null"}`)
@@ -109,6 +109,7 @@ const ConsultaDTCC = ({ id }) => {
               marginBottom: 15,
             }}
           >
+              <p><strong>Horneados:</strong> {fila.horneados}</p>
             <p><strong>Aprobados:</strong> {fila.aprobados}</p>
             <p><strong>Altos:</strong> {fila.altos}</p>
             <p><strong>Bajos:</strong> {fila.bajos}</p>
@@ -117,7 +118,12 @@ const ConsultaDTCC = ({ id }) => {
             <p><strong>Ahumados:</strong> {fila.ahumados}</p>
             <p><strong>Ovalados:</strong> {fila.ovalado}</p>
             <p><strong>Reasignados:</strong> {fila.reasignado}</p>
-            <p><strong>Sin tasa:</strong> {fila.sin_tasa}</p>
+            <p><strong>Ahumados:</strong> {fila.ahumados}</p>
+            <p><strong>Desperfecto de Producción:</strong> {fila.Desperfecto_de_produccion}</p>
+            <p><strong>Crudo CC:</strong> {fila.crudoCC}</p>
+            <p><strong>Desportillado C.c:</strong> {fila.desportillado}</p>
+            <p><strong>Desportillado Horno:</strong> {fila.desportillado_horno}</p>
+            <p><strong>Rajados Hornos:</strong> {fila.rajados_horno}</p>
           </div>
 
           {/* Porcentajes */}

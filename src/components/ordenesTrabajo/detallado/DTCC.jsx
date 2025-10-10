@@ -32,6 +32,7 @@ const DTHP = ({
       quemados: 0,
       ahumados: 0,
       sin_tasa: 0,
+   
       fecha_real: "",
       id_operarioCC: "",
       id_auditor: "",
@@ -44,7 +45,8 @@ const DTHP = ({
       turnoHorneado: "",
     },
   });
-
+console.log('Valor de reasignado en consola'
+  ,watch('reasignado'))
   const [operario, setOperario] = useState([]);
   const [modelo, setModelo] = useState([]);
   const [turno, setTurno] = useState([]);
@@ -166,17 +168,17 @@ console.log('id_dthh',datosOrden)
         desportillado:     Number(c.DESPORTILLADO ?? 0),
         desportillado_horno:     Number(c.DESPORTILLADO_HORNO ?? 0),
         sin_tasa:     Number(c.SIN_TASA ?? 0),
-
         // Regla de mermas_hornos: ahora = OVALADO
         // Si prefieres (RAJADO + OVALADO + BAJO + ALTO) usa la línea comentada debajo
         ovalado: Number(c.OVALADO ?? 0),
         // mermas_hornos: Number((c.RAJADO ?? 0) + (c.OVALADO ?? 0) + (c.BAJO ?? 0) + (c.ALTO ?? 0)),
-
         crudoCC:       Number(c.CRUDO ?? 0),
         quemados:      Number(c.QUEMADO ?? 0),
         quemados_horno:Number(c.QUEMADO_HORNO ?? 0),
         ahumados:      Number(c.AHUMADO ?? 0),
-        ahumados_horno:Number(c.AHUMADO_HORNO ?? 0),
+        Desperfecto_de_produccion: Number(c.DESPERFECTO_DE_PRODUCCION ?? 0),
+        ahumados_horno:Number(c.AHUMADO_HORNO ?? 0)
+        
       },
       { keepDirty: false, keepTouched: true }
     );
@@ -207,6 +209,7 @@ console.log('id_dthh',datosOrden)
     "ahumados_horno",
     "desportillado",
     "desportillado_horno",
+    "Desperfecto_de_produccion",
     "ovalado"
   ]);
 
@@ -251,7 +254,7 @@ console.log('id_dthh',datosOrden)
         quemados: formData.quemados,
         sin_tasa: formData.sin_tasa,
         ahumados: formData.ahumados,
-
+        Desperfecto_de_produccion:formData.Desperfecto_de_produccion,
         rajados_horno:formData.rajados_horno,
         desportillado:formData.desportillado,
         desportillado_horno:formData.desportillado_horno,
@@ -456,6 +459,10 @@ console.log('id_dthh',datosOrden)
             <div className="col-md-6">
               <label className="form-label">Ahumados de Hornos</label>
               <input type="number" className="form-control" id="desportillado_horno" {...register("desportillado_horno", { valueAsNumber: true })} required />
+            </div>
+             <div className="col-md-6">
+              <label className="form-label">Desperfecto de Producción</label>
+              <input type="number" className="form-control" id="Desperfecto_de_produccion" {...register("Desperfecto_de_produccion", { valueAsNumber: true })} required />
             </div>
 
            

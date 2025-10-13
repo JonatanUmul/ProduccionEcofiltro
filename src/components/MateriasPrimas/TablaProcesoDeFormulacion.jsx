@@ -1,38 +1,28 @@
 import React, { useEffect, useState } from "react";
-// import Detalle from "./botonOT/Detalle";
 import Detalle from "../ordenesTrabajo/botonOT/Detalle";
 import { formatFecha } from "../utilidades/FormatearFecta";
-import BotonOT from "./botonOT/BotonOT";
 import CrearOT from "./botonOT/Crear_OT";
-import CrearAS from './botonOT/Crear_OT';
-import { useAbility } from "../AbilityContext";
-import { Divider, Row, Col } from "antd";
-import CambioAHomogenización from "./botonOT/CambioAHomogenización";
-// import EstadoProceso from "./botonOT/EstadoProceso";
 import EstadoProceso from "../ordenesTrabajo/botonOT/EstadoProc";
-import EstadoProcesoAserrin from "./botonOT/EstadoProcesoAserrin";
-import Get_OT_mezclado_aserrin from "../../services/Get_OT_mezclado_aserrin";
 import Get_TablaProcesoDeFormulacion from "../../services/Get_TablaProcesoDeFormulacion";
 import Table from "../UI/Table";
 import PaginasAserrin from "../UI/PaginasAserrin";
-import { useLocation } from "react-router-dom";
-const TablaBarro = () => {
+import { Divider } from "antd";
+
+const TablaFormulacionAserrin = () => {
   const [datosApi, setdatosApi] = useState([]);
   const [id_creador, setid_creador] = useState("");
-  const location=useLocation()
-  const materiaPrim= 'Aserrin'
-console.log('materiaPrim',materiaPrim)
+  const materiaPrim = "Aserrin";
+console.log('datosApi',datosApi)
   useEffect(() => {
     setid_creador(localStorage.getItem("id_creador"));
   }, []);
 
- 
   const lotesAprobados = async () => {
- 
     try {
-      const response =await Get_TablaProcesoDeFormulacion({materiaPrim});
-      console.log(response.data)
-      setdatosApi(response);
+      const response = await Get_TablaProcesoDeFormulacion({ materiaPrim });
+      console.log("formulacion:", response.data);
+      //  Aquí estaba el error
+      setdatosApi(response || []); // <-- no guardes el response entero
     } catch (error) {
       console.log(error);
     }
@@ -40,10 +30,8 @@ console.log('materiaPrim',materiaPrim)
 
   useEffect(() => {
     lotesAprobados();
-  },[]);
+  }, []);
 
-  const Tabla = "ot_mezclado_aserrin";
-  
   const encabezadosTab = [
     "Detalle",
     "Fecha",
@@ -52,56 +40,91 @@ console.log('materiaPrim',materiaPrim)
     "Área",
     "Crear Registro",
     "Estado de la orden",
-
   ];
 
-  const nameSelector="Aprobar paso a pulverización"
-  const valueSelector=4
-  const bodyRows =Array.isArray(datosApi)&&datosApi.map((rows) => [
-    <Detalle encabezado='otfm' datosApi={rows} />,
-    formatFecha(rows.fecha_creacion) || "",
-    rows.correlativo,
-    rows.encabezado+'-'+rows.id || "",
-    rows.EncName || "",
-    <CrearOT  datosApi={rows}/>,
-    <EstadoProceso id={rows.id} encabezado='otfm'/>
-  ]);
+  const bodyRows =
+    Array.isArray(datosApi) &&
+    datosApi.map((rows) => [
+      <Detalle encabezado="otfm" datosApi={rows} />,
+      formatFecha(rows.fecha_creacion) || "",
+      rows.correlativo || "",
+      `${rows.encabezado}-${rows.id}` || "",
+      rows.EncName || "",
+      <CrearOT datosApi={rows} />,
+      <EstadoProceso id={rows.id} encabezado="otfm" />,
+    ]);
 
   const pagina = "3";
 
   return (
-    <div style={{ width: "100%", height: "100vh", padding: "1rem" }}>
-      <Row style={{ height: "100%" }}>
-        <Col span={3} style={{ borderRight: "1px solid #f0f0f0" }}>
-          {materiaPrim==='Barro'?  <Divider orientation="left" style={{ color: "blue" }}>
-          Etapas del Barro
-          </Divider>:
-           <Divider orientation="left" style={{ color: "blue" }}>
-           Etapas del Aserrin
-           </Divider>}
-         
-          <PaginasAserrin activeTabKey={pagina} />
-        </Col>
-        <Col span={20} style={{ paddingLeft: "2rem" }}>
-        {materiaPrim==='Barro'? 
-          <Divider orientation="left" style={{ color: "#f5222d" }}>
-            Muestras de Barro Aprobados
-          </Divider>
-          :
-          <Divider orientation="left" style={{ color: "#f5222d" }}>
-          Lotes de Aserrín
+    <div
+      style={{
+        display: "flex",
+        width: "100%",
+        height: "calc(100vh - 120px)",
+        backgroundColor: "#fff",
+        borderRadius: "12px",
+        boxShadow: "0 0 10px rgba(0,0,0,0.05)",
+        overflow: "hidden",
+      }}
+    >
+      {/* Panel lateral */}
+      <div
+        style={{
+          minWidth: 230,
+          maxWidth: 230,
+          borderRight: "1px solid #e0e0e0",
+          backgroundColor: "#fafafa",
+          padding: "16px 8px",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Divider
+          orientation="left"
+          style={{
+            color: "blue",
+            fontWeight: "bold",
+            marginBottom: 10,
+            marginLeft: 10,
+          }}
+        >
+          Etapas del Aserrín
         </Divider>
-          }
-         
-          <CrearOT datosApi='OTFM'  encabezados='OTFM' />,
-          
-          <div style={{ marginTop: "1rem" }}>
-            <Table encabezadosTab={encabezadosTab} datosTab={bodyRows} />
-          </div>
-        </Col>
-      </Row>
+        <div style={{ flexGrow: 1, overflowY: "auto" }}>
+          <PaginasAserrin activeTabKey={pagina} />
+        </div>
+      </div>
+
+      {/* Contenido principal */}
+      <div
+        style={{
+          flexGrow: 1,
+          padding: "32px",
+          overflowY: "auto",
+        }}
+      >
+        <Divider
+          orientation="left"
+          style={{
+            color: "#f5222d",
+            fontWeight: "bold",
+            marginBottom: 20,
+          }}
+        >
+          Lotes de Aserrín - Formulación
+        </Divider>
+
+        <div style={{ marginBottom: "1rem" }}>
+          <CrearOT datosApi="OTFM" encabezados="OTFM" />
+        </div>
+
+        <div style={{ marginTop: "1rem" }}>
+          <Table encabezadosTab={encabezadosTab} datosTab={bodyRows} />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default TablaBarro;
+export default TablaFormulacionAserrin;

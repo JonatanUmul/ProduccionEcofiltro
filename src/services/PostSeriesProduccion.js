@@ -1,7 +1,7 @@
 import axios from "axios";
 import SuccessAlert from "../components/UI/alerts/succesAlert";
 import ErrorAlert from "../components/UI/alerts/ErrorAlert";
-
+import Swal from "sweetalert2";
 const URL_MICRO1 = process.env.REACT_APP_URL_MICRO1;
 const PostSeriesProduccion=async({serialProduccion, id_dtp, id_proceso, id_modelo})=>{
    
@@ -11,10 +11,9 @@ const PostSeriesProduccion=async({serialProduccion, id_dtp, id_proceso, id_model
         const response= await axios.post(`${URL_MICRO1}/DTP_CodigosProduccion`,{
             serialProduccion, id_dtp, id_proceso, id_modelo
         })
-
+ 
         const respuesta=response.data.mensaje
       
-        console.log(respuesta)
         SuccessAlert({respuesta})
        
     } catch (error) {

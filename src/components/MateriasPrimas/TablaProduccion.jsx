@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Divider, Row, Col, Tabs } from "antd";
+import { Divider } from "antd";
 import Get_etapas_barro from "../../services/Get_etapas_barro";
 import Table from "../UI/Table";
 import { formatFecha } from "../utilidades/FormatearFecta";
 import EstadoProc from "./botonOT/EstadoProceso";
 import PaginasBarro from "../UI/PaginasBarro";
+
 const TablaBarro = () => {
   const [datosApi, setdatosApi] = useState([]);
-console.log('barro liberado',datosApi)
-  const id_fase_aprobacion=5
-  const estado_proceso=2
+  const id_fase_aprobacion = 5;
+  const estado_proceso = 2;
+
   useEffect(() => {
     const fetch = async () => {
       try {
-        const response = await  Get_etapas_barro({id_fase_aprobacion,estado_proceso});
+        const response = await Get_etapas_barro({
+          id_fase_aprobacion,
+          estado_proceso,
+        });
         setdatosApi(response.data.rows);
       } catch (error) {
         console.log(error);
@@ -21,8 +25,6 @@ console.log('barro liberado',datosApi)
     };
     fetch();
   }, []);
-
-
 
   const encabezadosTab = [
     "Código Lote",
@@ -34,7 +36,7 @@ console.log('barro liberado',datosApi)
     "% Arcilla",
     "% Arena",
     "% Limo",
-    "Cerrar Orden"
+    "Cerrar Orden",
   ];
 
   const bodyRows = datosApi.map((row) => [
@@ -46,40 +48,73 @@ console.log('barro liberado',datosApi)
     row.indice_plastico || "",
     row.arcilla || "",
     row.arena || "",
-    row.limo || "", 
-    <EstadoProc id={row.ID_muestra} encabezado='registroMuestra'/>
+    row.limo || "",
+    <EstadoProc id={row.ID_muestra} encabezado="registroMuestra" />,
   ]);
-  const pagina = "4";
-  return (
-    <div style={{ width: "100%", height: "100vh", padding: "1rem" }}>
-      <Row style={{ height: "100%" }}>
-        {/* Tabs laterales */}
-      
-        <Col span={3} style={{ borderRight: "1px solid #f0f0f0" }}>
-        <Divider orientation="left" style={{ color: "blue" }}>
-            Etapas del Barro
-          </Divider>
-          <PaginasBarro activeTabKey={pagina} />
-        </Col>
 
-        {/* Tabla central */}
-        <Col span={20} style={{ paddingLeft: "2rem" }}>
-        <Divider orientation="left" style={{ color: "#f5222d" }}>
-            Lotes Para Producción
-          </Divider>
-          <div style={{ marginTop: "1rem" }}>
-            <Table encabezadosTab={encabezadosTab} datosTab={bodyRows} />
-          </div>
-        </Col>
-      </Row>
+  const pagina = "4";
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        width: "100%",
+        height: "calc(100vh - 120px)",
+        backgroundColor: "#fff",
+        borderRadius: "12px",
+        boxShadow: "0 0 10px rgba(0,0,0,0.05)",
+        overflow: "hidden",
+      }}
+    >
+      {/* Panel lateral */}
+      <div
+        style={{
+          minWidth: "230px",
+          maxWidth: "230px",
+          borderRight: "1px solid #e0e0e0",
+          backgroundColor: "#fafafa",
+          padding: "16px 8px",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Divider
+          orientation="left"
+          style={{
+            color: "blue",
+            margin: "0 0 8px 16px",
+            fontWeight: "bold",
+          }}
+        >
+          Etapas del Barro
+        </Divider>
+        <div style={{ flexGrow: 1, overflowY: "auto" }}>
+          <PaginasBarro activeTabKey={pagina} />
+        </div>
+      </div>
+
+      {/* Contenido principal */}
+      <div
+        style={{
+          flexGrow: 1,
+          padding: "24px 32px",
+          overflowY: "auto",
+          backgroundColor: "#fff",
+        }}
+      >
+        <Divider
+          orientation="left"
+          style={{ color: "#f5222d", fontWeight: "bold" }}
+        >
+          Lotes Para Producción
+        </Divider>
+
+        <div style={{ marginTop: "1rem" }}>
+          <Table encabezadosTab={encabezadosTab} datosTab={bodyRows} />
+        </div>
+      </div>
     </div>
   );
 };
 
 export default TablaBarro;
-
-
-
-
-
-

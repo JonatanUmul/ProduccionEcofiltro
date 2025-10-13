@@ -9,10 +9,13 @@ import Table from "../../UI/Table";
 import PostSeriesProduccion from "../../../services/PostSeriesProduccion";
 import PutSeriesProduccion from "../../../services/PutSeriesProduccion";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+
 const URL = process.env.REACT_APP_URL;
 
 const DTHH = () => {
-  
+  const navigate = useNavigate();
   const { handleSubmit, register, watch, setValue } = useForm();
   const [turno, setTurno] = useState([]);
   const [modelos, setModelos] = useState([]);
@@ -21,15 +24,12 @@ const DTHH = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [serie1, setSerie] = useState([]);
-  console.log('serie serie',serie1)
 
   const [highlighted, setHighlighted] = useState([]);
   const modeloSeleccionado = watch("id_modelo");
-  console.log(modeloSeleccionado)
   const codigoInicio = watch("codigoInicio");
   const codigoFin = watch("codigoFin");
   const [id_dtp, setId_dtp] = useState();
-  console.log('horneados',id_dtp)
   const maquinaria = "Horno";
   const id_area = 3;
   const [id_creador, setIdCreador] = useState("");
@@ -203,10 +203,8 @@ const DTHH = () => {
         id_creador: id_creador,
         id_est: 2,
       });
-  window.location.href = "/Home/TablaOT";
-      //  1. Enviar series OK para producción
+  navigate("/Home/TablaOT");
       const seriesOkUnicas = [...new Set(seriesOK.map((row) => row.serie))];
-  console.log('okok',seriesOkUnicas)
       if (seriesOkUnicas.length > 0) {
         await PostSeriesProduccion({
           serialProduccion: seriesOkUnicas,
@@ -223,11 +221,10 @@ const DTHH = () => {
           id_proceso: 4,
           disponibilidad:"Indisponible",
         });
-      }
+    }
 
       //  Mostrar éxito
-      Swal.fire("Éxito", "Datos guardados correctamente", "success");
-      window.location.href = "/Home/TablaOT";
+  navigate("/Home/TablaOT");
     } catch (error) {
       console.error("Error al guardar DTHH:", error);
       Swal.fire("Error", "Ocurrió un problema al guardar los datos", "error");

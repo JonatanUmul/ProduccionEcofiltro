@@ -1,22 +1,21 @@
 import axios from "axios";
 import SuccessAlert from "../components/UI/alerts/succesAlert";
 import ErrorAlert from "../components/UI/alerts/ErrorAlert";
-
-const URL = process.env.REACT_APP_URL;
-
+import timeAlert from "../components/UI/alerts/timeAlert";
+import Swal from "sweetalert2";
+//const URL = process.env.REACT_APP_URL;
+const URL_MICRO1 = process.env.REACT_APP_URL_MICRO1;
 
 const PostSeriesProduccion=async({serialProduccion, id_proceso, id_modelo, disponibilidad})=>{
    
-    console.log(serialProduccion, id_proceso, id_modelo, disponibilidad)
+    console.log('Series para actualizar',serialProduccion, id_proceso, id_modelo, disponibilidad)
 
     try {
-        const response= await axios.put(`${URL}/UPDATE_CodigosProduccion`,{
+       const response= await axios.put(`${URL_MICRO1}/UPDATE_CodigosProduccion`,{
             serialProduccion, id_proceso, id_modelo, disponibilidad
         })
 
         const respuesta=response.data.mensaje
-      
-        console.log(respuesta)
         SuccessAlert({respuesta})
        
     } catch (error) {

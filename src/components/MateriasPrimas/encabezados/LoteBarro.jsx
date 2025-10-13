@@ -71,7 +71,7 @@ const LoteBarro = ({ toggleModal, materiaPrima, enc_matprima }) => {
         style={{ maxWidth: "600px", width: "100%", border: "0px" }}
       >
         <h4 className="text-center text-primary mb-4">
-          Registro camionada de aserrín
+          Registro camionada de barro
         </h4>
 
         <form onSubmit={handleSubmit(onSubmit)}>

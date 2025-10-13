@@ -93,7 +93,7 @@ const EstadoProc = ({ id, encabezado }) => {
             window.location.href = "/Home/TablaFormulasProduccion"
             break
           case "otfm":
-             window.location.href = "/Home/TablaProcesoDeMezclado"
+             window.location.href = "/Home/TablaProcesoDeFormulacion"
             break
           default:
             window.location.href = "/Home/TablaOT"

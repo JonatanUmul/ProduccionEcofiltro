@@ -34,12 +34,9 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
   const TotalLbAserrin = watch("librasAserrin") * watch("formulas_usadas");
   const modelo = watch("id_ufmodelo");
   const codigoInicioLiberado =watch("codigoInicioLiberado");
-  console.log('codigoInicioLiberado',codigoInicioLiberado)
   const producido = watch("producido");
   const identificador = watch("identificador");
-console.log('Cambiar ruta', cambiarSerie)
   const id_camionada_barro = watch("id_camionada_barro");
-console.log()
   
   const Disponible =
     Array.isArray(inventarioBarro) &&

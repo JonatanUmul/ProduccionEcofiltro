@@ -59,13 +59,49 @@ const PaginasBarro = ({ activeTabKey, materiaPrima }) => {
   ];
 
   return (
-    <div style={{ width: "100%" }}>
+     <div
+      style={{
+        display: "flex",
+        width: "100%",
+        height: "calc(100vh - 150px)",
+        backgroundColor: "#fff",
+        borderRadius: "12px",
+        overflow: "hidden",
+        boxShadow: "0 0 10px rgba(0,0,0,0.05)",
+      }}
+    >
+      {/* Panel lateral de Tabs */}
+      <div
+        style={{
+          minWidth: 200,
+          backgroundColor: "#f8f9fc",
+          borderRight: "1px solid #e0e0e0",
+          padding: "10px 0",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
+      >
       <Tabs
         activeKey={activeTabKey}
         tabPosition={tabPosition}
         items={itemsTabs}
         onChange={handleTabChange}
       />
+
+ </div>
+
+      {/* Contenido principal */}
+      <div
+        style={{
+          flexGrow: 1,
+          background: "#fff",
+          padding: "5px",
+          overflow: "auto",
+        }}
+      >
+        {/* Aquí va la tabla o el contenido del tab */}
+      </div>
     </div>
   );
 };

@@ -218,7 +218,7 @@ const DTHH = () => {
         await PutSeriesProduccion({
           serialProduccion: TodasSeriesSelect,
           id_modelo: formData.id_modelo,
-          id_proceso: 4,
+          id_proceso: id_proceso,
           disponibilidad:"Indisponible",
         });
     }

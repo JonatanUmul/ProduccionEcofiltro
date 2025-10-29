@@ -66,8 +66,10 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Fecha</th>
+                <th scope="col">Lote</th>
                 <th scope="col">Hora</th>
-                <th scope="col">Cantidad</th>
+                <th scope="col">Sacos</th>
+                <th scope="col">Total libras</th>
                 <th scope="col">Humedad</th>
            
 
@@ -78,17 +80,20 @@
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
                   <td>{formatFecha(fila.fecha_creacion) }</td>
+                  <td>{fila.codigo_lote}</td>
                   <td>{fila.hora_creacion}</td>
                   <td>{fila.cantidad}</td>
+                  <td>{fila.libras_tot}</td>
                   
-                  <td>{fila.humedad}</td>
+                  <td>{fila.humedad} %</td>
                
                 </tr>
               ))}
-              <tr >
-          <td colSpan="3"><strong>Total:</strong></td>
-          <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.cantidad), 0)}</strong></td>
-          <td><strong>{(datos.reduce((total, fila) => total + parseFloat(fila.humedad), 0) / datos.length).toFixed(1)}%</strong></td>
+              <tr>
+          <td colSpan="4"><strong>Total:</strong></td>
+          <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.sacos), 0)}</strong></td>
+                    <td><strong>{datos.reduce((total, fila) => total + parseFloat(fila.libras_tot), 0)}lb</strong></td>
+          {/*<td><strong>{(datos.reduce((total, fila) => total + parseFloat(fila.libras_tot), 0) / datos.length).toFixed(1)}%</strong></td>*/}
           </tr>
             </tbody>
           </table>

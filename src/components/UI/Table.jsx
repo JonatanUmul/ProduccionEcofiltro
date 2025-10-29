@@ -76,18 +76,21 @@ const Table = ({ encabezadosTab = [], datosTab = [] }) => {
           {Array.isArray(datosTab) && datosTab.length > 0 ? (
             datosTab.map((fila, i) => {
               const status = getStatus(fila);
-
+              const disp = Number(fila.lb_disponible ?? fila[5] ?? 0);
+              console.log('ver aca',disp)
               // Definimos colores amigables
               let red='f95738'
               let bg = "transparent";
               let color = "inherit";
               if (status === "no-cumple") {
-                bg = "#f8d7da"; // rojo pastel
-                color = "#842029";
-              } else if (status === "aprobado") {
+                bg = "#e4bcb7ff"; 
+                color = "#081C15";
+              } 
+              else if (status === "aprobado") {
                 bg = "#d1e7dd"; // verde pastel
                 color = "#0f5132";
               }
+              
 
               return (
                 <tr key={i} style={{ backgroundColor: bg, color }}>

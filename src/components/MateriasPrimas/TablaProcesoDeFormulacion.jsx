@@ -114,7 +114,7 @@ console.log('datosApi',datosApi)
         >
           Lotes de Aserrín - Formulación
         </Divider>
-
+          
         <div style={{ marginBottom: "1rem" }}>
           <CrearOT datosApi="OTFM" encabezados="OTFM" />
         </div>

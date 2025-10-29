@@ -8,7 +8,7 @@ const FormEHP = () => {
   const [id_creador, setid_creador] = useState('');
   const [correlativoFormateado, setMaxid] = useState('');
   const correlativo= correlativoFormateado?.correlativo
-
+console.log('corr',correlativo)
 useEffect(()=>{
   setid_creador(localStorage.getItem('id_creador'))
 })

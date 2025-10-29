@@ -11,9 +11,27 @@ const DTFM = ({datosApi}) => {
   const [modelos, setModelos] = useState([]);
   const [id_creador, setid_creador] = useState('');
   const [LotesAserrinOK, setlotesAserrinOK] = useState([]);
+  const [Disponible, setDisponible]=useState([])
   const formulas=watch('cantidad')
+  const correlativo=watch('correlativo')
   const peso=watch('peso')
 
+  console.log('Disponible',LotesAserrinOK)
+
+  const funcion=()=>{
+
+    if(!Array.isArray(LotesAserrinOK.rows)){
+      return
+    }
+    const LotesAserrin=LotesAserrinOK.rows
+    const b= LotesAserrin.filter((e)=>e.oscorrelativo===correlativo)
+    setDisponible(Number(b[0]?.lb_disponible))
+  }
+
+  useEffect(()=>{
+    funcion()
+  },[correlativo])
+  
   const cantidadLibras=(formulas*peso)
 
   useEffect(()=>{
@@ -29,7 +47,7 @@ const DTFM = ({datosApi}) => {
       .then(([ ModelosufResponse, LotesAserrinAprobados]) => {
   
         setModelos(ModelosufResponse.data);
-        setlotesAserrinOK(LotesAserrinAprobados.data)
+        setlotesAserrinOK(LotesAserrinAprobados?.data)
       })
       .catch((error) => {
       });
@@ -64,7 +82,7 @@ const DTFM = ({datosApi}) => {
   };
 
 
- 
+
   
   return (
     <div className="mt-4">
@@ -93,16 +111,31 @@ const DTFM = ({datosApi}) => {
       <select className="form-select" id="correlativo" {...register("correlativo")} required>
       <option value="" disabled selected>Seleccione...</option>
       {Array.isArray(LotesAserrinOK.rows)&& LotesAserrinOK.rows.map(Lotes => (
-          <option key={Lotes.id} value={Lotes.correlativo}>
-            {Lotes.correlativo}
+          <option key={Lotes.id} >
+            {Lotes.oscorrelativo}
           </option>
         ))}
       </select>
     </div>
+    
+{Disponible<=0 ?
+<div className="alert alert-danger" role="alert">
+  El lote presenta un valor igual o inferior a cero en el inventario.  
+  Por favor, solicita el cierre de la orden correspondiente.
 
-      <div className="col-md-6">
+  Disponible: {Disponible} lb
+</div>
+
+:
+<div>
+  
+  <div className="alert alert-info" role="alert">
+ Disponible: {Disponible} lb
+</div>
+
+  <div className="col-md-6">
       <label htmlFor="aserradero" className="form-label">
-          Modelo
+          Modelo:
       </label>
       <select className="form-select" id="id_modelo" {...register("id_modelo")} required>
       <option value="" disabled selected>Seleccione...</option>
@@ -139,6 +172,24 @@ const DTFM = ({datosApi}) => {
           </label>
           <input type="text" className="form-control" id="humedad" {...register("humedad")} required />
         </div>  
+             
+        <div className="col-12">
+        {/* <div className="col-4">
+        <a type="button" className="btn btn-danger mb-3" onClick={llamar}>Mix</a>
+        </div> */}
+        {cantidadLibras>Disponible?
+        <div className="alert alert-danger" role="alert">
+  La cantidad en libras no puede ser mayor a lo Disponible, revisa tus datos.
+</div>
+
+        :
+          <button type="submit" className="btn btn-primary">Guardar</button>
+          }
+        
+        </div>
+        </div>
+
+}
 {/* 
         {formula2 ? (
           <div className="row mt-3"> 
@@ -167,13 +218,7 @@ const DTFM = ({datosApi}) => {
         ) :false} */}
         
         
-        
-        <div className="col-12">
-        {/* <div className="col-4">
-        <a type="button" className="btn btn-danger mb-3" onClick={llamar}>Mix</a>
-        </div> */}
-          <button type="submit" className="btn btn-primary">Guardar</button>
-        </div>
+   
         
       </form>
     </div>

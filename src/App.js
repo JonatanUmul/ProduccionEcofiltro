@@ -79,8 +79,9 @@ function App() {
 
   return (
     <AbilityProvider>
+
+     
       <Router>
-      {/* <Router basename="/app_produccion"> */}
         <Routes>
           <Route path="/" element={<Login toggleDarkMode={toggleDarkMode} darkMode={darkMode} />} />
           <Route element={<ProtectedRoute />}>
@@ -143,6 +144,7 @@ function App() {
          
         </Routes>
       </Router>
+
       </AbilityProvider>
   );
 }

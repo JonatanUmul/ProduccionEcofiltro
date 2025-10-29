@@ -36,24 +36,33 @@ const TablaAserrinMezclado = () => {
 
   const encabezadosTab = [
     "Detalle",
-    "Fecha",
+    "Fecha.        ",
     "Correlativo",
-    "     Área     ",
+   // "Mezclado",
+    "Lb.mezclado",
+    "Lb.formulado",
+    "Lb.disponible",
+   // "     Área     ",
     "Estado",
     "Datos del Aserrín ",
     "Crear registro de sacos",
     "Estado mezclado",
     "Estado de la orden",
+    
   ];
-
+console.log('datosApi',datosApi)
   const bodyRows =
     Array.isArray(datosApi) &&
     datosApi.map((rows) => [
       <Detalle datosApi={rows} />,
       formatFecha(rows.fecha_creacion) || "",
-      rows.correlativo || "",
-      rows.EncName || "",
-      rows.aprobado || "",
+      rows.oscorrelativo || "",
+      // rows.sacos || "",
+       rows.libras_aserrin || "",
+       rows.fm_lib || "",
+       rows.lb_disponible || "",
+    //  rows.EncName || "",
+     rows.aprobado || "",
       <CrearAS encabezados="Datos_Aserrin" datosApi={rows} type="button">
         Crear Registro
       </CrearAS>,

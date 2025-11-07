@@ -7,8 +7,10 @@ import Get_TablaProcesoDeFormulacion from "../../services/Get_TablaProcesoDeForm
 import Table from "../UI/Table";
 import PaginasAserrin from "../UI/PaginasAserrin";
 import { Divider } from "antd";
+import { useAbility } from "../AbilityContext";
 
 const TablaFormulacionAserrin = () => {
+  const ability=useAbility()
   const [datosApi, setdatosApi] = useState([]);
   const [id_creador, setid_creador] = useState("");
   const materiaPrim = "Aserrin";
@@ -50,8 +52,16 @@ console.log('datosApi',datosApi)
       rows.correlativo || "",
       `${rows.encabezado}-${rows.id}` || "",
       rows.EncName || "",
-      <CrearOT datosApi={rows} />,
-      <EstadoProceso id={rows.id} encabezado="otfm" />,
+      ((ability && (ability.can('manage', 'all') || ability.can('manage', 'Supervisor')|| ability.can('create', 'BotonOT'))) ? (
+      <CrearOT datosApi={rows} />
+) : <button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+       Sin Permisos
+     </button>),
+        (((ability.can('manage', 'Supervisor'))) ? (
+      <EstadoProceso id={rows.id} encabezado="otfm" />)
+      : <button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+       Sin Permisos
+     </button>),
     ]);
 
   const pagina = "3";

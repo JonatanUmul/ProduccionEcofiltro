@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useAbility } from "../../AbilityContext";
 const URL = process.env.REACT_APP_URL;
+
 const EstadoProc = ({ id, encabezado, tabla }) => {
-  console.log('Buscar aca',encabezado)
+  
+  const ability = useAbility();
   const [estado, setEstado] = useState([]);
   const [cambiarEst, setCambiarEst] = useState(""); // Estado para almacenar el estado seleccionado
   const [cambiarRuta, setCambiarRuta] = useState("");
@@ -93,6 +96,7 @@ const EstadoProc = ({ id, encabezado, tabla }) => {
 
   return (
     <div>
+                {(ability && ( ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
       <select
         name="estado"
         id="id_est"
@@ -108,6 +112,11 @@ const EstadoProc = ({ id, encabezado, tabla }) => {
             </option>
           ))}
       </select>
+      ):
+       <button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+        Sin Permisos
+            </button>
+      }
     </div>
   );
 };

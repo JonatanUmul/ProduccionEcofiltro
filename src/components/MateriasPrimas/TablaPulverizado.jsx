@@ -6,8 +6,9 @@ import { formatFecha } from "../utilidades/FormatearFecta";
 import PaginasBarro from "../UI/PaginasBarro";
 import CambioAHomogenización from "./botonOT/CambioAHomogenización";
 import CrearOT from "./botonOT/Crear_OT";
-
+import { useAbility } from "../AbilityContext";
 const TablaBarro = () => {
+  const ability=useAbility()
   const [datosApi, setdatosApi] = useState([]);
   const [id_creador, setid_creador] = useState("");
 
@@ -53,14 +54,22 @@ const TablaBarro = () => {
     formatFecha(row.fechaHomogenizacion) || "",
     row.cant_sacos || "",
     row.cant_lib || "",
-    <CrearOT datosApi={row} encabezados={encabezados} />,
+    ((ability && (ability.can('create', 'BotonOT') || ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
+      <CrearOT datosApi={row} encabezados={encabezados} />
+    ) : <button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+      Sin Permisos
+    </button>),
+     ((ability && (ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
     <CambioAHomogenización
       datosApi={row}
       id_creador={id_creador}
       nameSelector={nameSelector}
       valueSelector={valueSelector}
       encabezados={encabezados}
-    />,
+    />
+     ) : <button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+       Sin Permisos
+     </button>)
   ]);
 
   const pagina = "3";

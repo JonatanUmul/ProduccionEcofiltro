@@ -13,6 +13,7 @@ import PaginasAserrin from "../UI/PaginasAserrin";
 import { useLocation } from "react-router-dom";
 
 const TablaBarro = () => {
+    const ability = useAbility();
   const [datosApi, setdatosApi] = useState([]);
   const [id_creador, setid_creador] = useState("");
   const location = useLocation();
@@ -68,12 +69,16 @@ const TablaBarro = () => {
       rows.arcilla || "",
       rows.arena || "",
       rows.limo || "",
+       ((ability && (ability.can('manage', 'all') || ability.can('manage', 'Supervisor'))) ? (
+
       <CambioAHomogenización
         datosApi={rows}
         id_creador={id_creador}
         nameSelector={nameSelector}
         valueSelector={valueSelector}
-      />,
+      />):<button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                  Sin Permisos
+                </button>)
     ]);
 
   const pagina = "2";

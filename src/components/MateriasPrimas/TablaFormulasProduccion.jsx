@@ -6,8 +6,10 @@ import Get_TablaProcesoDeFormulacion from "../../services/Get_TablaProcesoDeForm
 import Table from "../UI/Table";
 import PaginasAserrin from "../UI/PaginasAserrin";
 import { Divider } from "antd";
+import { useAbility } from "../AbilityContext";
 
 const TablaInventarioProduccion = () => {
+  const ability=useAbility()
   const [datosApi, setdatosApi] = useState([]);
   const [id_creador, setid_creador] = useState("");
   const materiaPrim = "InventarioOtfmProduccion";
@@ -50,7 +52,11 @@ const TablaInventarioProduccion = () => {
       `${rows.encabezado}-${rows.id}` || "",
       `${rows.total_bolsas} | ${rows.bolsas_disponibles}`,
       `${rows.LibrasDisponibles}(lb) | ${rows.total_libras}(lb)`,
-      <EstadoProceso id={rows.id} encabezado="TablaFormulasProduccion" />,
+       ((ability.can('manage', 'Supervisor'))) ? (
+      <EstadoProceso id={rows.id} encabezado="TablaFormulasProduccion" />)
+      :( <button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+       Sin Permisos
+     </button>)
     ]);
 
   const pagina = "4";

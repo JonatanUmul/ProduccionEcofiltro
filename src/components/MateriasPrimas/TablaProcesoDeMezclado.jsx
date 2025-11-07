@@ -10,8 +10,9 @@ import Get_OT_mezclado_aserrin from "../../services/Get_OT_mezclado_aserrin";
 import Table from "../UI/Table";
 import PaginasAserrin from "../UI/PaginasAserrin";
 import { useLocation } from "react-router-dom";
-
+import { useAbility } from "../AbilityContext";
 const TablaAserrinMezclado = () => {
+  const ability=useAbility()
   const [datosApi, setdatosApi] = useState([]);
   const [id_creador, setid_creador] = useState("");
   const location = useLocation();
@@ -63,10 +64,19 @@ console.log('datosApi',datosApi)
        rows.lb_disponible || "",
     //  rows.EncName || "",
      rows.aprobado || "",
+      ((ability && (ability.can('create', 'Laboratorio'))) ? (
       <CrearAS encabezados="Datos_Aserrin" datosApi={rows} type="button">
         Crear Registro
-      </CrearAS>,
-      <CrearOT datosApi={rows} Tabla="dot_mezclado_aserrin" />,
+      </CrearAS>
+        ):<button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                  Laboratorio
+                </button>),
+      ((ability && (ability.can('create', 'BotonOT') || ability.can('create', 'Supervisor'))) ? (
+      <CrearOT datosApi={rows} Tabla="dot_mezclado_aserrin" />
+      ):<button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                  Sin Permiso
+        </button>),
+      ((ability && (ability.can('create', 'Laboratorio'))) ? (
       <EstadoProcesoAserrin
         telefono={rows.telefono}
         aprobado={rows.aprobado}
@@ -74,8 +84,14 @@ console.log('datosApi',datosApi)
         EncName={rows.EncName}
         id={rows.id}
         Tabla="EstadoProcesoMezclaAserrin"
-      />,
-      <EstadoProceso id={rows.id} encabezado="ProcesoMezclado" />,
+      />):<button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                  Laboratorio
+        </button>),
+      ((ability && ( ability.can('manage', 'Supervisor'))) ? (
+      <EstadoProceso id={rows.id} encabezado="ProcesoMezclado" />
+       ) : <button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+       Sin Permiso
+     </button>)
     ]);
 
   const pagina = "2";
@@ -157,14 +173,14 @@ console.log('datosApi',datosApi)
         <div
           style={{
             width: "100%",
-            overflowX: "auto", // 🔥 scroll horizontal si es necesario
+            overflowX: "auto", 
             overflowY: "hidden",
             borderRadius: "8px",
           }}
         >
           <div
             style={{
-              minWidth: "950px", // 🔥 evita que se colapse en pantallas pequeñas
+              minWidth: "950px", 
             }}
           >
             <Table encabezadosTab={encabezadosTab} datosTab={bodyRows} />

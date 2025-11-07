@@ -123,13 +123,23 @@ const TablaBarro = () => {
                 </Card.Subtitle>
                 <div style={{ borderTop: '1px solid #eee', margin: '8px 0' }} />
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+
+                  {(ability && (ability.can('create', 'Laboratorio'))) ? (
                   <CrearOT datosApi={row} type="button">Crear Registro</CrearOT>
+                  ) : <button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                    Laboratorio
+                  </button>}
+                  
+                   {(ability && (ability.can('create', 'Laboratorio'))) ? (
                   <EstadoProc
                     encacezado="TablaRecepcionBarro"
                     datosApi={row}
                     id_creador={id_creador}
                     materiaPrima={materiaPrima}
                   />
+                  ) : <button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
+                    Laboratorio
+                  </button>}
                 </div>
               </Card.Body>
             </Card>

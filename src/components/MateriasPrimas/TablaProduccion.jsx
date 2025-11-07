@@ -5,8 +5,10 @@ import Table from "../UI/Table";
 import { formatFecha } from "../utilidades/FormatearFecta";
 import EstadoProc from "./botonOT/EstadoProceso";
 import PaginasBarro from "../UI/PaginasBarro";
+import { useAbility } from "../AbilityContext";
 
 const TablaBarro = () => {
+  const ability = useAbility();
   const [datosApi, setdatosApi] = useState([]);
   const id_fase_aprobacion = 5;
   const estado_proceso = 2;
@@ -49,7 +51,8 @@ const TablaBarro = () => {
     row.arcilla || "",
     row.arena || "",
     row.limo || "",
-    <EstadoProc id={row.ID_muestra} encabezado="registroMuestra" />,
+      <EstadoProc id={row.ID_muestra} encabezado="registroMuestra" />
+ 
   ]);
 
   const pagina = "4";

@@ -9,19 +9,20 @@ export default function defineAbilitiesFor(role) {
 
   switch (role) {
     case 1:
-      can('manage','all'); // Permiso para gestionar todos los recursos
+      can('manage', 'all'); // Permiso para gestionar todos los recursos
       break;
-      case 2:
-        can('read', 'all'); // Permiso para gestionar todos los recursos
+    case 2:
+      can('read', 'all'); // Permiso para gestionar todos los recursos
       break;
-      case 3:
-        can('create', 'CrearOT'); // Permiso para leer todos los recursos
-        can('manage','Supervisor'); // Permiso para gestionar todos los recursos
-      
-        break;
-      case 7:
+    case 3:
+      can('create', 'CrearOT'); // Permiso para leer todos los recursos
+      can('manage', 'Supervisor'); // Permiso para gestionar todos los recursos
+      break;
+    case 7:
       can('create', 'BotonOT'); // Permiso para gestionar todos los recursos
-     
+     break;
+      case 10:
+      can('create', 'Laboratorio'); // Permiso para gestionar todos los recursos
       break;
     default:
       can('read', 'all'); // Permiso predeterminado de lectura

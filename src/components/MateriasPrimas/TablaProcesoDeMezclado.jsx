@@ -80,7 +80,7 @@ console.log('datosApi',datosApi)
       <EstadoProcesoAserrin
         telefono={rows.telefono}
         aprobado={rows.aprobado}
-        correlativo={rows.correlativo}
+        correlativo={rows.oscorrelativo}
         EncName={rows.EncName}
         id={rows.id}
         Tabla="EstadoProcesoMezclaAserrin"

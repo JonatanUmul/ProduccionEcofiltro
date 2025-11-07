@@ -4,7 +4,7 @@ const URL = process.env.REACT_APP_URL
 const EstadoProc = ({ id, encabezado, tabla, telefono, correlativo, EncName  }) => {
   const [cambiarEst, setCambiarEst] = useState(""); // Estado para almacenar el estado seleccionado
   const [cambiarRuta, setCambiarRuta] = useState('');
-console.log('ruta cambiada',cambiarEst )
+console.log('ruta cambiada',correlativo )
 
 
   // Manejar el cambio de opción

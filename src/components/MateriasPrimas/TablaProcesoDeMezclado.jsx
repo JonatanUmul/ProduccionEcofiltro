@@ -64,7 +64,7 @@ console.log('datosApi',datosApi)
        rows.lb_disponible || "",
     //  rows.EncName || "",
      rows.aprobado || "",
-      ((ability && (ability.can('create', 'Laboratorio'))) ? (
+      ((ability && (ability.can('create', 'Laboratorio')|| ability.can('create', 'Supervisor'))) ? (
       <CrearAS encabezados="Datos_Aserrin" datosApi={rows} type="button">
         Crear Registro
       </CrearAS>

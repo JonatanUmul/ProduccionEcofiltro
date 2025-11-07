@@ -124,7 +124,7 @@ const TablaBarro = () => {
                 <div style={{ borderTop: '1px solid #eee', margin: '8px 0' }} />
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
 
-                  {(ability && (ability.can('create', 'Laboratorio'))) ? (
+                  {(ability && (ability.can('create', 'Laboratorio') || ability.can('manage', 'Supervisor'))) ? (
                   <CrearOT datosApi={row} type="button">Crear Registro</CrearOT>
                   ) : <button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
                     Laboratorio

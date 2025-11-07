@@ -76,7 +76,7 @@ console.log('datosApi',datosApi)
       ):<button type="default" disabled style={{ color: 'red', fontWeight: 'bold' }}>
                   Sin Permiso
         </button>),
-      ((ability && (ability.can('create', 'Laboratorio'))) ? (
+      ((ability && (ability.can('create', 'Laboratorio')|| ability.can('create', 'Supervisor'))) ? (
       <EstadoProcesoAserrin
         telefono={rows.telefono}
         aprobado={rows.aprobado}

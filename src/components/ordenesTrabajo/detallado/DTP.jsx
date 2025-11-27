@@ -86,7 +86,7 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
       axios.get(`${URL}/CernidoDetalle`),
       axios.get(`${URL}/GrupodeTrabajo`),
       axios.get(`${URL}/maquinaria/${maquinaria}`),
-      axios.get(`${URL}/etapas_barro_aprobados`,{params:{id_fase_aprobacion:4}}),
+      axios.get(`${URL}/etapas_barro_aprobados`,{params:{id_fase_aprobacion:5}}),
       axios.get(`${URL}/DTFM_ABIERTOS`),
     ])
       .then(

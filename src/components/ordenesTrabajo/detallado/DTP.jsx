@@ -37,10 +37,10 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
   const producido = watch("producido");
   const identificador = watch("identificador");
   const id_camionada_barro = watch("id_camionada_barro");
-  
+  console.log('loteSelect',idSelect)
   const Disponible =
     Array.isArray(inventarioBarro) &&
-    inventarioBarro.map((inv) => {
+    inventarioBarro?.map((inv) => {
       return inv.peso_total_libras;
     });
 
@@ -187,16 +187,18 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
   };
 
   const SelectLote = (event) => {
-    console.log(event.target.value)
-    setLoteSelect(event.target.value);
-
+    const id=event.target.value
+    console.log('datos',event.target.value)
+    setLoteSelect(event?.target.value);
+    console.log('liberados',lotesLiberados)
     const LotesID = Object.fromEntries(
-      Array.isArray(lotesLiberados.rows) &&
-        lotesLiberados.rows.map((lote) => [lote.id, lote])
+      Array.isArray(lotesLiberados?.rows) &&
+        lotesLiberados?.rows.map((lote) => [lote.id4, lote])
     );
 
     const IdSelect = LotesID[event.target.value];
-    setIdSelect(IdSelect.codigo_lote);
+    console.log('lote lote',LotesID)
+    setIdSelect(IdSelect?.codigo_lote);
   };
 
 
@@ -260,10 +262,10 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
               <option value="" disabled selected>
                 Seleccione...
               </option>
-              {Array.isArray(lotesLiberados.rows) &&
-                lotesLiberados.rows.length > 0 &&
-                lotesLiberados.rows.map((lote) => (
-                  <option key={lote.id} value={lote.id}>
+              {Array.isArray(lotesLiberados?.rows) &&
+                lotesLiberados?.rows.length > 0 &&
+                lotesLiberados?.rows.map((lote) => (
+                  <option key={lote.id4} value={lote.id4}>
                     {lote.codigo_lote}
                   </option>
                 ))}
@@ -576,7 +578,7 @@ required/>    </div>
                 <label style={{ color: "red" }}>{error}</label>
               </div>
      
- {loteSelect>0 && Number(Disponible) >= Number(TotalLbBarro) && Number(Disponible) >= 0  ?(
+ {loteSelect>=0 && Number(Disponible) >= Number(TotalLbBarro) && Number(Disponible) >= 0  ?(
     <div className="col-12">
     <button type="submit" className="btn btn-primary">
       Guardar

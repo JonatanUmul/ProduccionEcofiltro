@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/charts": "^2.6.6",
     "@babel/runtime": "^7.26.0",
     "@casl/ability": "^6.7.1",
     "@craco/craco": "^7.1.0",

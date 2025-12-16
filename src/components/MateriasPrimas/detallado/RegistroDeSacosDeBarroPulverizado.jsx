@@ -8,6 +8,7 @@ import PostResgitroSacosdeBarroPulverizado from "../../../services/PostResgitroS
 const RegistroDeSacosDeBarro = ({ datosApi, onClose }) => {
   const Hoy = new Date().toISOString().split("T")[0];
   const id_camionada = datosApi.id;
+  console.log('id_camionada',id_camionada)
   const camionada = datosApi.codigo_lote;
   const [id_creador, setid_creador] = useState("");
   const [peso, setPeso] = useState(0);

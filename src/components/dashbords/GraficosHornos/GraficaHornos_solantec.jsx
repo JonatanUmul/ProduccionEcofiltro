@@ -1,4 +1,5 @@
-import { Line } from '@ant-design/plots';
+//import { Line } from '@ant-design/plots';
+import { Line } from '@ant-design/charts';
 import { Card } from 'antd';
 
 const GraficaPromedio = ({ data }) => {

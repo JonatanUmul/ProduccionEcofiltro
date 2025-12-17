@@ -13,7 +13,7 @@ const URL = process.env.REACT_APP_URL;
 const ROTHP = () => {
   const navigate = useNavigate();
   const [datos, setDatos] = useState([]);
-
+console.log('datos produccion',datos)
   // const [fecha_creacion_inicio, setFecha] = useState('2024/04/01');
   // const [fecha_creacion_fin, setFecha2] = useState('2024/04/29');
   
@@ -315,7 +315,7 @@ const filtrosRecuperados = location.state?.filtros || JSON.parse(localStorage.ge
                   }
                   role={detalleProduccion === index ? "alert" : ""}
                 >
-                  {fila.codigoInicio}
+                  {fila.letra_inicio}{fila.codigoInicio}
                 </td>
                 <td
                   className={
@@ -323,7 +323,7 @@ const filtrosRecuperados = location.state?.filtros || JSON.parse(localStorage.ge
                   }
                   role={detalleProduccion === index ? "alert" : ""}
                 >
-                  {fila.codigoFinal}
+                  {fila.letra_fin}{fila.codigoFinal}
                 </td>
                 <td
                   className={

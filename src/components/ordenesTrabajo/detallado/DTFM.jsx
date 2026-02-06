@@ -4,7 +4,7 @@ import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from 'sweetalert2'; // Importar SweetAlert
 const URL = process.env.REACT_APP_URL
-
+console.log(URL)
 const DTFM = ({datosApi}) => {
   console.log('dtfm',datosApi)
   const { handleSubmit, register, watch } = useForm();

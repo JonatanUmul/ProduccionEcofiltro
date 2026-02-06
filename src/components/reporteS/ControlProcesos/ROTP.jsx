@@ -238,13 +238,14 @@ const filtrosRecuperados = location.state?.filtros || JSON.parse(localStorage.ge
             <th scope="col">Fecha</th>
             <th scope="col">Turno</th>
             <th scope="col">Modelo</th>
+            {/*<th scope="col">Grupo Prod.</th>*/}
             <th scope="col">Producido</th>
-            <th scope="col">Grupo Prod.</th>
-            <th scope="col">C.Inicio</th>
-            <th scope="col">C.Fin</th>
-            <th scope="col">Cantidades</th>
-            <th scope="col">Aserradero</th>
-            <th scope="col">Formula</th>
+            <th scope="col">Inicio</th>
+            <th scope="col">Fin</th>
+            <th scope="col">Lote A</th>
+            <th scope="col">Peso A</th>
+            <th scope="col">Lote B</th>
+            <th scope="col">Peso B</th>
             <th scope="col">Merma</th>
             <th scope="col">Crear Codigos</th>
           </tr>
@@ -254,19 +255,10 @@ const filtrosRecuperados = location.state?.filtros || JSON.parse(localStorage.ge
             datos.map((fila, index) => (
               <tr key={index}>
                 <th scope="row">{index + 1}</th>
-
-                <td
-                  className={
-                    detalleProduccion === index ? "text-light bg-dark" : ""
-                  }
-                  role={detalleProduccion === index ? "alert" : ""}
-                >
+                <td className={detalleProduccion === index ? "text-light bg-dark" : ""}role={detalleProduccion === index ? "alert" : ""}>
                   {fila.id}
                 </td>
-                <td
-                  className={
-                    detalleProduccion === index ? "text-light bg-dark" : ""
-                  }
+                <td className={detalleProduccion === index ? "text-light bg-dark" : ""}
                   role={detalleProduccion === index ? "alert" : ""}
                   onMouseOver={() => Mouseevent(index)}
                   onMouseOut={MouseeventOt}
@@ -277,80 +269,37 @@ const filtrosRecuperados = location.state?.filtros || JSON.parse(localStorage.ge
                     formatFecha(fila.fecha_real)
                   )}
                 </td>
-                <td
-                  className={
-                    detalleProduccion === index ? "text-light bg-dark" : ""
-                  }
-                  role={detalleProduccion === index ? "alert" : ""}
-                >
+                <td className={detalleProduccion === index ? "text-light bg-dark" : ""} role={detalleProduccion === index ? "alert" : ""}>
                   {fila.nombre_turno}
                 </td>
-                <td
-                  className={
-                    detalleProduccion === index ? "text-light bg-dark" : ""
-                  }
-                  role={detalleProduccion === index ? "alert" : ""}
-                >
+                <td className={detalleProduccion === index ? "text-light bg-dark" : ""}role={detalleProduccion === index ? "alert" : ""}>
                   {fila.nombre_ufmodelo}
                 </td>
-                <td
-                  className={
-                    detalleProduccion === index ? "text-light bg-dark" : ""
-                  }
-                  role={detalleProduccion === index ? "alert" : ""}
-                >
+                <td className={detalleProduccion === index ? "text-light bg-dark" : ""}role={detalleProduccion === index ? "alert" : ""}>
                   {fila.producido}
                 </td>
-                <td
-                  className={
-                    detalleProduccion === index ? "text-light bg-dark" : ""
-                  }
-                  role={detalleProduccion === index ? "alert" : ""}
-                >
+                {/*<td className={detalleProduccion === index ? "text-light bg-dark" : "" }role={detalleProduccion === index ? "alert" : ""} >
                   {fila.grupoProd}
-                </td>
-                <td
-                  className={
-                    detalleProduccion === index ? "text-light bg-dark" : ""
-                  }
-                  role={detalleProduccion === index ? "alert" : ""}
-                >
+                </td>*/}
+                <td className={detalleProduccion === index ? "text-light bg-dark" : ""}role={detalleProduccion === index ? "alert" : ""}>
                   {fila.letra_inicio}{fila.codigoInicio}
                 </td>
-                <td
-                  className={
-                    detalleProduccion === index ? "text-light bg-dark" : ""
-                  }
-                  role={detalleProduccion === index ? "alert" : ""}
-                >
+                <td className={detalleProduccion === index ? "text-light bg-dark" : ""}role={detalleProduccion === index ? "alert" : ""}>
                   {fila.letra_fin}{fila.codigoFinal}
                 </td>
-                <td
-                  className={
-                    detalleProduccion === index ? "text-light bg-dark" : ""
-                  }
-                  role={detalleProduccion === index ? "alert" : ""}
-                >
-                  {fila.librasAserrin}/{fila.librasAserrin2}
+                <td className={detalleProduccion === index ? "text-light bg-dark" : ""} role={detalleProduccion === index ? "alert" : ""}>
+                  {fila.fm_dcorrelativo}
                 </td>
-                <td
-                  className={
-                    detalleProduccion === index ? "text-light bg-dark" : ""
-                  }
-                  role={detalleProduccion === index ? "alert" : ""}
-                >
-                  {fila.aserradero1}/{fila.aserradero2}
+                <td className={detalleProduccion === index ? "text-light bg-dark" : ""} role={detalleProduccion === index ? "alert" : ""}>
+                  {fila.fm_peso}
                 </td>
-                <td
-                  className={
-                    detalleProduccion === index ? "text-light bg-dark" : ""
-                  }
-                  role={detalleProduccion === index ? "alert" : ""}
-                >
-                  {fila.pesototal}
+                <td className={detalleProduccion === index ? "text-light bg-dark" : ""} role={detalleProduccion === index ? "alert" : ""}>
+                  {fila.barro_lote}
                 </td>
-               
-             
+                <td className={detalleProduccion === index ? "text-light bg-dark" : ""} role={detalleProduccion === index ? "alert" : ""}>
+                  {fila.barro_peso}
+                </td>
+
                   <td>
                     <Button className='' onClick={() => Mermas({ fila })}>
                       Mermas

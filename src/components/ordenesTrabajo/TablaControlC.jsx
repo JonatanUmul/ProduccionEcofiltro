@@ -26,6 +26,7 @@ const TablaOT = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 5;
   const id_est=2;
+  console.log(estOT)
   useEffect(() => {
     const obtenerDatos = async () => {
       try {
@@ -90,7 +91,7 @@ const TablaOT = () => {
               Codigo Fin
             </th>
             <th scope="col" style={{ width: "1%" }}>
-              Horneado
+              Horneado/Series
             </th>
             <th scope="col" style={{ width: "1%" }}>
             Horno
@@ -130,7 +131,7 @@ const TablaOT = () => {
               <td>{OTDats.codigoInicio}</td>
               <td>{OTDats.codigoFin}</td>
               
-              <td>{OTDats.horneado}</td>
+              <td style={{background:OTDats.horneado==OTDats.cantidad?'#a5be00':'#9d0208'}}>{OTDats.horneado}/{OTDats.cantidad}</td>
               <td>{OTDats.Horno}</td>
               <td>{OTDats.Hornero}</td>
               <td>{OTDats.turnoHorneado}</td>

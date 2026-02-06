@@ -8,7 +8,7 @@ import RDTCC from '../consultas/RDTCC'
 const Detalle = ({datos,nombretabla }) => {
   const [modalVisible, setModalVisible] = useState(false); 
 
-console.log('nombre tabla',nombretabla)
+console.log('nombre tabla',datos)
 
   // Función para abrir el modal cuando se hace clic en el botón
   const handleOpenModal = () => {
@@ -20,7 +20,6 @@ console.log('nombre tabla',nombretabla)
     setModalVisible(false);
   };
 
-console.log('datos',datos[0].id)
 
   // Función para renderizar el formulario seleccionado según el ID
   const renderSelectedForm = () => {

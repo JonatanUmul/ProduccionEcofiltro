@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { formatFecha } from "../../../utilidades/FormatearFecta.js";
-import PdfROTHH from '../pdfECO/PdfROTHH.jsx';
+import PdfROTHH from '../pdfECO/PdfROCC.jsx';
 import ExcelRHorneados from '../Excel/ExcelRHorneados.jsx';
 import Detalle from '../detalles/RedireccionDetalle_ROTT.jsx';
 import DetalleCC from '../detalles/RedireccionDetalleCC.jsx'
@@ -108,7 +108,7 @@ console.log('porcentage',porcentaje );
             
            <td style={{color:'red'}} class="text-muted" value={porcentaje} onChange={(e)=>setPorcentaje(e.target.value)}>{fila.porcentaje}
            <DetalleCC
-           datos={datos}
+           datos={fila}
            nombretabla={fila.tabla}
            />
            </td>

@@ -158,24 +158,24 @@ const styles = StyleSheet.create({
 
 const MyDocument = ({ datos }) => {
   console.log('fiamr',datos)
-  const UltimaFirma = datos[datos.length - 1];
+  const UltimaFirma = datos[datos?.length - 1] || 0;
   const FirmaJefe=UltimaFirma?.firmaJefe || null
   const Firma= UltimaFirma?.firmaEncargado || null;
-  const rowsPerPage = 12; // Ajusta esto según sea necesario
-  const totalPages = Math.ceil(datos.length / rowsPerPage);
+  const rowsPerPage = 20; // Ajusta esto según sea necesario
+  const totalPages = Math.ceil(datos?.length / rowsPerPage);
 
   const createPages = () => {
     const pages = [];
     for (let i = 0; i < totalPages; i++) {
       const start = i * rowsPerPage;
       const end = start + rowsPerPage;
-      const pageData = datos.slice(start, end);
+      const pageData = datos?.slice(start, end);
 
       pages.push(
         <Page key={i} style={styles.page}>
           <View style={[styles.container, { textAlign: 'center' }]}>
             <View style={[styles.titleContainer, { flex: 0.7 }]}>
-              <Image source="/images/LoogoEco.png" style={[styles.logo, styles.section, styles.title]} />
+        <Image source="/images/LoogoEco.png" style={[styles.logo, styles.section, styles.title]} />
             </View>
 
             <View style={[styles.titleContainer, { flex: 4 }]}>
@@ -199,26 +199,31 @@ const MyDocument = ({ datos }) => {
           <View style={styles.table}>
             <View style={styles.tableHeader}>
               <Text style={styles.tableCell}>Fecha</Text>
-              <Text style={styles.tableCell}>Grupo</Text>
+              <Text style={styles.tableCell}>Turno</Text>
               <Text style={styles.tableCell}>Modelo</Text>
-              <Text style={styles.tableCell}>Código Inicio</Text>
-              <Text style={styles.tableCell}>Código Fin</Text>
               <Text style={styles.tableCell}>Producido</Text>
-              <Text style={styles.tableCell}>Peso</Text>
-              <Text style={styles.tableCell}>Aserradero</Text>
-              <Text style={styles.tableCell}>Firma</Text>
+              <Text style={styles.tableCell}>Inicio</Text>
+              <Text style={styles.tableCell}>Fin</Text>
+              <Text style={styles.tableCell}>Lote A</Text>
+              <Text style={styles.tableCell}>Peso A</Text>
+              <Text style={styles.tableCell}>Lote B</Text>
+              <Text style={styles.tableCell}>Peso B</Text>
+             {/* <Text style={styles.tableCell}>Firma</Text>*/}
             </View>
             {pageData.map((fila, index) => (
               <View key={index} style={styles.tableRow}>
-                <Text style={styles.tableCell}>{formatFecha(fila.fecha_creacion)}</Text>
-                <Text style={styles.tableCell}>{fila.grupoProd}</Text>
-                <Text style={styles.tableCell}>{fila.nombre_ufmodelo}</Text>
-                <Text style={styles.tableCell}>{fila.codigoInicio}</Text>
-                <Text style={styles.tableCell}>{fila.codigoFinal}</Text>
-                <Text style={styles.tableCell}>{fila.producido}</Text>
-                <Text style={styles.tableCell}>{fila.librasAserrin}/{fila.librasAserrin2}</Text>
-                <Text style={styles.tableCell}>{fila.aserradero1}/{fila.aserradero2}</Text>
-               <Image style={styles.tablefirma} src={Firma}></Image>
+                <Text style={styles.tableCell}>{formatFecha(fila?.fecha_creacion)}</Text>
+                <Text style={styles.tableCell}>{fila?.nombre_turno}</Text>
+                <Text style={styles.tableCell}>{fila?.nombre_ufmodelo}</Text>
+                <Text style={styles.tableCell}>{fila?.producido}</Text>
+                <Text style={styles.tableCell}>{fila?.codigoInicio}</Text>
+                <Text style={styles.tableCell}>{fila?.codigoFinal}</Text>
+                <Text style={styles.tableCell}>{fila?.fm_dcorrelativo}</Text>
+                <Text style={styles.tableCell}>{fila?.fm_peso}</Text>
+                <Text style={styles.tableCell}>{fila?.barro_lote}</Text>
+                <Text style={styles.tableCell}>{fila?.barro_peso}</Text>
+            
+             {/*Firma ?? <Image style={styles.tablefirma} src={Firma}></Image>*/}
               </View>
             ))}
           </View>
@@ -233,16 +238,18 @@ const MyDocument = ({ datos }) => {
                 </View>
               </View>
 
-              <View style={styles.firmas}>                                                  
+         <View style={styles.firmas}>                                                  
               {Firma  ?(<Image style={[styles.FirmasIMG]}  src={Firma}></Image>):(<Text style={styles.lineas}> __________________________ </Text>)} 
               <Text></Text>
               {FirmaJefe ?(<Image style={styles.FirmasIMG}  src={FirmaJefe}/>):(<Text style={styles.lineas}> __________________________ </Text>)}
   
                </View>
+                
                <View style={[styles.firmasText,{}]}>
                  <Text style={[styles.firmasText,{}]}>Encargado de Secado</Text>
                  <Text style={[styles.firmasText,{}]}>Jefe de Producción</Text>
                </View>
+            
             </View>
     
         </Page>

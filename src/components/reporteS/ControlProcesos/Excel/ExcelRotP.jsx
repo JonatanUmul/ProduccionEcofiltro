@@ -27,7 +27,7 @@ const ExcelROTHP = ({ datos}) => {
   
     XLSX.utils.book_append_sheet(wb, ws, 'ROTSA');
   
-    const fileName = `Remporte de Impregnación.xlsx`; // Asegúrate que fechaSecado esté definido
+    const fileName = `Remporte de producción.xlsx`; // Asegúrate que fechaSecado esté definido
     XLSX.writeFile(wb, fileName);
   };
   

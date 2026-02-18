@@ -4,9 +4,10 @@ import { Modal, ModalFooter, ModalBody, ModalHeader } from "reactstrap";
 
 import ConsultaDTCA1 from "../consutas/DetalleMuestraBarro";
 import DetalleMezcladoAserrin from "../consutas/DetalleMezcladoAserrin";
+import Detallses_del_Aserrin from "../consutas/Detallses_del_Aserrin";
 
-const Detalle = ({ datosApi }) => {
-  console.log(datosApi)
+const Detalle = ({encabezado1, datosApi }) => {
+  console.log(encabezado1)
   const encabezado = datosApi.encabezado;
   const [modalVisible, setModalVisible] = useState(false);
   const [datosdeConsu, setDatosConsu] = useState("");
@@ -26,11 +27,13 @@ const Detalle = ({ datosApi }) => {
 
   // Función para renderizar el formulario seleccionado según el ID
   const renderSelectedForm = () => {
-    switch (encabezado) {
+    switch (!encabezado1? encabezado:encabezado1) {
       case "muestras":
         return <ConsultaDTCA1 datosApi={datosApi} />;
       case "ot_mezclado_aserrin":
         return <DetalleMezcladoAserrin datosApi={datosApi} />;
+      case "dotdmp":
+        return <Detallses_del_Aserrin datosApi={datosApi} />;
       default:
         return <p>Formulario no encontrado</p>;
     }
@@ -52,7 +55,7 @@ const Detalle = ({ datosApi }) => {
       </a>
       {/* Modal */}
       <Modal isOpen={modalVisible} toggle={handleCloseModal} size="xl">
-        <ModalHeader toggle={handleCloseModal}>{encabezado}</ModalHeader>
+        <ModalHeader toggle={handleCloseModal}>{!encabezado1? encabezado:encabezado1}</ModalHeader>
         <ModalBody>
           {/* Renderiza el componente correspondiente al formulario seleccionado dentro del modal */}
           {renderSelectedForm()}

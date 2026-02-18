@@ -5,9 +5,10 @@ import AlertAnt from "../../UI/alerts/AlertAnt";
 import "./estiloTabla.css";
 
 const ConsultaDTCA1 = ({ datosApi }) => {
+  console.log('console', datosApi)
   const [error, setError] = useState("");
   const [datos, setDatos] = useState([]);
-
+console.log('datos consola', datos)
   const id_ot_mezclado_aserrin = datosApi.id;
 
   const ObtenerDatos = async () => {

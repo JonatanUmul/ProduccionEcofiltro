@@ -45,7 +45,8 @@ const TablaAserrinMezclado = () => {
     "Lb.disponible",
    // "     Área     ",
     "Estado",
-    "Datos del Aserrín ",
+    "Detalles del aserrín",
+    "Datos del aserrín ",
     "Crear registro de sacos",
     "Estado mezclado",
     "Estado de la orden",
@@ -64,6 +65,7 @@ console.log('datosApi',datosApi)
        rows.lb_disponible || "",
     //  rows.EncName || "",
      rows.aprobado || "",
+     <Detalle encabezado1='dotdmp' datosApi={rows} />, /*detalles del aserrin*/
       ((ability && (ability.can('create', 'Laboratorio')|| ability.can('create', 'Supervisor'))) ? (
       <CrearAS encabezados="Datos_Aserrin" datosApi={rows} type="button">
         Crear Registro

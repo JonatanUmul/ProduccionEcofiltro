@@ -18,13 +18,13 @@ const DTHP = ({ encabezado, EncName, fecha_creacion,id }) => {
   const [id_creador, setid_creador] = useState('');
   const [loading, setLoading] = useState(false);
   const [plata2, setplata2]=useState(false)
-  const showSkeleton = () => {
+  /*const showSkeleton = () => {
     setLoading(true);
 
     setTimeout(() => {
       setLoading(false);
     }, 3000);
-  };
+  };*/
 
 useEffect(()=>{
     setid_creador(localStorage.getItem('id_creador'))
@@ -48,6 +48,7 @@ useEffect(()=>{
 
   const onSubmit = async (formData) => {
     try {
+        setLoading(true);
       const response = await axios.post(`${URL}/DTIP` ,
       {
         id_OTIP: id.toString(),
@@ -66,15 +67,16 @@ useEffect(()=>{
         showConfirmButton: false,
         timer: 1500
       });
- 
+      setLoading(true);
       // Redirigir a la página de TablaOT después de 1.5 segundos
-      setTimeout(() => {
+     /* setTimeout(() => {
         window.location.href = "/Home/TablaOT";
-      },1500 );
+      },1500 );*/
     } catch (error) {
+      setLoading(false);
       setError("Error al enviar los datos:", error);
     }
-    showSkeleton();
+   // showSkeleton();
   };
 
 

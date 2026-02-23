@@ -12,10 +12,11 @@ const PostSeriesProduccion=async({serialProduccion, id_dtp, id_proceso, id_model
             serialProduccion, id_dtp, id_proceso, id_modelo
         })
  
-        const respuesta=response.data.mensaje
+        //const respuesta=response.data.mensaje
+        const respuesta='Series creadas exitosamente'
       
         SuccessAlert({respuesta})
-       
+     //  window.location.href = "/Home/TablaOT"
     } catch (error) {
         const err=error.response.data.mensaje
         console.log('error del server',error)

@@ -6,7 +6,7 @@ import { formatFecha } from "../../utilidades/FormatearFecta";
 import { Space } from "antd";
 import PostSeriesProduccion from "../../../services/PostSeriesProduccion";
 import PutSeriesProduccion from "../../../services/PutSeriesProduccion";
-
+import Cargando from "../../UI/alerts/Cargando"
 const URL = process.env.REACT_APP_URL;
 
 const DTHP = ({
@@ -233,6 +233,7 @@ console.log('id_dthh',datosOrden)
     }
 
     try {
+       setLoading(true);
       await axios.post(`${URL}/DTCC`, {
         id_dthh: id_dthh,
         fecha_real: formData.fecha_real,
@@ -265,9 +266,10 @@ console.log('id_dthh',datosOrden)
         id_creador,
       });
 
-      window.location.href = "/Home/TablaOT";
+      //window.location.href = "/Home/TablaOT";
       
       if (seriesOK.length > 0) {
+       setLoading(true);
         await PostSeriesProduccion({
           serialProduccion: seriesOK,
           id_modelo: id_modelo,
@@ -277,6 +279,7 @@ console.log('id_dthh',datosOrden)
       }
 
       if (TodasSeriesSelect.length > 0) {
+         setLoading(true);
         await PutSeriesProduccion({
           serialProduccion: TodasSeriesSelect,
           id_modelo: id_modelo,
@@ -285,17 +288,17 @@ console.log('id_dthh',datosOrden)
         });
       }
 
-      Swal.fire({
+     /* Swal.fire({
         icon: "success",
-        title: "Guardado exitosamente",
+        title: "Series creadas exitosamente",
         showConfirmButton: false,
         timer: 1500,
       });
 
-      setTimeout(() => {
+     /* setTimeout(() => {
         setLoading(false);
         window.location.href = "/Home/TablaOT";
-      }, 1500);
+      }, 1500);*/
     } catch (err) {
       setLoading(false);
       console.error("Error al enviar los datos:", err);
@@ -328,8 +331,9 @@ console.log('id_dthh',datosOrden)
     </React.Fragment>
   ))}
 </div>
-
-
+{loading ? 
+<Cargando/>
+:
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4 row g-3">
         {loading ? (
           <Space direction="vertical" style={{ width: "100%" }} size={16}>
@@ -473,6 +477,7 @@ console.log('id_dthh',datosOrden)
           </>
         )}
       </form>
+}
     </div>
   );
 };

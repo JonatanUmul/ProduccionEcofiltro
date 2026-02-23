@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from "sweetalert2";
-import { Skeleton, Space } from "antd";
+import { Skeleton, Space, Alert } from "antd";
 import ObtenerCodigosParaHornos from "../../../services/ObtenerCodigosParaHornos";
 import Table from "../../UI/Table";
 import PostSeriesProduccion from "../../../services/PostSeriesProduccion";
@@ -183,7 +183,7 @@ console.log(id)
   //  Enviar formulario
   const onSubmit = async (formData) => {
     console.log("Datos a enviar:", formData); // DEBUG
-  
+  setLoading(true)
     try {
       // Guardar cabecera primero
       const res = await axios.post(`${URL}/DTIP`, {
@@ -203,6 +203,7 @@ console.log(id)
       const seriesOkUnicas = [...new Set(seriesOK.map((row) => row.serie))];
   console.log('okok',seriesOkUnicas)
       if (seriesOkUnicas.length > 0) {
+          setLoading(true)
         await PostSeriesProduccion({
           serialProduccion: seriesOkUnicas,
           id_modelo: formData.id_modelo,
@@ -223,7 +224,7 @@ console.log(id)
       //  Mostrar éxito
       Swal.fire("Éxito", "Datos guardados correctamente", "success");
       
-      window.location.href = "/Home/TablaOT";
+    //  window.location.href = "/Home/TablaOT";
     } catch (error) {
       console.error("Error al guardar DTHH:", error);
       Swal.fire("Error", "Ocurrió un problema al guardar los datos", "error");
@@ -270,15 +271,14 @@ console.log(id)
   
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* Loading */}
-      {loading && (
+      {loading ?
         <div className="mb-3">
           <Space direction="vertical" style={{ width: "100%" }} size={12}>
-            <p className="small mb-0">Guardando datos...</p>
+            <Alert message="Procesando información, no actualice la página hasta finalizar." type="warning" />
             <Skeleton active size="small" />
           </Space>
         </div>
-      )}
-  
+:<>
       {/* Filtros */}
       <div className="card mb-3">
         <div className="card-header py-2">
@@ -469,6 +469,8 @@ console.log(id)
           Guardar
         </button>
       </div>
+      </>
+      }
     </form>
   </div>
   

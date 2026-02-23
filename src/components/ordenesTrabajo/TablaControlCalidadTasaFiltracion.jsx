@@ -71,7 +71,7 @@ const TablaMermasCrudos = () => {
 
   const obtenerSeries = async () => {
     const response = await GetSeriesPorOrdenDeProduccion({ id_dtp, id_proceso });
-    const series = response.data.response || [];
+    const series = response?.data?.response || [];
     setSeriesDeOrdenes(series);
 
     const inicial = {};

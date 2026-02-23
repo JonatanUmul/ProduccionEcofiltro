@@ -3,14 +3,14 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { formatFecha } from "../../utilidades/FormatearFecta";
 import Swal from "sweetalert2";
-import { Skeleton, Space } from "antd";
+import { Skeleton, Space, Alert } from "antd";
 import ObtenerCodigosParaHornos from "../../../services/ObtenerCodigosParaHornos";
 import Table from "../../UI/Table";
 import PostSeriesProduccion from "../../../services/PostSeriesProduccion";
 import PutSeriesProduccion from "../../../services/PutSeriesProduccion";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import Cargando from "../../UI/alerts/Cargando"
 
 const URL = process.env.REACT_APP_URL;
 
@@ -187,7 +187,7 @@ const DTHH = () => {
   //  Enviar formulario
   const onSubmit = async (formData) => {
     console.log("Datos a enviar:", formData); // DEBUG
-  
+   setLoading(true);
     try {
       // Guardar cabecera primero
       const res = await axios.post(`${URL}/DTHH`, {
@@ -203,9 +203,10 @@ const DTHH = () => {
         id_creador: id_creador,
         id_est: 2,
       });
-  navigate("/Home/TablaOT");
+ // navigate("/Home/TablaOT");
       const seriesOkUnicas = [...new Set(seriesOK.map((row) => row.serie))];
       if (seriesOkUnicas.length > 0) {
+        setLoading(true);
         await PostSeriesProduccion({
           serialProduccion: seriesOkUnicas,
           id_modelo: formData.id_modelo,
@@ -215,6 +216,7 @@ const DTHH = () => {
       }
 
       if (seriesTOdos.length > 0) {
+          setLoading(true);
         await PutSeriesProduccion({
           serialProduccion: TodasSeriesSelect,
           id_modelo: formData.id_modelo,
@@ -223,9 +225,17 @@ const DTHH = () => {
         });
     }
 
+        Swal.fire({
+            icon: "success",
+            title: "Series creadas exitosamente",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+
       //  Mostrar éxito
-  navigate("/Home/TablaOT");
+  //navigate("/Home/TablaOT");
     } catch (error) {
+      setLoading(false);
       console.error("Error al guardar DTHH:", error);
       Swal.fire("Error", "Ocurrió un problema al guardar los datos", "error");
     }
@@ -270,7 +280,7 @@ const DTHH = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="row g-2">
         {loading ? (
           <Space direction="vertical" style={{ width: "100%" }} size={12}>
-            <p className="small mb-0">Guardando datos...</p>
+           <Alert message="Procesando información, no actualice la página hasta finalizar." type="warning" />
             <Skeleton active size="small" />
           </Space>
         ) : (

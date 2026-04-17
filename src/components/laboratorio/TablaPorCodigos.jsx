@@ -47,7 +47,7 @@ console.log('Datos',datos)
     const cargarDatosIniciales = async () => {
       setCargando(true);
       try {
-        const url =` ${URL}/TablaPorCodigos/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${codigo || 'null'}/${ 'null'}/${id_modelo || 'null'}`;
+        const url =` ${URL}/TablaPorCodigos/${fecha_creacion_inicio || 'null'}/${fecha_creacion_fin || 'null'}/${id_modelo || 'null'}`;
         await axios.get(url)
           .then((response) => {
             setDatos(response.data);
@@ -167,10 +167,10 @@ const content = (
     <label htmlFor="fecha" className="form-label">Fecha 2</label>
     <input disabled={estadoSelect} className="form-control" type="date" value={fecha_creacion_fin} onChange={(e) => setFecha2(e.target.value)} />
   </div>
-  <div className="col-md-3">
+ {/* <div className="col-md-3">
   <label htmlFor="codigo" className="form-label">Código</label>
   <input className="form-control" type="text" value={codigos} onChange={BuscarCodigo}/>
-</div>
+</div>*/}
 <div className="col-md-3">
     <label htmlFor="aserradero" className="form-label">Modelo UF:</label>
     <select disabled={estadoSelect} className="form-select" name="id_aserradero" value={id_modelo} onChange={(e) => setId_modelo(e.target.value)}>
@@ -251,18 +251,21 @@ const content = (
       <thead class="thead-dark">
         <tr>
           <th scope="col">#</th>
+          <th scope="col">Fecha Producción</th>
+          <th scope="col">Serie</th>
+          <th scope="col">Lote Barro</th>
+          <th scope="col">Lote Aserrín</th>
+          <th scope="col">Lote Mezclado A.</th>
+          <th scope="col">Lote Formulacion</th>
+          <th scope="col">Peso</th>
           <th scope="col">Producción</th>
-          <th scope="col">Control C.</th>
-          <th scope="col">Formula</th>
-          <th scope="col">Código</th>
-          <th scope="col">Tipo de Filtro</th>
-          <th scope="col">Proveedor</th>
-          <th scope="col">Cantidad de aserrín</th>
-          <th scope="col">Total</th>
           <th scope="col">Horno</th>
-          <th scope="col">Estado</th>
+          <th scope="col">Estado H.</th>
           <th scope="col">Tasa</th>
-          <th scope="col">Temperatura</th>
+          <th scope="col">C.C</th>
+          <th scope="col">Estado Impregnación</th>
+          <th scope="col">Plata 1</th>
+          <th scope="col">Plata 2</th>
         </tr>
       </thead>
         <tbody>
@@ -272,19 +275,23 @@ const content = (
             <tr key={index}>
               <th scope="row">{index + 1}</th>
               <td>{formatFecha(fila.fecha_produccion) }</td>
-              <td>{formatFecha(fila.fechaCC)<='2000-12-31' ?'':formatFecha(fila.fechaCC)}</td>
-              <td>{fila.formulaTipo}</td>
-              <td>{fila.codigos}</td>
-              <td>{fila.ufmodelo}</td>
-              <td>{fila.aserradero_principal}/{fila.aserradero_secundario}</td>
+              <td>{fila.serie}</td>
+              <td>{fila.CorrelativoCamionadaBarro}</td>
+              <td>{fila.CorrelativoCamionadaAserrin}</td>
+              <td>{fila.CorrelativoMezcladoAserrin}</td>
+              <td>{fila.CorrelatioFormulacionAserrin}</td>
      
-              <td>{fila.librasAserrin}/{fila.librasAserrin2}</td>
-              <td>{fila.formulatotal}</td>
-              <td>{fila.horno}</td>
-              <td>{fila.estadouf}</td>
+              <td>{fila.peso}</td>
+              <td>{fila.produccion}</td>
+              <td>{fila.Horno}</td>
+              <td>{fila.Hornos}</td>
               <td>{fila.tasa}</td>
-              <td onMouseOver={()=>handleMouseOver(index)} onMouseOut={handleMouseOut}>
-              {mouseover===index ? (<Detalle nombretabla={nombretabla} datos={datos} />):((fila.promedio))}</td>
+              <td>{fila.ControlCalidad}</td>
+              <td>{fila.Impregnacion}</td>
+              <td>{fila.plata1}</td>
+              <td>{fila.plata2}</td>
+            {/* <td onMouseOver={()=>handleMouseOver(index)} onMouseOut={handleMouseOut}>
+              {mouseover===index ? (<Detalle nombretabla={nombretabla} datos={datos} />):((fila.promedio))}</td>*/}
             </tr>
           ))}
 

@@ -65,7 +65,7 @@ const ExcelROTHP = ({ datos }) => {
   // };
 
       // Crear una nueva hoja en la hoja de cálculo de Excel
-      const ws = XLSX.utils.json_to_sheet(dataWithHeaders);
+      const ws = XLSX.utils.json_to_sheet(datos);
 
       // Convertir la hoja de cálculo a CSV
       const csv = XLSX.utils.sheet_to_csv(ws);

@@ -55,7 +55,7 @@ const ExcelROTHP = ({ datos }) => {
     ];
 
     // Crear una nueva hoja en la hoja de cálculo de Excel
-    const ws = XLSX.utils.json_to_sheet(dataWithHeaders);
+    const ws = XLSX.utils.json_to_sheet(datos);
 
     // Agregar la hoja a la hoja de cálculo de Excel
     XLSX.utils.book_append_sheet(wb, ws, 'Producción');

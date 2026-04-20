@@ -4,6 +4,7 @@ import ROTPB from "./ROTPB";
 import ROTPS from "./ROTPS";
 import CalidadProduccionCrudos from "./CalidadProduccionCrudos";
 import ROTT from "./encabezados/ROTT";
+import Temperaturas_Tunel from "./encabezados/Temperaturas_Tunel";
 import ROTH from "./encabezados/ROTH";
 import ROTHSOLANTEC from "./encabezados/ROTHSOLANTEC";
 
@@ -43,8 +44,10 @@ const BotonOT = () => {
       case "4":
         return <ROTT />;
       case "5":
-        return <ROTH />;
+        return <Temperaturas_Tunel />;
       case "6":
+        return <ROTH />;
+      case "7":
         return <ROTHSOLANTEC />;
       default:
         return null;
@@ -92,23 +95,30 @@ const BotonOT = () => {
           href="#"
           onClick={(e) => handleDropdownItemClick(e, "4", "Temperatura Tunel")}
         >
-          4. Temperatura Tunel
+          4. Temperatura por Tunel
+        </a>
+         <a
+          className="dropdown-item"
+          href="#"
+          onClick={(e) => handleDropdownItemClick(e, "5", "Temperaturas Tunel")}
+        >
+          5. Temperaturas Tunel
         </a>
         <a
           className="dropdown-item"
           href="#"
-          onClick={(e) => handleDropdownItemClick(e, "5", "Temperatura Hornos")}
+          onClick={(e) => handleDropdownItemClick(e, "6", "Temperatura Hornos")}
         >
-          5. Temperatura Hornos Manual
+          6. Temperatura Hornos Manual
         </a>
         <a
           className="dropdown-item"
           href="#"
           onClick={(e) =>
-            handleDropdownItemClick(e, "6", "Temperatura Solantec")
+            handleDropdownItemClick(e, "7", "Temperatura Solantec")
           }
         >
-          6. Temperatura Solantec
+          7. Temperatura Solantec
         </a>
 
         {/* Agrega más elementos del menú desplegable aquí */}

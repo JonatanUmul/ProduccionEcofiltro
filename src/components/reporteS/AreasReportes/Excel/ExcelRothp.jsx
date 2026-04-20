@@ -1,8 +1,9 @@
 import React from 'react';
 import * as XLSX from 'xlsx'; // Importar todas las exportaciones de xlsx
 
-const ExcelROTHP = ({ datos }) => {
+const ExcelROTHP = ({ datos, name }) => {
   const generarExcel = () => {
+    let nom= !name ? 'Humedad En patios.xlsx': name
     // Crear una nueva hoja de cálculo de Excel
     const wb = XLSX.utils.book_new();
 
@@ -13,7 +14,7 @@ const ExcelROTHP = ({ datos }) => {
     XLSX.utils.book_append_sheet(wb, ws, 'ROTHP');  
 
     // Guardar el archivo Excel
-    XLSX.writeFile(wb, 'Humedad En patios.xlsx');
+    XLSX.writeFile(wb, nom);
   };
 
   return (

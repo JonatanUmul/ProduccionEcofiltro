@@ -156,6 +156,7 @@ const content = (
     <div className="row mb-3">
 {/*    <Divider style={{ color: '#1d39c4'}}>Cernido 1</Divider> */}
 
+<Divider style={{ color: '#1d39c4'}}>Temperatura Tunel</Divider>
     <div className="row mb-3">
   <div className="col-md-3">
     <label htmlFor="fecha" className="form-label">Fecha 1 </label>
@@ -181,7 +182,6 @@ const content = (
    :''}
   
  
-<Divider style={{ color: '#1d39c4'}}>Pulida Superior</Divider>
 
 </div>
 

@@ -2,12 +2,14 @@ import React from 'react';
 import * as XLSX from 'xlsx'; // Importar todas las exportaciones de xlsx
 import { formatFecha } from '../../../utilidades/FormatearFecta';
 const ExcelROTHP = ({ datos }) => {
+
   const generarExcel = () => {
     // Crear una nueva hoja de cálculo de Excel
     const wb = XLSX.utils.book_new();
 
 const dataWithHeaders=[
 ...datos.map(dato=>({
+  id:dato.id,
   fechaHorneado:formatFecha(dato.fecha_real),
   Modelo:dato.modelo,
   Horno:dato.horno,
@@ -25,7 +27,7 @@ const dataWithHeaders=[
 
 ]
 
-
+  console.log('excellll', datos)
 
 
     // Crear una nueva hoja en la hoja de cálculo de Excel

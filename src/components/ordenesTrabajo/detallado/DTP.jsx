@@ -68,10 +68,15 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
   }
   const showSkeleton = () => {
     setLoading(true);
-
-    setTimeout(() => {
+    /*setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 3000);*/
+  };
+  const notshowSkeleton = () => {
+    setLoading(false);
+    /*setTimeout(() => {
+      setLoading(false);
+    }, 3000);*/
   };
 
   useEffect(() => {
@@ -149,7 +154,9 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
 
 
   const onSubmit = async (formData) => {
+    //skeleton consfigurar aca
     try {
+       setLoading(true);
        await axios.post(`${URL}/DTP`, {
         id_OTP: id.toString(),
         fecha_creacion:formatFecha(fecha_creacion),
@@ -166,15 +173,15 @@ const DTHP = ({ encabezado, EncName, fecha_creacion, id }) => {
         showConfirmButton: false,
         timer: 1500,
       });
-    
       setTimeout(() => {
         window.location.href = "/Home/TablaOT";
       }, 1500);
-      
     } catch (error) {
-      setError("Error al enviar los datos:", error);
+      console.log('orroros',error.message)
+      setLoading(false);
+      setError("Error al enviar los datos:", error.message);
     }
-    showSkeleton();
+    
   };
 
 

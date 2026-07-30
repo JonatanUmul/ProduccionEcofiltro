@@ -2,6 +2,7 @@ import React from 'react';
 import * as XLSX from 'xlsx'; // Importar todas las exportaciones de xlsx
 
 const ExcelROTHP = ({ datos}) => {
+  console.log('excel',datos)
   const limitarTexto = (datos) => {
     return datos.map(fila => {
       const nuevaFila = {};
